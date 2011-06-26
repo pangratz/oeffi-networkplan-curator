@@ -14,6 +14,7 @@ import org.restlet.representation.Variant;
 import org.restlet.resource.ResourceException;
 
 import com.pangratz.oeffinpc.model.NetworkPlan;
+import com.pangratz.oeffinpc.model.NetworkPlanEntry;
 
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
@@ -28,8 +29,8 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 
 		this.mNetworkPlanId = (String) getRequest().getAttributes().get("networkPlanId");
 
-		getVariants(Method.GET).add(new Variant(MediaType.APPLICATION_JSON));
 		getVariants(Method.GET).add(new Variant(MediaType.TEXT_CSV));
+		getVariants(Method.GET).add(new Variant(MediaType.APPLICATION_JSON));
 		getVariants(Method.POST).add(new Variant(MediaType.APPLICATION_JSON));
 	}
 
@@ -53,23 +54,25 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 
 	@Override
 	protected Representation post(Representation entity, Variant variant) throws ResourceException {
-
 		JsonRepresentation represent;
 		try {
 			represent = new JsonRepresentation(entity);
 			JSONObject json = represent.getJsonObject();
 
-			NetworkPlan networkPlan = new NetworkPlan();
-			networkPlan.setImageUrl(json.getString("imageUrl"));
-			networkPlan.setNetworkId(json.getString("networkId"));
-			networkPlan.setPlanId(json.getString("planId"));
+			NetworkPlanEntry networkPlanEntry = new NetworkPlanEntry();
+			networkPlanEntry.setNetworkId(mNetworkPlanId);
+			networkPlanEntry.setName(json.getString("name"));
+			networkPlanEntry.setStationId(json.getString("stationId"));
+			networkPlanEntry.setX(json.getInt("x"));
+			networkPlanEntry.setY(json.getInt("y"));
 
-			mModelUtils.storeNetworkPlan(networkPlan);
+			mModelUtils.storeNetworkPlanEntry(networkPlanEntry);
+
+			return createResourceCreatedRepresentation(networkPlanEntry.getStationId());
 		} catch (Exception e) {
 			setStatus(Status.SERVER_ERROR_INTERNAL);
 		}
 
-		return new JsonRepresentation("{}");
+		return createErrorRepresentation("error while creating NetworkPlanEntry");
 	}
-
 }

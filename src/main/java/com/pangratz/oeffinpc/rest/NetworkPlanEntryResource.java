@@ -9,7 +9,7 @@ import org.restlet.resource.ResourceException;
 
 import com.pangratz.oeffinpc.model.NetworkPlanEntry;
 
-public class EntryResource extends OeffiNpcServerResource {
+public class NetworkPlanEntryResource extends OeffiNpcServerResource {
 
 	private String mNetworkPlanId;
 	private String mStationId;

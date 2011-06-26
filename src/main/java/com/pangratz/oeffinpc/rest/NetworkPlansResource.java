@@ -3,6 +3,7 @@ package com.pangratz.oeffinpc.rest;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
@@ -23,5 +24,27 @@ public class NetworkPlansResource extends OeffiNpcServerResource {
 
 		JSONArray arr = new JSONArray(networkPlans);
 		return new JsonRepresentation(arr);
+	}
+
+	@Override
+	protected Representation post(Representation entity, Variant variant) throws ResourceException {
+		JsonRepresentation represent;
+		try {
+			represent = new JsonRepresentation(entity);
+			JSONObject json = represent.getJsonObject();
+
+			NetworkPlan networkPlan = new NetworkPlan();
+			networkPlan.setImageUrl(json.getString("imageUrl"));
+			networkPlan.setNetworkId(json.getString("networkId"));
+			networkPlan.setPlanId(json.getString("planId"));
+
+			mModelUtils.storeNetworkPlan(networkPlan);
+
+			return createResourceCreatedRepresentation(networkPlan.getNetworkId());
+		} catch (Exception e) {
+			setStatus(Status.SERVER_ERROR_INTERNAL, e);
+		}
+
+		return createErrorRepresentation("error while storing NetworkPlan");
 	}
 }
