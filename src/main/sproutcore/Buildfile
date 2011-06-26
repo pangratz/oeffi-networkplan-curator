@@ -1,0 +1,11 @@
+# ==========================================================================
+# Project:   OeffiNpc
+# Copyright: @2011 My Company, Inc.
+# ==========================================================================
+
+# Add initial buildfile information here
+config :all,
+:required => [:sproutcore, "sproutcore/statechart"],
+:theme => "sproutcore/empty_theme",
+:load_fixtures  => true
+

@@ -1,0 +1,8 @@
+.DS_Store
+target
+
+.project
+.classpath
+.settings
+
+src/main/sproutcore/tmp

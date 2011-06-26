@@ -1,0 +1,3 @@
+<#list entries as planEntry>
+${networkPlan.networkId}|${planEntry.stationId}|${planEntry.name}|${networkPlan.planId}|${planEntry.x}|${planEntry.y}
+</#list>
