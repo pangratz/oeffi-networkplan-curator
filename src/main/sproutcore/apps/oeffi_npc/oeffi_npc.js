@@ -5,7 +5,7 @@
 /*globals OeffiNpc */
 
 OeffiNpc = SC.Application.create({
-	store: SC.Store.create().from('OeffiNpc.FixturesDataSource')
+	store: SC.Store.create().from('OeffiNpc.RestDataSource')
 });
 
 SC.ready(function() {

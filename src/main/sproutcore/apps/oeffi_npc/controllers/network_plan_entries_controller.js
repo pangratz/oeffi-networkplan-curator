@@ -14,6 +14,10 @@ OeffiNpc.networkPlanEntriesController = SC.ArrayController.create(
 /** @scope OeffiNpc.networkPlanEntriesController.prototype */ {
 	
 	allowsMultipleSelection: NO,
-	contentBinding: 'OeffiNpc.networkPlanController.entries'
+	contentBinding: 'OeffiNpc.networkPlanController.entries',
+	
+	numberOfNetworkPlanEntries: function(){
+		return this.get('length') + ' entries';
+	}.property('length')
 	
 });

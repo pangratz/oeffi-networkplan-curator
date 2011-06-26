@@ -6,11 +6,9 @@ OeffiNpc.LoadingState = SC.State.extend({
 		// this.set('pane', SC.TemplatePane.append({ templateName: 'oeffi_npc' }));
 		OeffiNpc.getPath('mainPage.mainPane').append();
 		
-		var query = SC.Query.local(OeffiNpc.NetworkPlan);
-		var networkPlans = OeffiNpc.store.find(query);
+		var networkPlans = OeffiNpc.store.find(OeffiNpc.NETWORK_PLANS_QUERY);
 		OeffiNpc.networkPlansController.set('content', networkPlans);
 		
-		var linzNetwork = networkPlans.objectAt(0);
 		// OeffiNpc.networkPlansController.set('selection', [linzNetwork]);
 		// OeffiNpc.networkPlanEntriesController.set('selection', [linzNetwork.get('entries').objectAt(0)]);
 		

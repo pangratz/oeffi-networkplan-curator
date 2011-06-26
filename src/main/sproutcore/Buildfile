@@ -9,3 +9,5 @@ config :all,
 :theme => "sproutcore/empty_theme",
 :load_fixtures  => true
 
+proxy '/', :to => 'localhost:3000'
+
