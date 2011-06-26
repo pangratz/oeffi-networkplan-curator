@@ -1,8 +1,10 @@
 package com.pangratz.oeffinpc.rest;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.restlet.data.MediaType;
 import org.restlet.data.Method;
@@ -37,6 +39,7 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 	@Override
 	protected Representation get(Variant variant) throws ResourceException {
 		NetworkPlan networkPlan = mModelUtils.getNetworkPlan(mNetworkPlanId);
+		List<NetworkPlanEntry> entries = mModelUtils.getNetworkPlanEntries(mNetworkPlanId);
 
 		if (MediaType.TEXT_CSV.equals(variant.getMediaType())) {
 			String templateName = "template.tfl";
@@ -45,11 +48,18 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 			config.setTemplateLoader(ctl);
 			Map<String, Object> model = new HashMap<String, Object>();
 			model.put("networkPlan", networkPlan);
-			model.put("entries", mModelUtils.getNetworkPlanEntries(mNetworkPlanId));
+			model.put("entries", entries);
 			return new TemplateRepresentation(templateName, config, model, MediaType.TEXT_CSV);
 		}
 
-		return new JsonRepresentation(networkPlan);
+		JSONObject networkPlanObj = new JSONObject(networkPlan);
+		try {
+			networkPlanObj.put("entries", entries);
+			return new JsonRepresentation(networkPlanObj);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return createErrorRepresentation(e.getMessage());
+		}
 	}
 
 	@Override
