@@ -51,9 +51,10 @@ public class ModelUtils {
 		return entries;
 	}
 
-	public NetworkPlanEntry getNetworkPlanEntry(String stationId) {
+	public NetworkPlanEntry getNetworkPlanEntry(String networkId, String stationId) {
 		Query query = new Query(NetworkPlanEntry.class.getSimpleName());
 		query.addFilter("stationId", Query.FilterOperator.EQUAL, stationId);
+		query.addFilter("networkId", Query.FilterOperator.EQUAL, networkId);
 
 		PreparedQuery preparedQuery = mDatastore.prepare(query);
 		Entity entity = preparedQuery.asSingleEntity();

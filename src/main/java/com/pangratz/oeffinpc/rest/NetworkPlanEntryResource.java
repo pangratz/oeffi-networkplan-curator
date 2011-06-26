@@ -1,6 +1,5 @@
 package com.pangratz.oeffinpc.rest;
 
-import org.json.JSONObject;
 import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
@@ -23,25 +22,14 @@ public class NetworkPlanEntryResource extends OeffiNpcServerResource {
 	}
 
 	@Override
-	protected Representation post(Representation entity, Variant variant) throws ResourceException {
-		JsonRepresentation represent;
-		try {
-			represent = new JsonRepresentation(entity);
-			JSONObject json = represent.getJsonObject();
-
-			NetworkPlanEntry networkPlanEntry = new NetworkPlanEntry();
-			networkPlanEntry.setNetworkId(mNetworkPlanId);
-			networkPlanEntry.setName(json.getString("name"));
-			networkPlanEntry.setStationId(json.getString("stationId"));
-			networkPlanEntry.setX(json.getInt("x"));
-			networkPlanEntry.setY(json.getInt("y"));
-
-			mModelUtils.storeNetworkPlanEntry(networkPlanEntry);
-		} catch (Exception e) {
-			setStatus(Status.SERVER_ERROR_INTERNAL);
+	protected Representation get(Variant variant) throws ResourceException {
+		NetworkPlanEntry networkPlanEntry = mModelUtils.getNetworkPlanEntry(mNetworkPlanId, mStationId);
+		if (networkPlanEntry == null) {
+			setStatus(Status.CLIENT_ERROR_NOT_FOUND);
+			return createErrorRepresentation("NetworkPlanEntry with given id not found");
 		}
 
-		return new JsonRepresentation("{}");
+		return new JsonRepresentation(networkPlanEntry);
 	}
 
 }
