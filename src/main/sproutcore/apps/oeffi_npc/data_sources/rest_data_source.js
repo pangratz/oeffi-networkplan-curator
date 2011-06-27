@@ -59,14 +59,10 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 		var type = params.type;
 		var deffered = params.deffered;
 		
-		if (SC.ok(response)) {			
-			SC.debug('fetch local');
-			SC.debug( response.get('body') );
-			var storeKeys = store.loadRecords(type, response.get('body'));
-			SC.debug(storeKeys);
+		if (SC.ok(response)) {
+			store.loadRecords(type, response.get('body'));
 			store.dataSourceDidFetchQuery(query);
 		} else {
-			SC.debug('error');
 			SC.debug(response.get('errorObject'));
 			store.dataSourceDidErrorQuery(query, response);
 		}
