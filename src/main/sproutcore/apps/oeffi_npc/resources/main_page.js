@@ -4,35 +4,29 @@ OeffiNpc.mainPage = SC.Page.design({
 	
 	mainPane: SC.MainPane.design({
 		
-		childViews: 'topView mainView entriesView entryView'.w(),
+		childViews: 'topView entriesView entryView'.w(),
+		layout: {left: 0, right: 0, top: 0, bottom: 0},
 		
-		topView: SC.ToolbarView.design({
+		topView: SC.View.design({
 			layout: {top: 0, left: 0, right: 0, height: 36},
-			childViews: 'labelView'.w(),
-			anchorLocation: SC.ANCHOR_TOP,
+			childViews: 'backButton labelView'.w(),
+			
+			backButton: SC.ButtonView.design({
+				layout: {left: 10, width: 50},
+				title: 'back',
+				target: 'OeffiNpc.statechart',
+				action: 'backToNetworkPlans'
+			}),
 			
 			labelView: SC.LabelView.design({
-				layout: {left: 10, right: 10},
+				layout: {left: 70, right: 10},
 				valueBinding: 'OeffiNpc.networkPlanController.networkId'
 			})
 			
 		}),
 		
-		mainView: SC.ScrollView.design({
-			layout: {top: 36, left: 50, width: 300},
-			contentView: SC.ListView.design({
-				showAlternatingRows: YES,
-				contentBinding: 'OeffiNpc.networkPlansController.arrangedObjects',
-				selectionBinding: 'OeffiNpc.networkPlanController.content',
-				contentValueKey: 'networkId',
-				target: 'OeffiNpc.statechart',
-				action: 'networkPlanSelected',
-				actOnSelect: YES
-			})
-		}),
-			
 		entriesView: SC.ListView.design({
-			layout: {left: 400, width: 200, top: 36, bottom: 0},
+			layout: {left: 10, width: 200, top: 36, bottom: 0},
 			showAlternatingRows: YES,
 			contentBinding: 'OeffiNpc.networkPlanEntriesController.arrangedObjects',
 			selectionBinding: 'OeffiNpc.networkPlanEntryController.content',
@@ -40,17 +34,17 @@ OeffiNpc.mainPage = SC.Page.design({
 		}),
 		
 		entryView: SC.View.design({
-			layout: {left: 650, top: 36, right: 0, bottom: 0},
+			layout: {left: 220, top: 36, right: 10, bottom: 0},
 			childViews: 'contentView imageView'.w(),
 			
 			contentView: SC.TemplateView.create({
-				layout: {left: 10, top: 20, right: 10, height: 100},
+				layout: {left: 10, width: 150, top: 0, bottom: 0},
 				templateName: 'entry',
 				entryBinding: 'OeffiNpc.networkPlanEntryController'
 			}),
 			
 			imageView: SC.ScrollView.design({
-				layout: {left: 10, top: 120, right: 0, bottom: 0},
+				layout: {left: 150, top: 0, right: 0, bottom: 0},
 				contentView: SC.ImageView.design({
 					valueBinding: 'OeffiNpc.networkPlanController.imageUrl',
 					layout: {width: 1114, height: 1618}
@@ -87,6 +81,20 @@ OeffiNpc.mainPage = SC.Page.design({
 			})
 		})
 		
+	}),
+	
+	listNetworkPlansPane: SC.Pane.design({
+		childViews: 'networkPlanList'.w(),
+		
+		networkPlanList: SC.ListView.design({
+			showAlternatingRows: YES,
+			contentBinding: 'OeffiNpc.networkPlansController.arrangedObjects',
+			selectionBinding: 'OeffiNpc.networkPlanController.content',
+			contentValueKey: 'networkId',
+			target: 'OeffiNpc.statechart',
+			action: 'networkPlanSelected',
+			actOnSelect: YES
+		})
 	})
 	
 });

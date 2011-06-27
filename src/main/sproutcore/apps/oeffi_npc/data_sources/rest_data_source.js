@@ -69,7 +69,8 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 		var deffered = params.deffered;
 		
 		if (SC.ok(response)) {
-			store.loadRecords(type, response.get('body'));
+			var body = response.get('body');
+			store.loadRecords(type, SC.isArray(body) ? body : [body]);
 			store.dataSourceDidFetchQuery(query);
 		} else {
 			store.dataSourceDidErrorQuery(query, response);
