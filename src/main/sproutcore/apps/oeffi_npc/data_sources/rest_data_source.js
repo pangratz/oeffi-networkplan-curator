@@ -63,7 +63,6 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 			store.loadRecords(type, response.get('body'));
 			store.dataSourceDidFetchQuery(query);
 		} else {
-			SC.debug(response.get('errorObject'));
 			store.dataSourceDidErrorQuery(query, response);
 		}
 	}
