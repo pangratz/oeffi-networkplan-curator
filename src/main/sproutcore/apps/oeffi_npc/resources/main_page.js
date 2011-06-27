@@ -13,7 +13,7 @@ OeffiNpc.mainPage = SC.Page.design({
 			
 			labelView: SC.LabelView.design({
 				layout: {left: 10, right: 10},
-				valueBinding: 'OeffiNpc.networkPlanEntriesController.numberOfNetworkPlanEntries'
+				valueBinding: 'OeffiNpc.networkPlanController.networkId'
 			})
 			
 		}),
@@ -24,7 +24,10 @@ OeffiNpc.mainPage = SC.Page.design({
 				showAlternatingRows: YES,
 				contentBinding: 'OeffiNpc.networkPlansController.arrangedObjects',
 				selectionBinding: 'OeffiNpc.networkPlanController.content',
-				contentValueKey: 'networkId'
+				contentValueKey: 'networkId',
+				target: 'OeffiNpc.statechart',
+				action: 'networkPlanSelected',
+				actOnSelect: YES
 			})
 		}),
 			

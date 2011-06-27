@@ -10,7 +10,8 @@
 
   @extends SC.DataSource
 */
-OeffiNpc.NETWORK_PLANS_QUERY = SC.Query.local(OeffiNpc.NetworkPlan, {
+OeffiNpc.NETWORK_PLANS_QUERY = SC.Query.create({
+	recordType: OeffiNpc.NetworkPlan,
 	orderBy: 'networkId ASC'
 });
 
@@ -29,6 +30,13 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 			return this._getFromUri('/networkplan', options);
 		}
 		
+		var type = query.get('type');
+		if (type && type === 'getNetworkPlan') {
+			options['type'] = OeffiNpc.NetworkPlan;
+			var url = '/networkplan/' + query.get('networkId');
+			return this._getFromUri(url, options);
+		}
+		
     	return NO;
 	},
   
@@ -43,6 +51,7 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 	},
 	
 	_getFromUri: function(uri, options) {
+		SC.debug('invoking uri: ' + uri);
 		SC.Request
 			.getUrl(uri)
 			.header({'Accept': 'application/json'})
