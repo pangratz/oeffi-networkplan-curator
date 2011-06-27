@@ -10,7 +10,9 @@
 
   @extends SC.DataSource
 */
-OeffiNpc.NETWORK_PLANS_QUERY = SC.Query.local(OeffiNpc.NetworkPlan);
+OeffiNpc.NETWORK_PLANS_QUERY = SC.Query.local(OeffiNpc.NetworkPlan, {
+	orderBy: 'networkId ASC'
+});
 
 OeffiNpc.RestDataSource = SC.DataSource.extend(
 /** @scope OeffiNpc.RestDataSource.prototype */ {
