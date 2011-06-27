@@ -18,14 +18,16 @@ OeffiNpc.mainPage = SC.Page.design({
 			
 		}),
 		
-		mainView: SC.ListView.design({
+		mainView: SC.ScrollView.design({
 			layout: {top: 36, left: 50, width: 300},
-			showAlternatingRows: YES,
-			contentBinding: 'OeffiNpc.networkPlansController.arrangedObjects',
-			selectionBinding: 'OeffiNpc.networkPlanController.content',
-			contentValueKey: 'networkId'
+			contentView: SC.ListView.design({
+				showAlternatingRows: YES,
+				contentBinding: 'OeffiNpc.networkPlansController.arrangedObjects',
+				selectionBinding: 'OeffiNpc.networkPlanController.content',
+				contentValueKey: 'networkId'
+			})
 		}),
-		
+			
 		entriesView: SC.ListView.design({
 			layout: {left: 400, width: 200, top: 36},
 			showAlternatingRows: YES,
