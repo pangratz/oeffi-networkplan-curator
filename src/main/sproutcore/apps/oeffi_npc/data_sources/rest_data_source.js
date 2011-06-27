@@ -62,7 +62,7 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 		if (SC.ok(response)) {			
 			SC.debug('fetch local');
 			SC.debug( response.get('body') );
-			var storeKeys = store.loadRecords(OeffiNpc.NetworkPlan, response.get('body'));
+			var storeKeys = store.loadRecords(type, response.get('body'));
 			SC.debug(storeKeys);
 			store.dataSourceDidFetchQuery(query);
 		} else {
