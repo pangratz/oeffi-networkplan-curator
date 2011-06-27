@@ -29,7 +29,7 @@ OeffiNpc.mainPage = SC.Page.design({
 		}),
 			
 		entriesView: SC.ListView.design({
-			layout: {left: 400, width: 200, top: 36},
+			layout: {left: 400, width: 200, top: 36, bottom: 0},
 			showAlternatingRows: YES,
 			contentBinding: 'OeffiNpc.networkPlanEntriesController.arrangedObjects',
 			selectionBinding: 'OeffiNpc.networkPlanEntryController.content',
@@ -37,12 +37,50 @@ OeffiNpc.mainPage = SC.Page.design({
 		}),
 		
 		entryView: SC.View.design({
-			layout: {left: 650, top: 36, right: 0, height: 200},
-			childViews: 'contentView'.w(),
+			layout: {left: 650, top: 36, right: 0, bottom: 0},
+			childViews: 'contentView imageView'.w(),
 			
 			contentView: SC.TemplateView.create({
+				layout: {left: 10, top: 20, right: 10, height: 100},
 				templateName: 'entry',
 				entryBinding: 'OeffiNpc.networkPlanEntryController'
+			}),
+			
+			imageView: SC.ScrollView.design({
+				layout: {left: 10, top: 120, right: 0, bottom: 0},
+				contentView: SC.ImageView.design({
+					valueBinding: 'OeffiNpc.networkPlanController.imageUrl',
+					layout: {width: 1114, height: 1618}
+				}),
+				
+				mouseDown: function() {
+					return YES;
+				},
+
+				mouseUp: function(evt) {
+					
+					var point = {
+						x: event.pageX,
+						y: event.pageY
+					};
+					
+					var newFrame = this.convertFrameFromView(point, null);
+					point.x = newFrame.x;
+					point.y = newFrame.y;
+					
+					var offset = {
+						x: Math.floor(this.get('horizontalScrollOffset') * this.get('scale')),
+						y: Math.floor(this.get('verticalScrollOffset') * this.get('scale'))
+					};
+					
+					point.x += offset.x;
+					point.y += offset.y;
+					
+					SC.debug( 'cliked image @ ' + point.x + '/' + point.y );
+					
+					OeffiNpc.networkPlanEntryController.set('x', point.x);
+					OeffiNpc.networkPlanEntryController.set('y', point.y);
+				}
 			})
 		})
 		
