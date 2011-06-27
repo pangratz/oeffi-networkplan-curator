@@ -6,3 +6,5 @@ target
 .settings
 
 src/main/sproutcore/tmp
+
+node_modules/
