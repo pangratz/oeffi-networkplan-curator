@@ -34,12 +34,36 @@ OeffiNpc.mainPage = SC.Page.design({
 			})
 		}),
 		
-		entriesView: SC.ListView.design({
+		entriesView: SC.View.design({
 			layout: {left: 10, width: 200, top: 36, bottom: 220},
-			showAlternatingRows: YES,
-			contentBinding: 'OeffiNpc.networkPlanEntriesController.arrangedObjects',
-			selectionBinding: 'OeffiNpc.networkPlanEntryController.content',
-			contentValueKey: 'name'
+			childViews: 'list buttons'.w(),
+			
+			list: SC.ScrollView.design({
+				layout: {top: 0, bottom: 36, left: 0, right: 0},
+				contentView: SC.ListView.design({
+					showAlternatingRows: YES,
+					contentBinding: 'OeffiNpc.networkPlanEntriesController.arrangedObjects',
+					selectionBinding: 'OeffiNpc.networkPlanEntryController.content',
+					contentValueKey: 'name'
+				})
+			}),
+			
+			buttons: SC.View.design({
+				childViews: 'removeBtn addBtn'.w(),
+				layout: {bottom: 0, height: 36, left: 0, right: 0},
+				
+				removeBtn: SC.ButtonView.design({
+					layout: {bottom: 0, right: 30, width: 18},
+					title: '-'
+				}),
+
+				addBtn: SC.ButtonView.design({
+					layout: {bottom: 0, right: 10, width: 18},
+					title: '+',
+					target: 'OeffiNpc.statechart',
+					action: 'addEntry'
+				})
+			})
 		}),
 		
 		entryView: SC.View.design({
