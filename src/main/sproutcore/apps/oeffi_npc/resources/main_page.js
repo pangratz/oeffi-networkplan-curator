@@ -51,27 +51,47 @@ OeffiNpc.mainPage = SC.Page.design({
 				}),
 				
 				mouseEntered: function(evt) {
-					SC.Event.add(evt.target, 'mousemove', this.mouseMoved);
-					
-					// var origEvent = evt.originalEvent;
-					// var canvasEl = origEvent.srcElement;
-					// var ctx = canvasEl.getContext('2d');
+					var that = this;
+					var listener = function(evt) {
+						that.mouseMoved(evt);
+					};
+					this.set('listener', listener);
+					SC.Event.add(evt.target, 'mousemove', listener);
 				},
 				
 				mouseExited: function(evt) {
-					SC.Event.remove(evt.target, 'mousemove', this.mouseMoved);
+					var listener = this.get('listener');
+					this.set('listener', undefined);
+					SC.Event.remove(evt.target, 'mousemove', listener);
 				},
 				
 				mouseMoved: function(evt) {
-					var origEvent = evt.originalEvent;
-					var offset = {
-						x: origEvent.offsetX,
-						y: origEvent.offsetY
-					};
+					var pointOnCanvas = this.getImageCoords(evt);
+					// SC.debug('mouse moved on image @ ' + pointOnCanvas.x + '/' + pointOnCanvas.y);
 					
-					// var canvasEl = origEvent.srcElement;
-					// var ctx = canvasEl.getContext('2d');
-					// ctx.drawImage(canvasEl, offset.x-10, offset.y-10, 21, 21, offset.x-20, offset.y-20, 41, 41);
+					var canvas = this.get('canvas');
+					if (!canvas) {
+						this.set('canvas', evt.srcElement);
+						canvas = evt.srcElement;
+					}
+					
+					var ctx = canvas.getContext('2d');
+					var origImage = this.get('origImage');
+					if (!origImage) {
+						origImage = {};
+						this.set('origImage', origImage);
+					} else {
+						// replace current canvas with original
+						// ctx.drawImage(origImage, 0, 0);
+					}
+					
+					// SC.debug(ctx);
+					
+					ctx.fillStyle = "rgb(200,0,0)";
+					ctx.fillRect(pointOnCanvas.x-2, pointOnCanvas.y-2, 5, 5);
+					
+					// draw the magnifier
+					// ctx.drawImage(canvas, pointOnCanvas.x-10, pointOnCanvas.y-10, 21, 21, pointOnCanvas.x-20, pointOnCanvas.y-20, 41, 41);
 				},
 				
 				mouseDown: function() {
