@@ -13,10 +13,9 @@
 OeffiNpc.networkPlanMouseController = SC.ObjectController.create(
 /** @scope OeffiNpc.networkPlanMouseController.prototype */ {
 	
-	content: {
-		x: undefined,
-		y: undefined
-	},
+	x: undefined,
+	y: undefined,
+	zoom: NO,
 	
 	positionString: function(){
 		return this.get('x') + '/' + this.get('y');

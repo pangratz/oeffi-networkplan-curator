@@ -68,7 +68,7 @@ OeffiNpc.mainPage = SC.Page.design({
 		
 		entryView: SC.View.design({
 			layout: {left: 220, top: 36, right: 10, bottom: 0},
-			childViews: 'contentView imageView label'.w(),
+			childViews: 'contentView imageView bottomView'.w(),
 			
 			contentView: SC.TemplateView.create({
 				layout: {left: 10, width: 150, top: 0, bottom: 0},
@@ -76,16 +76,27 @@ OeffiNpc.mainPage = SC.Page.design({
 				entryBinding: 'OeffiNpc.networkPlanEntryController'
 			}),
 			
-			label: SC.LabelView.design({
+			bottomView: SC.View.design({
+				childViews: 'label zoom'.w(),
 				layout: {left: 150, bottom: 0, height: 36, right: 0},
-				valueBinding: 'OeffiNpc.mainPage.mainPane.entryView.imageView.contentView.cursorPositionString'
+				
+				label: SC.LabelView.design({
+					layout: {width: 100, left: 0},
+					valueBinding: 'OeffiNpc.mainPage.mainPane.entryView.imageView.contentView.cursorPositionString'
+				}),
+				
+				zoom: SC.CheckboxView.design({
+					layout: {left: 110},
+					valueBinding: 'OeffiNpc.networkPlanMouseController.zoom'
+				})
 			}),
 			
 			imageView: SC.ScrollView.design({
 				layout: {left: 150, top: 0, right: 0, bottom: 36},
 				contentView: OeffiNpc.NetworkPlanImageView.design({
 					valueBinding: 'OeffiNpc.networkPlanController.imageUrl',
-					layout: {width: 1114, height: 1618}
+					layout: {width: 1114, height: 1618},
+					zoomBinding: 'OeffiNpc.networkPlanMouseController.zoom'
 				}),
 				
 				mouseDown: function() {
@@ -104,8 +115,8 @@ OeffiNpc.mainPage = SC.Page.design({
 				
 				getImageCoords: function(evt) {
 					var point = {
-						x: event.pageX,
-						y: event.pageY
+						x: evt.pageX,
+						y: evt.pageY
 					};
 					
 					var newFrame = this.convertFrameFromView(point, null);
