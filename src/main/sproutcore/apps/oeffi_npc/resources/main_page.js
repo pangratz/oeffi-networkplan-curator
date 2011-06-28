@@ -50,12 +50,45 @@ OeffiNpc.mainPage = SC.Page.design({
 					layout: {width: 1114, height: 1618}
 				}),
 				
+				mouseEntered: function(evt) {
+					SC.Event.add(evt.target, 'mousemove', this.mouseMoved);
+					
+					// var origEvent = evt.originalEvent;
+					// var canvasEl = origEvent.srcElement;
+					// var ctx = canvasEl.getContext('2d');
+				},
+				
+				mouseExited: function(evt) {
+					SC.Event.remove(evt.target, 'mousemove', this.mouseMoved);
+				},
+				
+				mouseMoved: function(evt) {
+					var origEvent = evt.originalEvent;
+					var offset = {
+						x: origEvent.offsetX,
+						y: origEvent.offsetY
+					};
+					
+					// var canvasEl = origEvent.srcElement;
+					// var ctx = canvasEl.getContext('2d');
+					// ctx.drawImage(canvasEl, offset.x-10, offset.y-10, 21, 21, offset.x-20, offset.y-20, 41, 41);
+				},
+				
 				mouseDown: function() {
 					return YES;
 				},
 
 				mouseUp: function(evt) {
 					
+					var point = this.getImageCoords(evt);
+					
+					SC.debug( 'cliked image @ ' + point.x + '/' + point.y );
+					
+					OeffiNpc.networkPlanEntryController.set('x', point.x);
+					OeffiNpc.networkPlanEntryController.set('y', point.y);
+				},
+				
+				getImageCoords: function(evt) {
 					var point = {
 						x: event.pageX,
 						y: event.pageY
@@ -73,10 +106,7 @@ OeffiNpc.mainPage = SC.Page.design({
 					point.x += offset.x;
 					point.y += offset.y;
 					
-					SC.debug( 'cliked image @ ' + point.x + '/' + point.y );
-					
-					OeffiNpc.networkPlanEntryController.set('x', point.x);
-					OeffiNpc.networkPlanEntryController.set('y', point.y);
+					return point;
 				}
 			})
 		})
@@ -87,6 +117,7 @@ OeffiNpc.mainPage = SC.Page.design({
 		childViews: 'networkPlanList'.w(),
 		
 		networkPlanList: SC.ListView.design({
+			layout: {centerX: 0, centerY: 0, width: 250, height: 300},
 			showAlternatingRows: YES,
 			contentBinding: 'OeffiNpc.networkPlansController.arrangedObjects',
 			selectionBinding: 'OeffiNpc.networkPlanController.content',
