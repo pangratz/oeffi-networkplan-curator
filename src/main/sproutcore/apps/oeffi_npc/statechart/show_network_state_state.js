@@ -20,6 +20,11 @@ OeffiNpc.ShowNetworkPlanState = SC.State.extend({
 			name: 'new entry'
 		});
 		OeffiNpc.networkPlanEntriesController.addObject(newEntry);
+	},
+	
+	zPressed: function(){
+		var zoom = OeffiNpc.networkPlanMouseController.get('zoom');
+		OeffiNpc.networkPlanMouseController.set('zoom', !zoom);
 	}
 	
 });
