@@ -14,6 +14,11 @@ OeffiNpc.ShowNetworkPlanState = SC.State.extend({
 		this.gotoState('showNetworkPlans');
 	},
 	
+	clickedOnNetworkPlan: function(point) {
+		OeffiNpc.networkPlanEntryController.set('x', point.x);
+		OeffiNpc.networkPlanEntryController.set('y', point.y);
+	},
+	
 	addEntry: function(){
 		var newEntry = OeffiNpc.store.createRecord(OeffiNpc.NetworkPlanEntry, {
 			networkPlan: OeffiNpc.networkPlanController.get('networkdId'),

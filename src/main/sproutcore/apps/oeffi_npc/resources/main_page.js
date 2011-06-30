@@ -112,13 +112,9 @@ OeffiNpc.mainPage = SC.Page.design({
 				},
 
 				mouseUp: function(evt) {
-					
 					var point = this.getImageCoords(evt);
-					
 					SC.debug( 'cliked image @ ' + point.x + '/' + point.y );
-					
-					OeffiNpc.networkPlanEntryController.set('x', point.x);
-					OeffiNpc.networkPlanEntryController.set('y', point.y);
+					OeffiNpc.statechart.sendEvent('clickedOnNetworkPlan', point);
 				},
 				
 				getImageCoords: function(evt) {
