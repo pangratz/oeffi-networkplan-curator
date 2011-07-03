@@ -10,7 +10,7 @@
 
   @extends SC.View
 */
-OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(
+OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(OeffiNpc.ImageViewMixin,
 /** @scope OeffiNpc.NetworkPlanImageView.prototype */ {
 	
 	from: 20,
@@ -24,6 +24,9 @@ OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(
 	}.observes('zoom'),
 	
 	mouseMovedEventChanged: function(){
+		var evt = this.get('mouseMoveEvent');
+		var pointOnCanvas = this.get('parentView').get('parentView').getImageCoords(evt);
+		this.set('cursorPosition', pointOnCanvas);
 		if (this.get('zoom') === YES) {
 			this.repaint();
 		}
@@ -91,8 +94,7 @@ OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(
 			canvas = evt.srcElement;
 		}
 		
-		var pointOnCanvas = this.get('parentView').get('parentView').getImageCoords(evt);
-		this.set('cursorPosition', pointOnCanvas);
+		var pointOnCanvas = this.get('cursorPosition');
 		var width = canvas.width;
 		var height = canvas.height;
 		

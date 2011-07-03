@@ -10,7 +10,7 @@
 
   @extends SC.View
 */
-OeffiNpc.MagnifierView = SC.ImageView.extend(
+OeffiNpc.MagnifierView = SC.ImageView.extend(OeffiNpc.ImageViewMixin,
 /** @scope OeffiNpc.MagnifierView.prototype */ {
 	
 	positionChanged: function(){
