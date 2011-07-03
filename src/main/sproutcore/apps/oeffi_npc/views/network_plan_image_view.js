@@ -48,10 +48,18 @@ OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(
 		
 		if (pointOnCanvas) {
 			ctx.save();
+			
 			ctx.beginPath();
 			ctx.arc(pointOnCanvas.x, pointOnCanvas.y, this.to, 0, Math.PI*2, false);
 			ctx.clip();
 			ctx.drawImage(canvas, pointOnCanvas.x-this.from, pointOnCanvas.y-this.from, 2*this.from+1, 2*this.from+1, pointOnCanvas.x-this.to-1, pointOnCanvas.y-this.to-1, 2*this.to-1, 2*this.to-1);
+			
+			ctx.save();
+				ctx.strokeStyle = 'black';
+				ctx.lineWidth = 3;
+				ctx.beginPath();
+				ctx.arc(pointOnCanvas.x, pointOnCanvas.y, this.to-2, 0, Math.PI*2, false);
+				ctx.stroke();
 			ctx.restore();
 			
 			ctx.beginPath();
@@ -61,6 +69,8 @@ OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(
 			ctx.moveTo(pointOnCanvas.x-20, pointOnCanvas.y);
 			ctx.lineTo(pointOnCanvas.x+20, pointOnCanvas.y);
 			ctx.stroke();
+			
+			ctx.restore();
 		}
 		
 		this.set('prev', {
