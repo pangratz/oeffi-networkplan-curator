@@ -119,21 +119,6 @@ OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(OeffiNpc.ImageViewMixin,
 		return '';
 	}.property('cursorPosition'),
 	
-	mouseEntered: function(evt) {
-		var that = this;
-		var listener = function(evt) {
-			that.mouseMoved(evt);
-		};
-		this.set('listener', listener);
-		SC.Event.add(evt.target, 'mousemove', listener);
-	},
-	
-	mouseExited: function(evt) {
-		var listener = this.get('listener');
-		this.set('listener', undefined);
-		SC.Event.remove(evt.target, 'mousemove', listener);
-	},
-	
 	mouseMoved: function(evt) {
 		this.set('mouseMoveEvent', evt);
 	}
