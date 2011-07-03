@@ -13,27 +13,67 @@
 OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(
 /** @scope OeffiNpc.NetworkPlanImageView.prototype */ {
 	
+	from: 20,
+	to: 60,
 	zoom: NO,
 	cursorPosition: undefined,
 	prev: undefined,
 	
-	drawZoom: function(){
+	zoomChanged: function(){
+		this.repaint();
+	}.observes('zoom'),
+	
+	mouseMovedEventChanged: function(){
+		if (this.get('zoom') === YES) {
+			this.repaint();
+		}
+	}.observes('mouseMoveEvent'),
+	
+	_resetPreviousZoom: function(canvas) {
+		var ctx = canvas.getContext('2d');
+		var image = this.get('image');
+		var prev = this.get('prev');
+		if (prev) {
+			try {
+				ctx.drawImage(image, Math.max(0, prev.x-this.to), Math.max(0, prev.y-this.to), 2*this.to+1, 2*this.to+1, prev.x-this.to, prev.y-this.to, 2*this.to+1, 2*this.to+1);
+			} catch (err) {
+				// silent
+			}
+		}
+	},
+	
+	_drawNewZoom: function(canvas){
+		var ctx = canvas.getContext('2d');
+		var pointOnCanvas = this.get('cursorPosition');
+		
+		if (pointOnCanvas) {
+			ctx.save();
+			ctx.beginPath();
+			ctx.arc(pointOnCanvas.x, pointOnCanvas.y, this.to, 0, Math.PI*2, false);
+			ctx.clip();
+			ctx.drawImage(canvas, pointOnCanvas.x-this.from, pointOnCanvas.y-this.from, 2*this.from+1, 2*this.from+1, pointOnCanvas.x-this.to-1, pointOnCanvas.y-this.to-1, 2*this.to-1, 2*this.to-1);
+			ctx.restore();
+			
+			ctx.beginPath();
+			ctx.strokeStyle = 'red';
+			ctx.moveTo(pointOnCanvas.x, pointOnCanvas.y-20);
+			ctx.lineTo(pointOnCanvas.x, pointOnCanvas.y+20);
+			ctx.moveTo(pointOnCanvas.x-20, pointOnCanvas.y);
+			ctx.lineTo(pointOnCanvas.x+20, pointOnCanvas.y);
+			ctx.stroke();
+		}
+		
+		this.set('prev', {
+			x: pointOnCanvas.x,
+			y: pointOnCanvas.y
+		});
+	},
+	
+	repaint: function(){
 		var evt = this.get('mouseMoveEvent');
 		if (!evt){
 			return;
 		}
-		
-		var pointOnCanvas = this.get('parentView').get('parentView').getImageCoords(evt);
-		this.set('cursorPosition', pointOnCanvas);
-		
-		if (!this.get('zoom') && SC.ok(this.get('prev'))) {
-			SC.debug('reset view from zoomed state to not zoomed state');
-			this.set('prev', 'nix');
-			return;
-		}
-		
-		var from = 20;
-		var to = 60;
 		
 		var canvas = this.get('canvas');
 		if (!canvas) {
@@ -41,55 +81,23 @@ OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(
 			canvas = evt.srcElement;
 		}
 		
+		var pointOnCanvas = this.get('parentView').get('parentView').getImageCoords(evt);
+		this.set('cursorPosition', pointOnCanvas);
 		var width = canvas.width;
 		var height = canvas.height;
 		
-		if (pointOnCanvas.x >= (width - to) || pointOnCanvas.x <= to) {
+		if (pointOnCanvas.x >= (width - this.to) || pointOnCanvas.x <= this.to) {
 			return;
 		}
-		if (pointOnCanvas.y >= (height - to) || pointOnCanvas.y <= to) {
+		if (pointOnCanvas.y >= (height - this.to) || pointOnCanvas.y <= this.to) {
 			return;
 		}
 		
-		var ctx = canvas.getContext('2d');
-		var image = this.get('image');
-		var prev = this.get('prev');
-		if (prev) {
-			try {
-				ctx.drawImage(image, Math.max(0, prev.x-to), Math.max(0, prev.y-to), 2*to+1, 2*to+1, prev.x-to, prev.y-to, 2*to+1, 2*to+1);
-			} catch (err) {
-				// silent
-			}
+		this._resetPreviousZoom(canvas);
+		if (this.get('zoom') == YES) {
+			this._drawNewZoom(canvas);
 		}
-		
-		if (prev) {
-			ctx.save();
-			ctx.beginPath();
-			ctx.arc(prev.x, prev.y, to, 0, Math.PI*2, true);
-			ctx.clip();
-			ctx.drawImage(canvas, pointOnCanvas.x-from, pointOnCanvas.y-from, 2*from+1, 2*from+1, pointOnCanvas.x-to-1, pointOnCanvas.y-to-1, 2*to-1, 2*to-1);
-			ctx.restore();
-			
-			ctx.save();
-			// ctx.strokeStyle = 'green';
-			ctx.arc(prev.x, prev.y, to-10, 0, Math.PI*2, true);
-			// ctx.stroke();
-			ctx.restore();
-		}
-		
-		ctx.beginPath();
-		ctx.strokeStyle = 'red';
-		ctx.moveTo(pointOnCanvas.x, pointOnCanvas.y-20);
-		ctx.lineTo(pointOnCanvas.x, pointOnCanvas.y+20);
-		ctx.moveTo(pointOnCanvas.x-20, pointOnCanvas.y);
-		ctx.lineTo(pointOnCanvas.x+20, pointOnCanvas.y);
-		ctx.stroke();
-		
-		this.set('prev', {
-			x: pointOnCanvas.x,
-			y: pointOnCanvas.y
-		});
-	}.observes('zoom', 'mouseMoveEvent'),
+	},
 	
 	cursorPositionString: function() {
 		var pos = this.get('cursorPosition');
