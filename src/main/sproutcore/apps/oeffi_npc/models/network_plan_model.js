@@ -18,6 +18,8 @@ OeffiNpc.NetworkPlan = SC.Record.extend(
 	networkId: SC.Record.attr(String),
 	planId: SC.Record.attr(String),
 	imageUrl: SC.Record.attr(String),
+	imageWidth: SC.Record.attr(Number),
+	imageHeight: SC.Record.attr(Number),
 	entries: SC.Record.toMany('OeffiNpc.NetworkPlanEntry', {isMaster: YES, nested: YES})
 
 }) ;
