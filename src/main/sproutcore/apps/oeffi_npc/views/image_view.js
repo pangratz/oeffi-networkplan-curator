@@ -10,12 +10,14 @@
 */
 OeffiNpc.ImageViewMixin = {
 	
+	scale: 1.0,
+	
 	_imageChanged: function(){
 		var image = this.get('image');
 		if (image) {
 			var layout = {
-				width: image.width,
-				height: image.height
+				width: this.scale * image.width,
+				height: this.scale * image.height
 			};
 			this.set('layout', layout);
 		}
