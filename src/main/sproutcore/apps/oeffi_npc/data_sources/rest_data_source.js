@@ -50,6 +50,16 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 		return YES;
 	},
 	
+	createRecord: function(store, storeKey, params) {
+		SC.debug('createRecord with storeKey: ' + storeKey);
+		return NO;
+	},
+	
+	updateRecord: function(store, storeKey, params) {
+		SC.debug('updateRecord with storeKey: ' + storeKey);
+		return NO;
+	},
+	
 	_getFromUri: function(uri, options) {
 		SC.debug('invoking uri: ' + uri);
 		SC.Request
