@@ -20,6 +20,6 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>static/oeffi_npc/en/build/index.html</welcome-file>
 	</welcome-file-list>
 </web-app>
