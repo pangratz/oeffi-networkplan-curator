@@ -6,6 +6,8 @@ var networkplan = {};
 
 networkplan['linz'] = {
 	"imageUrl": "http://oeffi.schildbach.de/plans/linz.png",
+	"imageWidth": 1114,
+	"imageHeight": 1618,
 	"networkId": "linz",
 	"planId": "linz",
 	"entries": [
@@ -23,30 +25,18 @@ networkplan['linz'] = {
 		}
 	]
 };
-networkplan['innsbruck'] = {
-	"imageUrl": "http://oeffi.schildbach.de/plans/linz.png",
-	"networkId": "innsbruck",
-	"planId": "innsbruck",
-	"entries": [
-		{
-			"stationId": "111",
-			"name": "Innsbruck Hauptbahnhof",
-			"x": 123,
-			"y": 321
-		}
-	]
-};
-networkplan['graz'] = {
-	"imageUrl": "http://oeffi.schildbach.de/plans/linz.png",
-	"networkId": "graz",
-	"planId": "graz"
+networkplan['bonn'] = {
+	"imageUrl": "http://oeffi.schildbach.de/plans/bonn_schnellverkehr.png",
+	"imageWidth": 2338,
+	"imageHeight": 1653,
+	"networkId": "bonn",
+	"planId": "bonn"
 };
 
 app.get('/networkplan', function(req, res){
 	var networkplanArray = [];
 	networkplanArray.push( networkplan['linz'] );
-	networkplanArray.push( networkplan['graz'] );
-	networkplanArray.push( networkplan['innsbruck'] );
+	networkplanArray.push( networkplan['bonn'] );
 	res.send( networkplanArray );
 });
 

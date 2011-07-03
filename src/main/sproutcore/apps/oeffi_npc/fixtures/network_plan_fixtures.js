@@ -13,14 +13,18 @@ OeffiNpc.NetworkPlan.FIXTURES = [
 		networkId: 'linz',
 		planId: 'linz',
 		imageUrl: 'http://oeffi.schildbach.de/plans/linz.png',
+		imageWidth: 1114,
+		imageHeight: 1618,
 		entries: ['schumpeterstrasse', 'taubenmarkt']
 	},
 	
 	{
-		guid: 'innsbruck',
-		networkId: 'innsbruck',
-		planId: 'innsbruck',
-		imageUrl: 'http://oeffi.schildbach.de/plans/linz.png',
+		guid: 'bonn',
+		networkId: 'bonn',
+		planId: 'bonn',
+		imageUrl: 'http://oeffi.schildbach.de/plans/bonn_schnellverkehr.png',
+		imageWidth: 2338,
+		imageHeight: 1653,
 		entries: ['landesmuseum', 'innsbruck_hauptbahnhof']
 	}
 
