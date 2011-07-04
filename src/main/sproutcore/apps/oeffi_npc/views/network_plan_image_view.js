@@ -65,13 +65,7 @@ OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(OeffiNpc.ImageViewMixin,
 				ctx.stroke();
 			ctx.restore();
 			
-			ctx.beginPath();
-			ctx.strokeStyle = 'red';
-			ctx.moveTo(pointOnCanvas.x, pointOnCanvas.y-this.to);
-			ctx.lineTo(pointOnCanvas.x, pointOnCanvas.y+this.to);
-			ctx.moveTo(pointOnCanvas.x-this.to, pointOnCanvas.y);
-			ctx.lineTo(pointOnCanvas.x+this.to, pointOnCanvas.y);
-			ctx.stroke();
+			this._drawCrosshair(ctx, pointOnCanvas.x, pointOnCanvas.y);
 			
 			ctx.restore();
 		}
@@ -80,6 +74,20 @@ OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(OeffiNpc.ImageViewMixin,
 			x: pointOnCanvas.x,
 			y: pointOnCanvas.y
 		});
+	},
+	
+	_drawCrosshair: function(ctx, x, y) {
+		ctx.save();
+		
+		ctx.beginPath();
+		ctx.strokeStyle = 'red';
+		ctx.moveTo(x, y-this.to);
+		ctx.lineTo(x, y+this.to);
+		ctx.moveTo(x-this.to, y);
+		ctx.lineTo(x+this.to, y);
+		ctx.stroke();
+		
+		ctx.restore();
 	},
 	
 	repaint: function(){
