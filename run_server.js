@@ -5,7 +5,7 @@ var app = require('express').createServer();
 var networkplan = {};
 
 networkplan['linz'] = {
-	"imageUrl": "http://oeffi.schildbach.de/plans/linz.png",
+	"imageUrl": "static/oeffi_npc/en/build/source/resources/images/linz_bw.png",
 	"imageWidth": 1114,
 	"imageHeight": 1618,
 	"networkId": "linz",
@@ -26,7 +26,7 @@ networkplan['linz'] = {
 	]
 };
 networkplan['bonn'] = {
-	"imageUrl": "http://oeffi.schildbach.de/plans/bonn_schnellverkehr.png",
+	"imageUrl": "static/oeffi_npc/en/build/source/resources/images/bonn_schnellverkehr_bw.png",
 	"imageWidth": 2338,
 	"imageHeight": 1653,
 	"networkId": "bonn",
