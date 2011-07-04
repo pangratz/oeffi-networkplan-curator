@@ -57,7 +57,7 @@ OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(OeffiNpc.ImageViewMixin,
 			ctx.clip();
 			ctx.drawImage(canvas, pointOnCanvas.x-this.from, pointOnCanvas.y-this.from, 2*this.from+1, 2*this.from+1, pointOnCanvas.x-this.to-1, pointOnCanvas.y-this.to-1, 2*this.to-1, 2*this.to-1);
 			
-			this._drawMagnifierCircle();
+			this._drawMagnifierCircle(ctx, pointOnCanvas.x, pointOnCanvas.y);
 			this._drawCrosshair(ctx, pointOnCanvas.x, pointOnCanvas.y);
 			
 			ctx.restore();
