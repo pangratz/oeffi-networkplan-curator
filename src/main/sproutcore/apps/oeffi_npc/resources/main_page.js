@@ -15,6 +15,7 @@ OeffiNpc.mainPage = SC.Page.design({
 			
 			if (evt.keyCode >= 49 && evt.keyCode <= 57) {
 				OeffiNpc.statechart.sendEvent('numberPressed', (evt.keyCode - 48));
+				return YES;
 			}
 			
 			return NO;
