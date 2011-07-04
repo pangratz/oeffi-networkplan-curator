@@ -15,13 +15,12 @@ OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(OeffiNpc.ImageViewMixin,
 	
 	from: 20,
 	to: 60,
-	zoom: NO,
 	cursorPosition: undefined,
 	prev: undefined,
 	
 	zoomChanged: function(){
 		this.repaint();
-	}.observes('zoom'),
+	}.observes('zoom', 'zoomScale'),
 	
 	mouseMovedEventChanged: function(){
 		var evt = this.get('mouseMoveEvent');
@@ -55,10 +54,11 @@ OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(OeffiNpc.ImageViewMixin,
 			ctx.beginPath();
 			ctx.arc(pointOnCanvas.x, pointOnCanvas.y, this.to, 0, Math.PI*2, false);
 			ctx.clip();
-			ctx.drawImage(canvas, pointOnCanvas.x-this.from, pointOnCanvas.y-this.from, 2*this.from+1, 2*this.from+1, pointOnCanvas.x-this.to-1, pointOnCanvas.y-this.to-1, 2*this.to-1, 2*this.to-1);
+			var w = this.to/this.zoomScale;
+			ctx.drawImage(canvas, pointOnCanvas.x-w, pointOnCanvas.y-w, 2*w, 2*w, pointOnCanvas.x-this.to, pointOnCanvas.y-this.to, 2*this.to, 2*this.to);
 			
-			this._drawMagnifierCircle(ctx, pointOnCanvas.x, pointOnCanvas.y);
 			this._drawCrosshair(ctx, pointOnCanvas.x, pointOnCanvas.y);
+			this._drawMagnifierCircle(ctx, pointOnCanvas.x, pointOnCanvas.y);
 			
 			ctx.restore();
 		}
@@ -74,7 +74,7 @@ OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(OeffiNpc.ImageViewMixin,
 		ctx.strokeStyle = 'black';
 		ctx.lineWidth = 3;
 		ctx.beginPath();
-		ctx.arc(x, y, this.to-2, 0, Math.PI*2, false);
+		ctx.arc(x, y, this.to-1, 0, Math.PI*2, false);
 		ctx.stroke();
 		ctx.restore();
 	},

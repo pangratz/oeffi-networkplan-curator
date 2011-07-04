@@ -30,6 +30,11 @@ OeffiNpc.ShowNetworkPlanState = SC.State.extend({
 	zPressed: function(){
 		var zoom = OeffiNpc.networkPlanMouseController.get('zoom');
 		OeffiNpc.networkPlanMouseController.set('zoom', !zoom);
+	},
+	
+	numberPressed: function(nr) {
+		var scale = nr * 0.5;
+		OeffiNpc.networkPlanMouseController.set('zoomScale', scale);
 	}
 	
 });

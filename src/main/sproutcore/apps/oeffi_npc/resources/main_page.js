@@ -12,6 +12,11 @@ OeffiNpc.mainPage = SC.Page.design({
 				OeffiNpc.statechart.sendEvent('zPressed');
 				return YES;
 			}
+			
+			if (evt.keyCode >= 49 && evt.keyCode <= 57) {
+				OeffiNpc.statechart.sendEvent('numberPressed', (evt.keyCode - 48));
+			}
+			
 			return NO;
 		},
 		
@@ -104,7 +109,8 @@ OeffiNpc.mainPage = SC.Page.design({
 				contentView: OeffiNpc.NetworkPlanImageView.design({
 					valueBinding: 'OeffiNpc.networkPlanController.imageUrl',
 					layout: {width: 1114, height: 1618},
-					zoomBinding: 'OeffiNpc.networkPlanMouseController.zoom'
+					zoomBinding: 'OeffiNpc.networkPlanMouseController.zoom',
+					zoomScaleBinding: 'OeffiNpc.networkPlanMouseController.zoomScale'
 				}),
 				
 				mouseDown: function() {
