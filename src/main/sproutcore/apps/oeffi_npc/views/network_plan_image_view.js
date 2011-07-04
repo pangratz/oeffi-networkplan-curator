@@ -67,10 +67,10 @@ OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(OeffiNpc.ImageViewMixin,
 			
 			ctx.beginPath();
 			ctx.strokeStyle = 'red';
-			ctx.moveTo(pointOnCanvas.x, pointOnCanvas.y-20);
-			ctx.lineTo(pointOnCanvas.x, pointOnCanvas.y+20);
-			ctx.moveTo(pointOnCanvas.x-20, pointOnCanvas.y);
-			ctx.lineTo(pointOnCanvas.x+20, pointOnCanvas.y);
+			ctx.moveTo(pointOnCanvas.x, pointOnCanvas.y-this.to);
+			ctx.lineTo(pointOnCanvas.x, pointOnCanvas.y+this.to);
+			ctx.moveTo(pointOnCanvas.x-this.to, pointOnCanvas.y);
+			ctx.lineTo(pointOnCanvas.x+this.to, pointOnCanvas.y);
 			ctx.stroke();
 			
 			ctx.restore();
