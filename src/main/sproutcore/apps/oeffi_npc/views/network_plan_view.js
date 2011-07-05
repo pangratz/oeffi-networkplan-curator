@@ -26,9 +26,20 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 	
 	doubleClick: function(evt) {
 		var point = this.getImageCoords(evt);
-		SC.debug( 'double clicked image @ ' + point.x + '/' + point.y );
 		OeffiNpc.statechart.sendEvent('clickedOnNetworkPlan', point);
 	},
+	
+	mouseMoved: function(evt) {
+		this.set('mouseMoveEvent', evt);
+		this.contentView.set('mouseMoveEvent', evt);
+	},
+    
+	mouseMoveEventChanged: function(){
+		var evt = this.get('mouseMoveEvent');
+		var pointOnCanvas = this.getImageCoords(evt);
+		this.set('cursorPosition', pointOnCanvas);
+		this.contentView.set('cursorPosition', pointOnCanvas);
+	}.observes('mouseMoveEvent'),
 	
 	getImageCoords: function(evt) {
 		var point = {
@@ -58,18 +69,11 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 		cursorPosition: undefined,
 		prev: undefined,
 		
-		mouseMoved: function(evt) {
-			this.set('mouseMoveEvent', evt);
-		},
-        
-		mouseMovedEventChanged: function(){
-			var evt = this.get('mouseMoveEvent');
-			var pointOnCanvas = this.get('parentView').get('parentView').getImageCoords(evt);
-			this.set('cursorPosition', pointOnCanvas);
+		cursorPositionChanged: function(){
 			if (this.get('zoom') === YES) {
 				this.repaint();
 			}
-		}.observes('mouseMoveEvent'),
+		}.observes('cursorPosition'),
 		
 		zoomPropertiesChanged: function(){
 			this.repaint();
@@ -103,14 +107,6 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 				this._drawNewZoom(canvas);
 			}
 		},
-        
-		cursorPositionString: function() {
-			var pos = this.get('cursorPosition');
-			if (pos) {
-				return pos.x + '/' + pos.y;
-			}
-			return undefined;
-		}.property('cursorPosition'),
         
 		_resetPreviousZoom: function(canvas) {
 			var ctx = canvas.getContext('2d');

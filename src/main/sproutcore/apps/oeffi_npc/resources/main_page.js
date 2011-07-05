@@ -42,9 +42,8 @@ OeffiNpc.mainPage = SC.Page.design({
 		magnifierView: SC.ScrollView.design({
 			layout: {left: 10, width: 200, bottom: 10, height: 200},
 			contentView: OeffiNpc.MagnifierView.design({
-				imageBinding: 'OeffiNpc.mainPage.mainPane.entryView.imageView.contentView.image',
-				positionBinding: 'OeffiNpc.mainPage.mainPane.entryView.imageView.contentView.cursorPosition',
-				layout: {width: 2*1114, height: 2*1618}
+				valueBinding: 'OeffiNpc.networkPlanController.imageUrl',
+				positionBinding: 'OeffiNpc.networkPlanViewController.cursorPosition'
 			})
 		}),
 		
@@ -96,20 +95,21 @@ OeffiNpc.mainPage = SC.Page.design({
 				
 				label: SC.LabelView.design({
 					layout: {width: 100, left: 0},
-					valueBinding: 'OeffiNpc.mainPage.mainPane.entryView.imageView.contentView.cursorPositionString'
+					valueBinding: 'OeffiNpc.networkPlanViewController.cursorPositionString'
 				}),
 				
 				zoom: SC.CheckboxView.design({
 					layout: {left: 110},
-					valueBinding: 'OeffiNpc.networkPlanMouseController.zoom'
+					valueBinding: 'OeffiNpc.networkPlanViewController.zoom'
 				})
 			}),
 			
 			imageView: OeffiNpc.NetworkPlanView.design({
 				layout: {left: 150, top: 0, right: 0, bottom: 36},
+				cursorPositionBinding: 'OeffiNpc.networkPlanViewController.cursorPosition',
 				valueBinding: 'OeffiNpc.networkPlanController.imageUrl',
-				zoomBinding: 'OeffiNpc.networkPlanMouseController.zoom',
-				zoomScaleBinding: 'OeffiNpc.networkPlanMouseController.zoomScale'
+				zoomBinding: 'OeffiNpc.networkPlanViewController.zoom',
+				zoomScaleBinding: 'OeffiNpc.networkPlanViewController.zoomScale'
 			})
 		})
 		
