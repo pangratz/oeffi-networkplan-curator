@@ -42,6 +42,7 @@ public class NetworkPlansResource extends OeffiNpcServerResource {
 
 			return createResourceCreatedRepresentation(networkPlan.getNetworkId());
 		} catch (Exception e) {
+			e.printStackTrace();
 			setStatus(Status.SERVER_ERROR_INTERNAL, e);
 		}
 

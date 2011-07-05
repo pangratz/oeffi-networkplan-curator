@@ -71,15 +71,23 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 
 			NetworkPlanEntry networkPlanEntry = new NetworkPlanEntry();
 			networkPlanEntry.setNetworkId(mNetworkPlanId);
-			networkPlanEntry.setName(json.getString("name"));
 			networkPlanEntry.setStationId(json.getString("stationId"));
-			networkPlanEntry.setX(json.getInt("x"));
-			networkPlanEntry.setY(json.getInt("y"));
+
+			if (json.has("name")) {
+				networkPlanEntry.setName(json.getString("name"));
+			}
+			if (json.has("x")) {
+				networkPlanEntry.setX(json.getInt("x"));
+			}
+			if (json.has("y")) {
+				networkPlanEntry.setY(json.getInt("y"));
+			}
 
 			mModelUtils.storeNetworkPlanEntry(networkPlanEntry);
 
 			return createResourceCreatedRepresentation(networkPlanEntry.getStationId());
 		} catch (Exception e) {
+			e.printStackTrace();
 			setStatus(Status.SERVER_ERROR_INTERNAL);
 		}
 

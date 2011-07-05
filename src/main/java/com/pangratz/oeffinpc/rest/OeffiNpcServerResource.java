@@ -33,8 +33,12 @@ public abstract class OeffiNpcServerResource extends ServerResource {
 	protected Representation createResourceCreatedRepresentation(String id) {
 		setStatus(Status.SUCCESS_CREATED);
 		Representation result = new StringRepresentation("created");
-		String identifier = getRequest().getResourceRef().getIdentifier();
-		result.setLocationRef(identifier + "/" + id);
+		return result;
+	}
+
+	protected Representation createResourceUpdatedRepresentation(String stationId) {
+		setStatus(Status.SUCCESS_NO_CONTENT);
+		Representation result = new StringRepresentation("updated");
 		return result;
 	}
 

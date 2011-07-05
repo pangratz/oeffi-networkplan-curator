@@ -75,6 +75,12 @@ public class ModelUtils {
 		return networkPlans;
 	}
 
+	public boolean removeNetworkPlanEntry(String networkPlanId, String stationId) {
+		Key key = KeyFactory.createKey(NetworkPlanEntry.class.getSimpleName(), stationId);
+		mDatastore.delete(key);
+		return true;
+	}
+
 	public void storeNetworkPlan(NetworkPlan networkPlan) {
 		Entity e = createEntity(networkPlan);
 		mDatastore.put(e);
