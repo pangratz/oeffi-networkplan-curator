@@ -94,16 +94,18 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 				return;
 			}
 			
-			var pointOnCanvas = this.get('cursorPosition');
+			var cursorPosition = this.get('cursorPosition');
 			var width = canvas.width;
 			var height = canvas.height;
         
-			if (pointOnCanvas.x >= (width - this.to) || pointOnCanvas.x <= this.to) {
+			/*
+			if (cursorPosition.x >= (width - this.to) || cursorPosition.x <= this.to) {
 				return;
 			}
-			if (pointOnCanvas.y >= (height - this.to) || pointOnCanvas.y <= this.to) {
+			if (cursorPosition.y >= (height - this.to) || cursorPosition.y <= this.to) {
 				return;
 			}
+			*/
         
 			this._resetPreviousZoom(canvas);
 			if (this.get('zoom') == YES) {
@@ -117,56 +119,109 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 			var prev = this.get('prev');
 			if (prev) {
 				try {
-					ctx.drawImage(image, Math.max(0, prev.x-this.to), Math.max(0, prev.y-this.to), 2*this.to+1, 2*this.to+1, prev.x-this.to, prev.y-this.to, 2*this.to+1, 2*this.to+1);
+					var pos = this._calculateMagnifierPosition(canvas, prev);
+					ctx.drawImage(image,
+						pos.x-this.to,
+						pos.y-this.to,
+						2*this.to,
+						2*this.to,
+						pos.x-this.to,
+						pos.y-this.to,
+						2*this.to,
+						2*this.to);
+						
 				} catch (err) {
 					// silent
 				}
 			}
 		},
+		
+		_calculateMagnifierPosition: function(canvas, pos){
+			return {
+				x: Math.min(Math.max(this.to, pos.x), canvas.width - this.to),
+				y: Math.min(Math.max(this.to, pos.y), canvas.height - this.to)
+			};
+		},
+		
+		_calculateMagnifierRect: function(canvas, center, magnifierPos, srcWidth, targetWidth) {
+			var src = {
+				x: Math.max(center.x - srcWidth, 0),
+				y: Math.max(center.y - srcWidth, 0),
+				width: 2*srcWidth,
+				height: 2*srcWidth
+			};
+			var target = {
+				x: Math.max(center.x - targetWidth, 0),
+				y: Math.max(center.y - targetWidth, 0),
+				width: 2*targetWidth,
+				height: 2*targetWidth
+			};
+			
+			src.width = Math.min(src.width, (canvas.width - src.x));
+			src.height = Math.min(src.height, (canvas.height - src.y));
+			
+			target.width = Math.min(target.width, (canvas.width - target.x));
+			target.height = Math.min(target.height, (canvas.height - target.y));
+			
+			return {
+				src: src,
+				target: target
+			};
+		},
         
 		_drawNewZoom: function(canvas){
 			var ctx = canvas.getContext('2d');
-			var pointOnCanvas = this.get('cursorPosition');
-        
-			if (pointOnCanvas) {
-				ctx.save();
-        
-				ctx.beginPath();
-				ctx.arc(pointOnCanvas.x, pointOnCanvas.y, this.to, 0, Math.PI*2, false);
-				ctx.clip();
-				var w = this.to/this.zoomScale;
-				ctx.drawImage(canvas, pointOnCanvas.x-w, pointOnCanvas.y-w, 2*w, 2*w, pointOnCanvas.x-this.to, pointOnCanvas.y-this.to, 2*this.to, 2*this.to);
-        
-				this._drawCrosshair(ctx, pointOnCanvas.x, pointOnCanvas.y);
-				this._drawMagnifierCircle(ctx, pointOnCanvas.x, pointOnCanvas.y);
-        
-				ctx.restore();
-			}
+			var cursorPosition = this.get('cursorPosition');
+			var magnifierPos = this._calculateMagnifierPosition(canvas, cursorPosition);
+			
+			ctx.save();
+            
+			ctx.beginPath();
+			ctx.arc(magnifierPos.x, magnifierPos.y, this.to, 0, Math.PI*2, false);
+			ctx.clip();
+			
+			var w = this.to/this.zoomScale;
+			var magnifierRect = this._calculateMagnifierRect(canvas, cursorPosition, magnifierPos, w, this.to);
+			ctx.drawImage(canvas,
+				magnifierRect.src.x,
+				magnifierRect.src.y,
+				magnifierRect.src.width,
+				magnifierRect.src.height,
+				magnifierRect.target.x,
+				magnifierRect.target.y,
+				magnifierRect.target.width,
+				magnifierRect.target.height);
+            
+			this._drawCrosshair(ctx, magnifierPos);
+			this._drawMagnifierCircle(ctx, magnifierPos);
+            
+			ctx.restore();
         
 			this.set('prev', {
-				x: pointOnCanvas.x,
-				y: pointOnCanvas.y
+				x: magnifierPos.x,
+				y: magnifierPos.y
 			});
 		},
         
-		_drawMagnifierCircle: function(ctx, x, y){
+		_drawMagnifierCircle: function(ctx, center){
 			ctx.save();
 			ctx.strokeStyle = 'black';
-			ctx.lineWidth = 3;
+			ctx.lineWidth = 3.0;
 			ctx.beginPath();
-			ctx.arc(x, y, this.to-1, 0, Math.PI*2, false);
+			ctx.arc(center.x, center.y, this.to, 0, Math.PI*2, false);
 			ctx.stroke();
 			ctx.restore();
 		},
         
-		_drawCrosshair: function(ctx, x, y) {
+		_drawCrosshair: function(ctx, center) {
 			ctx.save();
 			ctx.beginPath();
 			ctx.strokeStyle = 'red';
-			ctx.moveTo(x, y-this.to);
-			ctx.lineTo(x, y+this.to);
-			ctx.moveTo(x-this.to, y);
-			ctx.lineTo(x+this.to, y);
+			ctx.lineWidth = 1.0;
+			ctx.moveTo(center.x, center.y-this.to);
+			ctx.lineTo(center.x, center.y+this.to);
+			ctx.moveTo(center.x-this.to, center.y);
+			ctx.lineTo(center.x+this.to, center.y);
 			ctx.stroke();
         
 			ctx.restore();
