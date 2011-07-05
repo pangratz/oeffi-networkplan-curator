@@ -24,6 +24,37 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 		this.contentView.set('zoomScale', this.get('zoomScale'));
 	}.observes('zoomScale'),
 	
+	mouseDown: function() {
+		return YES;
+	},
+	
+	mouseUp: function(evt) {
+		var point = this.getImageCoords(evt);
+		SC.debug( 'cliked image @ ' + point.x + '/' + point.y );
+		OeffiNpc.statechart.sendEvent('clickedOnNetworkPlan', point);
+	},
+	
+	getImageCoords: function(evt) {
+		var point = {
+			x: evt.pageX,
+			y: evt.pageY
+		};
+		
+		var newFrame = this.convertFrameFromView(point, null);
+		point.x = newFrame.x;
+		point.y = newFrame.y;
+		
+		var offset = {
+			x: Math.floor(this.get('horizontalScrollOffset') * this.get('scale')),
+			y: Math.floor(this.get('verticalScrollOffset') * this.get('scale'))
+		};
+		
+		point.x += offset.x;
+		point.y += offset.y;
+		
+		return point;
+	},
+	
 	contentView: SC.ImageView.design(OeffiNpc.ImageViewMixin, {
 		
 		from: 20,
@@ -47,6 +78,43 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 		zoomPropertiesChanged: function(){
 			this.repaint();
 		}.observes('zoom', 'zoomScale'),
+		
+		repaint: function(){
+			var evt = this.get('mouseMoveEvent');
+			if (!evt){
+				return;
+			}
+        
+			var canvas = this.get('canvas');
+			if (!canvas) {
+				this.set('canvas', evt.srcElement);
+				canvas = evt.srcElement;
+			}
+        
+			var pointOnCanvas = this.get('cursorPosition');
+			var width = canvas.width;
+			var height = canvas.height;
+        
+			if (pointOnCanvas.x >= (width - this.to) || pointOnCanvas.x <= this.to) {
+				return;
+			}
+			if (pointOnCanvas.y >= (height - this.to) || pointOnCanvas.y <= this.to) {
+				return;
+			}
+        
+			this._resetPreviousZoom(canvas);
+			if (this.get('zoom') == YES) {
+				this._drawNewZoom(canvas);
+			}
+		},
+        
+		cursorPositionString: function() {
+			var pos = this.get('cursorPosition');
+			if (pos) {
+				return pos.x + '/' + pos.y;
+			}
+			return undefined;
+		}.property('cursorPosition'),
         
 		_resetPreviousZoom: function(canvas) {
 			var ctx = canvas.getContext('2d');
@@ -107,74 +175,6 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 			ctx.stroke();
         
 			ctx.restore();
-		},
-        
-		repaint: function(){
-			var evt = this.get('mouseMoveEvent');
-			if (!evt){
-				return;
-			}
-        
-			var canvas = this.get('canvas');
-			if (!canvas) {
-				this.set('canvas', evt.srcElement);
-				canvas = evt.srcElement;
-			}
-        
-			var pointOnCanvas = this.get('cursorPosition');
-			var width = canvas.width;
-			var height = canvas.height;
-        
-			if (pointOnCanvas.x >= (width - this.to) || pointOnCanvas.x <= this.to) {
-				return;
-			}
-			if (pointOnCanvas.y >= (height - this.to) || pointOnCanvas.y <= this.to) {
-				return;
-			}
-        
-			this._resetPreviousZoom(canvas);
-			if (this.get('zoom') == YES) {
-				this._drawNewZoom(canvas);
-			}
-		},
-        
-		cursorPositionString: function() {
-			var pos = this.get('cursorPosition');
-			if (pos) {
-				return pos.x + '/' + pos.y;
-			}
-			return undefined;
-		}.property('cursorPosition')
-	}),
-
-	mouseDown: function() {
-		return YES;
-	},
-	
-	mouseUp: function(evt) {
-		var point = this.getImageCoords(evt);
-		SC.debug( 'cliked image @ ' + point.x + '/' + point.y );
-		OeffiNpc.statechart.sendEvent('clickedOnNetworkPlan', point);
-	},
-	
-	getImageCoords: function(evt) {
-		var point = {
-			x: evt.pageX,
-			y: evt.pageY
-		};
-		
-		var newFrame = this.convertFrameFromView(point, null);
-		point.x = newFrame.x;
-		point.y = newFrame.y;
-		
-		var offset = {
-			x: Math.floor(this.get('horizontalScrollOffset') * this.get('scale')),
-			y: Math.floor(this.get('verticalScrollOffset') * this.get('scale'))
-		};
-		
-		point.x += offset.x;
-		point.y += offset.y;
-		
-		return point;
-	}
+		}
+	})
 });
