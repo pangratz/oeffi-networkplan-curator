@@ -98,15 +98,6 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 			var width = canvas.width;
 			var height = canvas.height;
         
-			/*
-			if (cursorPosition.x >= (width - this.to) || cursorPosition.x <= this.to) {
-				return;
-			}
-			if (cursorPosition.y >= (height - this.to) || cursorPosition.y <= this.to) {
-				return;
-			}
-			*/
-        
 			this._resetPreviousZoom(canvas);
 			if (this.get('zoom') == YES) {
 				this._drawNewZoom(canvas);
