@@ -127,10 +127,18 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 			}
 		},
 		
-		_calculateMagnifierPosition: function(canvas, pos){
+		_calculateMagnifierPosition: function(canvas, pos) {
+			var x = Math.min(Math.max(this.to, pos.x), canvas.width - this.to);
+			var y = Math.min(Math.max(this.to, pos.y), canvas.height - this.to);
 			return {
-				x: Math.min(Math.max(this.to, pos.x), canvas.width - this.to),
-				y: Math.min(Math.max(this.to, pos.y), canvas.height - this.to)
+				x: x,
+				y: y,
+				topLeft: {
+					x: x - this.to,
+					y: y - this.to
+				},
+				width: 2*this.to,
+				height: 2*this.to
 			};
 		},
 		
@@ -154,6 +162,9 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 			target.width = Math.min(target.width, (canvas.width - target.x));
 			target.height = Math.min(target.height, (canvas.height - target.y));
 			
+			target.x = target.x + (magnifierPos.x - center.x);
+			target.y = target.y + (magnifierPos.y - center.y);
+			
 			return {
 				src: src,
 				target: target
@@ -163,6 +174,7 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 		_drawNewZoom: function(canvas){
 			var ctx = canvas.getContext('2d');
 			var cursorPosition = this.get('cursorPosition');
+			var image = this.get('image');
 			var magnifierPos = this._calculateMagnifierPosition(canvas, cursorPosition);
 			
 			ctx.save();
@@ -171,9 +183,12 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 			ctx.arc(magnifierPos.x, magnifierPos.y, this.to, 0, Math.PI*2, false);
 			ctx.clip();
 			
+			ctx.fillStyle = 'white';
+			ctx.fillRect(magnifierPos.topLeft.x, magnifierPos.topLeft.y, magnifierPos.width, magnifierPos.height);
+			
 			var w = this.to/this.zoomScale;
 			var magnifierRect = this._calculateMagnifierRect(canvas, cursorPosition, magnifierPos, w, this.to);
-			ctx.drawImage(canvas,
+			ctx.drawImage(image,
 				magnifierRect.src.x,
 				magnifierRect.src.y,
 				magnifierRect.src.width,
