@@ -5,7 +5,7 @@
 /*globals OeffiNpc */
 
 OeffiNpc = SC.Application.create({
-	store: SC.Store.create().from('OeffiNpc.RestDataSource', {commitRecordsAutomatically: YES})
+	store: SC.Store.create({commitRecordsAutomatically: YES}).from('OeffiNpc.RestDataSource')
 });
 
 SC.ready(function() {
