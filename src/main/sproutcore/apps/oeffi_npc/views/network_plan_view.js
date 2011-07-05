@@ -36,9 +36,9 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
     
 	mouseMoveEventChanged: function(){
 		var evt = this.get('mouseMoveEvent');
-		var pointOnCanvas = this.getImageCoords(evt);
-		this.set('cursorPosition', pointOnCanvas);
-		this.contentView.set('cursorPosition', pointOnCanvas);
+		var cursorPosition = this.getImageCoords(evt);
+		this.set('cursorPosition', cursorPosition);
+		this.contentView.set('cursorPosition', cursorPosition);
 	}.observes('mouseMoveEvent'),
 	
 	getImageCoords: function(evt) {
@@ -79,18 +79,21 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 			this.repaint();
 		}.observes('zoom', 'zoomScale'),
 		
+		mouseEntered: function(evt) {
+			this.set('canvas', evt.srcElement);
+		},
+
+		mouseExited: function(evt) {
+			this.set('canvas', undefined);
+		},
+		
 		repaint: function(){
-			var evt = this.get('mouseMoveEvent');
-			if (!evt){
-				return;
-			}
-        
 			var canvas = this.get('canvas');
 			if (!canvas) {
-				this.set('canvas', evt.srcElement);
-				canvas = evt.srcElement;
+				SC.debug('#repaint :: no canvas available');
+				return;
 			}
-        
+			
 			var pointOnCanvas = this.get('cursorPosition');
 			var width = canvas.width;
 			var height = canvas.height;
