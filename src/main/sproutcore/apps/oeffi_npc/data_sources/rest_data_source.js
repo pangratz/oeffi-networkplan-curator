@@ -50,14 +50,70 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 		return YES;
 	},
 	
-	createRecord: function(store, storeKey, params) {
-		SC.debug('createRecord with storeKey: ' + storeKey);
-		return NO;
+	createRecord: function(store, storeKey) {
+		var type = store.recordTypeFor(storeKey);
+		var hash = store.readDataHash(storeKey);
+		var id = store.idFor(storeKey);
+		var url = this._urlFor(type, id, hash);
+		var body = hash;
+		
+		SC.Request.postUrl(url)
+				  .json()
+				  .notify(this, this._didCreateRecord, store, storeKey)
+				  .send(body);
+		
+		return YES;
 	},
 	
-	updateRecord: function(store, storeKey, params) {
-		SC.debug('updateRecord with storeKey: ' + storeKey);
-		return NO;
+	_didCreateRecord: function(response, store, key) {
+		if (SC.ok(response)) {
+			SC.debug('invoking store#dataSourceDidComplete for ' + key);
+			store.dataSourceDidComplete(key);
+		} else {
+			SC.debug('invoking store#dataSourceDidError for ' + key);
+			store.dataSourceDidError(key);
+		}
+	},
+	
+	updateRecord: function(store, storeKey) {
+		var type = store.recordTypeFor(storeKey);
+		if (type !== OeffiNpc.NetworkPlanEntry) {
+			return NO;
+		}
+		var hash = store.readDataHash(storeKey);
+		var id = store.idFor(storeKey);
+		var body = hash;
+		SC.debug(hash);
+		var url = '/networkplan/%@1/%@2'.fmt(hash.networkId, hash.stationId);
+		
+		SC.Request.putUrl(url)
+				  .json()
+				  .notify(this, this._didUpdateRecord, store, storeKey)
+				  .send(body);
+		
+		return YES;
+	},
+	
+	_didUpdateRecord: function(response, store, key) {
+		if (SC.ok(response)) {
+			SC.debug('invoking store#dataSourceDidComplete for ' + key);
+			store.dataSourceDidComplete(key);
+		} else {
+			SC.debug('invoking store#dataSourceDidError for ' + key);
+			store.dataSourceDidError(key);
+		}
+	},
+	
+	_urlFor: function(type, id, hash) {
+		if (OeffiNpc.NetworkPlanEntry === type) {
+			return '/networkplan/%@1'.fmt(hash.networkId);
+		}
+		
+		if (OeffiNpc.NetworkPlan === type) {
+			return '/networkplan/%@1'.ftm(id);
+		}
+		
+		return undefined;
 	},
 	
 	_getFromUri: function(uri, options) {
