@@ -105,45 +105,11 @@ OeffiNpc.mainPage = SC.Page.design({
 				})
 			}),
 			
-			imageView: SC.ScrollView.design({
+			imageView: OeffiNpc.NetworkPlanView.design({
 				layout: {left: 150, top: 0, right: 0, bottom: 36},
-				contentView: OeffiNpc.NetworkPlanView.design({
-					valueBinding: 'OeffiNpc.networkPlanController.imageUrl',
-					layout: {width: 1114, height: 1618},
-					zoomBinding: 'OeffiNpc.networkPlanMouseController.zoom',
-					zoomScaleBinding: 'OeffiNpc.networkPlanMouseController.zoomScale'
-				}),
-				
-				mouseDown: function() {
-					return YES;
-				},
-
-				mouseUp: function(evt) {
-					var point = this.getImageCoords(evt);
-					SC.debug( 'cliked image @ ' + point.x + '/' + point.y );
-					OeffiNpc.statechart.sendEvent('clickedOnNetworkPlan', point);
-				},
-				
-				getImageCoords: function(evt) {
-					var point = {
-						x: evt.pageX,
-						y: evt.pageY
-					};
-					
-					var newFrame = this.convertFrameFromView(point, null);
-					point.x = newFrame.x;
-					point.y = newFrame.y;
-					
-					var offset = {
-						x: Math.floor(this.get('horizontalScrollOffset') * this.get('scale')),
-						y: Math.floor(this.get('verticalScrollOffset') * this.get('scale'))
-					};
-					
-					point.x += offset.x;
-					point.y += offset.y;
-					
-					return point;
-				}
+				valueBinding: 'OeffiNpc.networkPlanController.imageUrl',
+				zoomBinding: 'OeffiNpc.networkPlanMouseController.zoom',
+				zoomScaleBinding: 'OeffiNpc.networkPlanMouseController.zoomScale'
 			})
 		})
 		
