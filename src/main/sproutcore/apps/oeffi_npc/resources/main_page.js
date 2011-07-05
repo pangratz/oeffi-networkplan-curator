@@ -107,7 +107,7 @@ OeffiNpc.mainPage = SC.Page.design({
 			
 			imageView: SC.ScrollView.design({
 				layout: {left: 150, top: 0, right: 0, bottom: 36},
-				contentView: OeffiNpc.NetworkPlanImageView.design({
+				contentView: OeffiNpc.NetworkPlanView.design({
 					valueBinding: 'OeffiNpc.networkPlanController.imageUrl',
 					layout: {width: 1114, height: 1618},
 					zoomBinding: 'OeffiNpc.networkPlanMouseController.zoom',

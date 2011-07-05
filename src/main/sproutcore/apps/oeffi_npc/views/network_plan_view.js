@@ -1,5 +1,5 @@
 // ==========================================================================
-// Project:   OeffiNpc.NetworkPlanImageView
+// Project:   OeffiNpc.NetworkPlanView
 // Copyright: @2011 My Company, Inc.
 // ==========================================================================
 /*globals OeffiNpc */
@@ -10,8 +10,8 @@
 
   @extends SC.View
 */
-OeffiNpc.NetworkPlanImageView = SC.ImageView.extend(OeffiNpc.ImageViewMixin,
-/** @scope OeffiNpc.NetworkPlanImageView.prototype */ {
+OeffiNpc.NetworkPlanView = SC.ImageView.extend(OeffiNpc.ImageViewMixin,
+/** @scope OeffiNpc.NetworkPlanView.prototype */ {
 	
 	from: 20,
 	to: 60,
