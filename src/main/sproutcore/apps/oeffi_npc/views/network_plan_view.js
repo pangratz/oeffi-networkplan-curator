@@ -24,13 +24,9 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 		this.contentView.set('zoomScale', this.get('zoomScale'));
 	}.observes('zoomScale'),
 	
-	mouseDown: function() {
-		return YES;
-	},
-	
-	mouseUp: function(evt) {
+	doubleClick: function(evt) {
 		var point = this.getImageCoords(evt);
-		SC.debug( 'cliked image @ ' + point.x + '/' + point.y );
+		SC.debug( 'double clicked image @ ' + point.x + '/' + point.y );
 		OeffiNpc.statechart.sendEvent('clickedOnNetworkPlan', point);
 	},
 	
