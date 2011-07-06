@@ -14,20 +14,13 @@ import com.pangratz.oeffinpc.model.NetworkPlanEntry;
 
 public class NetworkPlanEntryResource extends OeffiNpcServerResource {
 
-	private String mNetworkPlanId;
-	private String mStationId;
+	private Long mStationKey;
 
 	@Override
 	protected Representation delete(Variant variant) throws ResourceException {
-		boolean removed = mModelUtils.removeNetworkPlanEntry(mNetworkPlanId, mStationId);
-		if (removed) {
-			setStatus(Status.SUCCESS_NO_CONTENT);
-		} else {
-			setStatus(Status.SERVER_ERROR_INTERNAL);
-		}
-
+		mModelUtils.removeNetworkPlanEntry(mStationKey);
 		Map<Object, Object> data = new HashMap<Object, Object>();
-		data.put("deleted", removed);
+		data.put("deleted", true);
 		return new JsonRepresentation(data);
 	}
 
@@ -35,13 +28,13 @@ public class NetworkPlanEntryResource extends OeffiNpcServerResource {
 	protected void doInit() throws ResourceException {
 		super.doInit();
 
-		this.mNetworkPlanId = (String) getRequest().getAttributes().get("networkPlanId");
-		this.mStationId = (String) getRequest().getAttributes().get("stationId");
+		String stringVal = (String) getRequest().getAttributes().get("stationId");
+		this.mStationKey = Long.valueOf(stringVal);
 	}
 
 	@Override
 	protected Representation get(Variant variant) throws ResourceException {
-		NetworkPlanEntry networkPlanEntry = mModelUtils.getNetworkPlanEntry(mNetworkPlanId, mStationId);
+		NetworkPlanEntry networkPlanEntry = mModelUtils.getNetworkPlanEntry(mStationKey);
 		if (networkPlanEntry == null) {
 			setStatus(Status.CLIENT_ERROR_NOT_FOUND);
 			return createErrorRepresentation("NetworkPlanEntry with given id not found");
@@ -58,7 +51,7 @@ public class NetworkPlanEntryResource extends OeffiNpcServerResource {
 			JSONObject json = represent.getJsonObject();
 
 			NetworkPlanEntry networkPlanEntry = new NetworkPlanEntry();
-			networkPlanEntry.setNetworkId(mNetworkPlanId);
+			networkPlanEntry.setNetworkPlanKey(json.getLong("networkPlanKey"));
 			networkPlanEntry.setStationId(json.getString("stationId"));
 
 			if (json.has("name")) {

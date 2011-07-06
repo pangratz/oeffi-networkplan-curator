@@ -1,16 +1,10 @@
 package com.pangratz.oeffinpc.model;
 
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
+import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Query;
 
 public class ModelUtils {
 
@@ -20,127 +14,100 @@ public class ModelUtils {
 		return INSTANCE;
 	}
 
-	private DatastoreService mDatastore;
+	private PersistenceManagerFactory mPMF;
 
 	private ModelUtils() {
 		super();
-
-		mDatastore = DatastoreServiceFactory.getDatastoreService();
+		mPMF = PMF.get();
 	}
 
-	public NetworkPlan getNetworkPlan(String networkId) {
-		Query q = new Query(NetworkPlan.class.getSimpleName());
-		q.addFilter("networkId", Query.FilterOperator.EQUAL, networkId);
-
-		PreparedQuery preparedQuery = mDatastore.prepare(q);
-		Entity entity = preparedQuery.asSingleEntity();
-
-		return extractNetworkPlan(entity);
-	}
-
-	public List<NetworkPlanEntry> getNetworkPlanEntries(String networkId) {
-		Query query = new Query(NetworkPlanEntry.class.getSimpleName());
-		query.addFilter("networkId", Query.FilterOperator.EQUAL, networkId);
-
-		PreparedQuery preparedQuery = mDatastore.prepare(query);
-		Iterator<Entity> it = preparedQuery.asIterator();
-		List<NetworkPlanEntry> entries = new LinkedList<NetworkPlanEntry>();
-		while (it.hasNext()) {
-			entries.add(extractNetworkPlanEntry(it.next()));
+	public NetworkPlan getNetworkPlan(Long networkId) {
+		if (networkId == null) {
+			return null;
 		}
-		return entries;
+
+		PersistenceManager pm = mPMF.getPersistenceManager();
+		try {
+			Query query = pm.newQuery(NetworkPlan.class, "key == networkIdParam");
+			query.declareParameters("Long networkIdParam");
+			List<NetworkPlan> networkPlans = (List<NetworkPlan>) query.execute(networkId);
+			if (networkPlans != null && networkPlans.size() == 1) {
+				return networkPlans.get(0);
+			}
+			return null;
+		} finally {
+			pm.close();
+		}
 	}
 
-	public NetworkPlanEntry getNetworkPlanEntry(String networkId, String stationId) {
-		Query query = new Query(NetworkPlanEntry.class.getSimpleName());
-		query.addFilter("stationId", Query.FilterOperator.EQUAL, stationId);
-		query.addFilter("networkId", Query.FilterOperator.EQUAL, networkId);
+	public List<NetworkPlanEntry> getNetworkPlanEntries(Long networkId) {
+		PersistenceManager pm = mPMF.getPersistenceManager();
+		try {
+			Query query = pm.newQuery(NetworkPlanEntry.class, "networkPlanKey == networkIdParam");
+			query.setOrdering("name asc");
+			List<NetworkPlanEntry> networkPlanEntries = (List<NetworkPlanEntry>) query.execute(networkId);
+			return (List<NetworkPlanEntry>) pm.detachCopyAll(networkPlanEntries);
+		} finally {
+			pm.close();
+		}
+	}
 
-		PreparedQuery preparedQuery = mDatastore.prepare(query);
-		Entity entity = preparedQuery.asSingleEntity();
+	public NetworkPlanEntry getNetworkPlanEntry(Long stationId) {
+		if (stationId == null) {
+			return null;
+		}
 
-		return extractNetworkPlanEntry(entity);
+		PersistenceManager pm = mPMF.getPersistenceManager();
+		try {
+			Query query = pm.newQuery(NetworkPlanEntry.class, "key == stationId");
+			query.declareParameters("Long stationId");
+			List<NetworkPlanEntry> networkPlanEntries = (List<NetworkPlanEntry>) query.execute(stationId);
+			if (networkPlanEntries != null && networkPlanEntries.size() == 1) {
+				return networkPlanEntries.get(0);
+			}
+			return null;
+		} finally {
+			pm.close();
+		}
 	}
 
 	public List<NetworkPlan> getNetworkPlans() {
-		Query query = new Query(NetworkPlan.class.getSimpleName());
-		PreparedQuery preparedQuery = mDatastore.prepare(query);
-
-		List<NetworkPlan> networkPlans = new LinkedList<NetworkPlan>();
-		Iterator<Entity> it = preparedQuery.asIterator();
-		while (it.hasNext()) {
-			Entity entity = it.next();
-			networkPlans.add(extractNetworkPlan(entity));
+		PersistenceManager pm = mPMF.getPersistenceManager();
+		try {
+			List<NetworkPlan> networkPlans = (List<NetworkPlan>) pm.newQuery(NetworkPlan.class).execute();
+			return (List<NetworkPlan>) pm.detachCopyAll(networkPlans);
+		} finally {
+			pm.close();
 		}
-		return networkPlans;
 	}
 
-	public boolean removeNetworkPlanEntry(String networkPlanId, String stationId) {
-		Key key = KeyFactory.createKey(NetworkPlanEntry.class.getSimpleName(), stationId);
-		mDatastore.delete(key);
-		return true;
+	public void removeNetworkPlanEntry(Long stationKey) {
+		PersistenceManager pm = mPMF.getPersistenceManager();
+		try {
+			Query query = pm.newQuery(NetworkPlanEntry.class, "key == keyParam");
+			query.deletePersistentAll();
+		} finally {
+			pm.close();
+		}
 	}
 
-	public void storeNetworkPlan(NetworkPlan networkPlan) {
-		Entity e = createEntity(networkPlan);
-		mDatastore.put(e);
+	public Long storeNetworkPlan(NetworkPlan networkPlan) {
+		PersistenceManager pm = mPMF.getPersistenceManager();
+		try {
+			NetworkPlan persistent = pm.makePersistent(networkPlan);
+			return persistent.getKey();
+		} finally {
+			pm.close();
+		}
 	}
 
-	public void storeNetworkPlanEntry(NetworkPlanEntry networkPlanEntry) {
-		Entity e = createEntity(networkPlanEntry);
-		mDatastore.put(e);
-	}
-
-	private Entity createEntity(NetworkPlan networkPlan) {
-		Key key = KeyFactory.createKey(NetworkPlan.class.getSimpleName(), networkPlan.getNetworkId());
-		Entity e = new Entity(key);
-		e.setProperty("networkId", networkPlan.getNetworkId());
-		e.setProperty("planId", networkPlan.getPlanId());
-		e.setProperty("imageUrl", networkPlan.getImageUrl());
-		return e;
-	}
-
-	private Entity createEntity(NetworkPlanEntry networkPlanEntry) {
-		Key key = KeyFactory.createKey(NetworkPlanEntry.class.getSimpleName(), networkPlanEntry.getStationId());
-		Entity e = new Entity(key);
-
-		e.setProperty("networkId", networkPlanEntry.getNetworkId());
-		e.setProperty("stationId", networkPlanEntry.getStationId());
-		e.setProperty("name", networkPlanEntry.getName());
-		e.setProperty("x", Long.valueOf(networkPlanEntry.getX()));
-		e.setProperty("y", Long.valueOf(networkPlanEntry.getY()));
-
-		return e;
-	}
-
-	private int extractInt(Entity entity, String property) {
-		Long value = (Long) entity.getProperty(property);
-		return value.intValue();
-	}
-
-	private NetworkPlan extractNetworkPlan(Entity entity) {
-		if (entity == null)
-			return null;
-
-		NetworkPlan networkPlan = new NetworkPlan();
-		networkPlan.setImageUrl((String) entity.getProperty("imageUrl"));
-		networkPlan.setNetworkId((String) entity.getProperty("networkId"));
-		networkPlan.setPlanId((String) entity.getProperty("planId"));
-		return networkPlan;
-	}
-
-	private NetworkPlanEntry extractNetworkPlanEntry(Entity entity) {
-		if (entity == null)
-			return null;
-
-		NetworkPlanEntry networkPlanEntry = new NetworkPlanEntry();
-		networkPlanEntry.setName((String) entity.getProperty("name"));
-		networkPlanEntry.setNetworkId((String) entity.getProperty("networkId"));
-		networkPlanEntry.setStationId((String) entity.getProperty("stationId"));
-
-		networkPlanEntry.setX(extractInt(entity, "x"));
-		networkPlanEntry.setY(extractInt(entity, "y"));
-
-		return networkPlanEntry;
+	public Long storeNetworkPlanEntry(NetworkPlanEntry networkPlanEntry) {
+		PersistenceManager pm = mPMF.getPersistenceManager();
+		try {
+			NetworkPlanEntry persistent = pm.makePersistent(networkPlanEntry);
+			return persistent.getKey();
+		} finally {
+			pm.close();
+		}
 	}
 }

@@ -23,13 +23,15 @@ import freemarker.template.Configuration;
 
 public class NetworkPlanResource extends OeffiNpcServerResource {
 
-	private String mNetworkPlanId;
+	private Long mNetworkPlanId;
 
 	@Override
 	protected void doInit() throws ResourceException {
 		super.doInit();
 
-		this.mNetworkPlanId = (String) getRequest().getAttributes().get("networkPlanId");
+		String stringVal = (String) getRequest().getAttributes().get("networkPlanId");
+		System.out.println("NetworkPlanResource#stringVal = " + stringVal);
+		this.mNetworkPlanId = Long.valueOf(stringVal);
 
 		getVariants(Method.GET).add(new Variant(MediaType.TEXT_CSV));
 		getVariants(Method.GET).add(new Variant(MediaType.APPLICATION_JSON));
@@ -39,6 +41,11 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 	@Override
 	protected Representation get(Variant variant) throws ResourceException {
 		NetworkPlan networkPlan = mModelUtils.getNetworkPlan(mNetworkPlanId);
+		if (networkPlan == null) {
+			setStatus(Status.CLIENT_ERROR_NOT_FOUND);
+			return createErrorRepresentation("no network plan with id " + mNetworkPlanId);
+		}
+
 		List<NetworkPlanEntry> entries = mModelUtils.getNetworkPlanEntries(mNetworkPlanId);
 
 		if (MediaType.TEXT_CSV.equals(variant.getMediaType())) {
@@ -52,8 +59,8 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 			return new TemplateRepresentation(templateName, config, model, MediaType.TEXT_CSV);
 		}
 
-		JSONObject networkPlanObj = new JSONObject(networkPlan);
 		try {
+			JSONObject networkPlanObj = new JSONObject(networkPlan);
 			networkPlanObj.put("entries", entries);
 			return new JsonRepresentation(networkPlanObj);
 		} catch (JSONException e) {
@@ -70,7 +77,7 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 			JSONObject json = represent.getJsonObject();
 
 			NetworkPlanEntry networkPlanEntry = new NetworkPlanEntry();
-			networkPlanEntry.setNetworkId(mNetworkPlanId);
+			networkPlanEntry.setNetworkPlanKey(mNetworkPlanId);
 			networkPlanEntry.setStationId(json.getString("stationId"));
 
 			if (json.has("name")) {
@@ -85,7 +92,7 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 
 			mModelUtils.storeNetworkPlanEntry(networkPlanEntry);
 
-			return createResourceCreatedRepresentation(networkPlanEntry.getStationId());
+			return createResourceCreatedRepresentation(networkPlanEntry);
 		} catch (Exception e) {
 			e.printStackTrace();
 			setStatus(Status.SERVER_ERROR_INTERNAL);

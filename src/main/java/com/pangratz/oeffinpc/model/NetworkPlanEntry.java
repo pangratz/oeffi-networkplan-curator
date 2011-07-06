@@ -1,22 +1,45 @@
 package com.pangratz.oeffinpc.model;
 
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
 import org.json.JSONObject;
 import org.json.JSONString;
 
+@PersistenceCapable(detachable = "true")
 public class NetworkPlanEntry implements JSONString {
 
-	private String networkId;
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Long key;
+
+	@Persistent
+	private Long networkPlanKey;
+
+	@Persistent
 	private String stationId;
+
+	@Persistent
 	private String name;
+
+	@Persistent
 	private int x;
+
+	@Persistent
 	private int y;
+
+	public Long getKey() {
+		return key;
+	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getNetworkId() {
-		return networkId;
+	public Long getNetworkPlanKey() {
+		return networkPlanKey;
 	}
 
 	public String getStationId() {
@@ -31,12 +54,16 @@ public class NetworkPlanEntry implements JSONString {
 		return y;
 	}
 
+	public void setKey(Long key) {
+		this.key = key;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public void setNetworkId(String networkId) {
-		this.networkId = networkId;
+	public void setNetworkPlanKey(Long networkPlanKey) {
+		this.networkPlanKey = networkPlanKey;
 	}
 
 	public void setStationId(String stationId) {

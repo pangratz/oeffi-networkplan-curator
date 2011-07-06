@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.restlet.data.MediaType;
+import org.restlet.data.Reference;
 import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
@@ -13,6 +14,8 @@ import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
 import com.pangratz.oeffinpc.model.ModelUtils;
+import com.pangratz.oeffinpc.model.NetworkPlan;
+import com.pangratz.oeffinpc.model.NetworkPlanEntry;
 
 public abstract class OeffiNpcServerResource extends ServerResource {
 
@@ -30,9 +33,20 @@ public abstract class OeffiNpcServerResource extends ServerResource {
 		return new JsonRepresentation(data);
 	}
 
+	protected Representation createResourceCreatedRepresentation(NetworkPlan networkPlan) {
+		return createResourceCreatedRepresentation("/networkplan/" + networkPlan.getKey());
+	}
+
+	protected Representation createResourceCreatedRepresentation(NetworkPlanEntry networkPlanEntry) {
+		return createResourceCreatedRepresentation("/networkplanentry/" + networkPlanEntry.getKey());
+	}
+
 	protected Representation createResourceCreatedRepresentation(String id) {
 		setStatus(Status.SUCCESS_CREATED);
 		Representation result = new StringRepresentation("created");
+		Reference hostRef = getRequest().getHostRef();
+		String host = hostRef.toString();
+		result.setLocationRef(host + id);
 		return result;
 	}
 
