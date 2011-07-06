@@ -14,11 +14,11 @@
 OeffiNpc.NetworkPlanEntry = SC.Record.extend(
 /** @scope OeffiNpc.NetworkPlanEntry.prototype */ {
 	
-	primaryKey: 'stationId',
+	primaryKey: '_id',
 	stationId: SC.Record.attr(String),
 	name: SC.Record.attr(String),
 	x: SC.Record.attr(Number),
 	y: SC.Record.attr(Number),
-	networkPlan: SC.Record.toOne('OeffiNpc.NetworkPlan', {isMaster: NO})
+	networkPlanKey: SC.Record.toOne('OeffiNpc.NetworkPlan', {isMaster: NO, inverse: 'entries'})
 
 });

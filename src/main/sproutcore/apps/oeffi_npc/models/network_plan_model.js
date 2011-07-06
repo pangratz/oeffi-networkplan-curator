@@ -14,12 +14,14 @@
 OeffiNpc.NetworkPlan = SC.Record.extend(
 /** @scope OeffiNpc.NetworkPlan.prototype */ {
 	
-	primaryKey: 'networkId',
+	primaryKey: '_id',
 	networkId: SC.Record.attr(String),
 	planId: SC.Record.attr(String),
 	imageUrl: SC.Record.attr(String),
-	imageWidth: SC.Record.attr(Number),
-	imageHeight: SC.Record.attr(Number),
-	entries: SC.Record.toMany('OeffiNpc.NetworkPlanEntry', {isMaster: YES, nested: YES})
+	entries: SC.Record.toMany('OeffiNpc.NetworkPlanEntry', {
+		isMaster: YES,
+		nested: YES,
+		inverse: 'networkPlanKey'
+	})
 
 }) ;
