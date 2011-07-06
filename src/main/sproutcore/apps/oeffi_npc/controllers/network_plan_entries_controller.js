@@ -13,6 +13,8 @@
 OeffiNpc.networkPlanEntriesController = SC.ArrayController.create(
 /** @scope OeffiNpc.networkPlanEntriesController.prototype */ {
 	
+	isEditable: YES,
+	destroyOnRemoval: YES,
 	allowsMultipleSelection: NO,
 	contentBinding: 'OeffiNpc.networkPlanController.entries',
 	
