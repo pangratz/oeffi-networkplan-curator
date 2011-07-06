@@ -9,9 +9,9 @@ public class OeffiNetworkPlanCuratorApplication extends Application {
 	@Override
 	public Restlet createInboundRoot() {
 		Router router = new Router(getContext());
-		router.attach("/networkplan", NetworkPlansResource.class);
-		router.attach("/networkplan/{networkPlanId}", NetworkPlanResource.class);
-		router.attach("/networkplanentry/{stationId}", NetworkPlanEntryResource.class);
+		router.attach("/networkplans", NetworkPlansResource.class);
+		router.attach("/networkplans/{networkPlanId}", NetworkPlanResource.class);
+		router.attach("/networkplanentries/{stationId}", NetworkPlanEntryResource.class);
 		return router;
 	}
 

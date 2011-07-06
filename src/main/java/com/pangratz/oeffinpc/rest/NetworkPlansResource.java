@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.restlet.data.MediaType;
+import org.restlet.data.Method;
 import org.restlet.data.Status;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
@@ -13,6 +15,14 @@ import org.restlet.resource.ResourceException;
 import com.pangratz.oeffinpc.model.NetworkPlan;
 
 public class NetworkPlansResource extends OeffiNpcServerResource {
+
+	@Override
+	protected void doInit() throws ResourceException {
+		super.doInit();
+
+		getVariants(Method.GET).add(new Variant(MediaType.APPLICATION_JSON));
+		getVariants(Method.POST).add(new Variant(MediaType.APPLICATION_JSON));
+	}
 
 	@Override
 	protected Representation get(Variant variant) throws ResourceException {

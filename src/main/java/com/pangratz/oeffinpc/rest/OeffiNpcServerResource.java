@@ -34,11 +34,11 @@ public abstract class OeffiNpcServerResource extends ServerResource {
 	}
 
 	protected Representation createResourceCreatedRepresentation(NetworkPlan networkPlan) {
-		return createResourceCreatedRepresentation("/networkplan/" + networkPlan.getKey());
+		return createResourceCreatedRepresentation("/networkplans/" + networkPlan.getKey());
 	}
 
 	protected Representation createResourceCreatedRepresentation(NetworkPlanEntry networkPlanEntry) {
-		return createResourceCreatedRepresentation("/networkplanentry/" + networkPlanEntry.getKey());
+		return createResourceCreatedRepresentation("/networkplanentries/" + networkPlanEntry.getKey());
 	}
 
 	protected Representation createResourceCreatedRepresentation(String id) {
