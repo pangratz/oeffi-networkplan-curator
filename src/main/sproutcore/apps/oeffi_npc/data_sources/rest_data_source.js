@@ -27,64 +27,110 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 		
 		if (query === OeffiNpc.NETWORK_PLANS_QUERY) {
 			options['type'] = OeffiNpc.NetworkPlan;
-			return this._getFromUri('/networkplan', options);
+			return this._getFromUri('/networkplans', options);
 		}
 		
 		var type = query.get('type');
 		if (type && type === 'getNetworkPlan') {
 			options['type'] = OeffiNpc.NetworkPlan;
-			var url = '/networkplan/' + query.get('networkId');
+			var url = '/networkplans/' + query.get('networkPlanId');
+			SC.debug('fetching ' + url);
 			return this._getFromUri(url, options);
 		}
 		
     	return NO;
 	},
   
-	retrieveRecord: function(store, storeKey) {
+	retrieveRecord: function(store, storeKey, id) {
 		SC.debug('retrieveRecord');
-		this._getFromUri(store.idFor(storeKey), {
-			storeKey: storeKey,
-			store: store,
-			type: store.recordTypeFor(storeKey)
-		});
+		var type = store.recordTypeFor(storeKey);
+		var hash = store.readDataHash(storeKey);
+		var url = this._urlFor(type, id, hash);
+		SC.Request.getUrl(url)
+				  .json()
+				  .notify(this, this._didRetrieveRecord, store, storeKey)
+				  .send();
+		
 		return YES;
 	},
 	
+	_didRetrieveRecord: function(response, store, storeKey, type){
+		SC.debug('#_didRetrieveRecord');
+		if (SC.ok(response)) {
+			var body = response.get('body');
+			SC.debug('_didRetrieveRecord');
+			store.loadRecords(type, body);
+			store.dataSourceDidComplete(storeKey, body, body._id);
+		} else {
+			store.dataSourceDidError(storeKey);
+		}
+	},
+	
 	createRecord: function(store, storeKey) {
+		SC.debug("#createRecord");
 		var type = store.recordTypeFor(storeKey);
+		if (OeffiNpc.NetworkPlan === type) {
+			SC.debug('tried to create NetworkPlan');
+			return NO;
+		}
 		var hash = store.readDataHash(storeKey);
 		var id = store.idFor(storeKey);
 		var url = this._urlFor(type, id, hash);
 		var body = hash;
-		
+		body['_id'] = undefined;
 		SC.Request.postUrl(url)
 				  .json()
-				  .notify(this, this._didCreateRecord, store, storeKey)
+				  .notify(this, this._didCreateRecord, store, storeKey, type)
 				  .send(body);
 		
 		return YES;
 	},
 	
 	_didCreateRecord: function(response, store, key) {
+		SC.debug("#_didCreateRecord");
 		if (SC.ok(response)) {
 			SC.debug('invoking store#dataSourceDidComplete for ' + key);
-			store.dataSourceDidComplete(key);
+			var body = response.get('body');
+			var id = body._id;
+			store.dataSourceDidComplete(key, body, id);
 		} else {
 			SC.debug('invoking store#dataSourceDidError for ' + key);
 			store.dataSourceDidError(key);
 		}
 	},
 	
-	updateRecord: function(store, storeKey) {
+	destroyRecord: function(store, storeKey) {
+		SC.debug('#destroyRecord');
 		var type = store.recordTypeFor(storeKey);
-		if (type !== OeffiNpc.NetworkPlanEntry) {
-			return NO;
+		var id = store.idFor(storeKey);
+		var hash = store.readDataHash(storeKey);
+		
+		var url = this._urlFor(type, id, hash);
+		SC.debug('delete ' + url);
+		SC.Request.deleteUrl(url)
+				  .json()
+				  .notify(this, this._didDestroyRecord, store, storeKey)
+				  .send();
+		
+		return YES;
+	},
+	
+	_didDestroyRecord: function(response, store, storeKey) {
+		SC.debug('#_didDestroyRecord');
+		if (SC.ok(response)) {
+			store.dataSourceDidDestroy(storeKey);
+		} else {
+			store.dataSourceDidError(storeKey);
 		}
+	},
+	
+	updateRecord: function(store, storeKey) {
+		SC.debug("#updateRecord");
+		var type = store.recordTypeFor(storeKey);
 		var hash = store.readDataHash(storeKey);
 		var id = store.idFor(storeKey);
 		var body = hash;
-		SC.debug(hash);
-		var url = '/networkplan/%@1/%@2'.fmt(hash.networkId, hash.stationId);
+		var url = this._urlFor(type, id, hash);
 		
 		SC.Request.putUrl(url)
 				  .json()
@@ -95,6 +141,7 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 	},
 	
 	_didUpdateRecord: function(response, store, key) {
+		SC.debug("#_didUpdateRecord");
 		if (SC.ok(response)) {
 			SC.debug('invoking store#dataSourceDidComplete for ' + key);
 			store.dataSourceDidComplete(key);
@@ -106,21 +153,23 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 	
 	_urlFor: function(type, id, hash) {
 		if (OeffiNpc.NetworkPlanEntry === type) {
-			return '/networkplan/%@1'.fmt(hash.networkId);
+			if (id) {
+				return '/networkplanentries/%@1'.fmt(id);
+			} else {
+				return '/networkplans/%@1'.fmt(hash.networkPlanKey);
+			}
 		}
 		
 		if (OeffiNpc.NetworkPlan === type) {
-			return '/networkplan/%@1'.ftm(id);
+			return '/networkplans/%@1'.fmt(id);
 		}
 		
 		return undefined;
 	},
 	
 	_getFromUri: function(uri, options) {
-		SC.debug('invoking uri: ' + uri);
 		SC.Request
 			.getUrl(uri)
-			.header({'Accept': 'application/json'})
 			.json()
 			.notify(this, '_didGetQuery', options)
 			.send();
@@ -129,6 +178,7 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 	},
 	
 	_didGetQuery: function(response, params) {
+		SC.debug('#_didGetQuery');
 		var store = params.store;
 		var query = params.query;
 		var type = params.type;
@@ -136,7 +186,11 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 		
 		if (SC.ok(response)) {
 			var body = response.get('body');
-			store.loadRecords(type, SC.isArray(body) ? body : [body]);
+			if (SC.isArray(body)) {
+				store.loadRecords(type, body);
+			} else {
+				store.loadRecord(type, body);
+			}
 			store.dataSourceDidFetchQuery(query);
 		} else {
 			store.dataSourceDidErrorQuery(query, response);
