@@ -67,7 +67,9 @@ OeffiNpc.mainPage = SC.Page.design({
 				
 				removeBtn: SC.ButtonView.design({
 					layout: {bottom: 0, right: 30, width: 18},
-					title: '-'
+					title: '-',
+					target: 'OeffiNpc.statechart',
+					action: 'removeEntry'
 				}),
 
 				addBtn: SC.ButtonView.design({
