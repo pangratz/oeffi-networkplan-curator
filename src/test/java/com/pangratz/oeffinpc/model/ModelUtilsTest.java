@@ -182,9 +182,28 @@ public class ModelUtilsTest extends TestCase {
 		modelUtils.removeNetworkPlanEntry(schumpeterKey);
 
 		Query query = pm.newQuery(NetworkPlanEntry.class, "key == keyParam");
+		query.declareParameters("Long keyParam");
 		Collection<Object> entries = (Collection<Object>) query.execute(schumpeterKey);
 		assertNotNull(entries);
 		assertEquals(0, entries.size());
+	}
+
+	public void testRemoveNetworkPlanEntry2() {
+		NetworkPlan linz = createNetworkPlan("linz", "linz", "http://oeffi.schildbach.de/plans/linz.png");
+		Long linzKey = modelUtils.storeNetworkPlan(linz);
+
+		Long schumpeterKey = modelUtils.storeNetworkPlanEntry(createNetworkPlanEntry(linzKey, "Schumpeter", "1", 1, 1));
+		Long hbfKey = modelUtils.storeNetworkPlanEntry(createNetworkPlanEntry(linzKey, "Hauptbahnhof", "2", 2, 2));
+
+		modelUtils.removeNetworkPlanEntry(schumpeterKey);
+
+		List<NetworkPlanEntry> entries = modelUtils.getNetworkPlanEntries(linzKey);
+		assertNotNull(entries);
+		assertEquals(1, entries.size());
+
+		NetworkPlanEntry hbfEntry = entries.get(0);
+		assertEquals("Hauptbahnhof", hbfEntry.getName());
+		assertEquals(hbfKey, hbfEntry.getKey());
 	}
 
 	private NetworkPlan createNetworkPlan(String networkId, String planId, String imageUrl) {

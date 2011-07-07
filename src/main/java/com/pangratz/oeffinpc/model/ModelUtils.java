@@ -86,7 +86,8 @@ public class ModelUtils {
 		PersistenceManager pm = mPMF.getPersistenceManager();
 		try {
 			Query query = pm.newQuery(NetworkPlanEntry.class, "key == keyParam");
-			query.deletePersistentAll();
+			query.declareParameters("Long keyParam");
+			query.deletePersistentAll(stationKey);
 		} finally {
 			pm.close();
 		}
