@@ -14,7 +14,7 @@ OeffiNpc.ShowNetworkPlansState = SC.State.extend({
 		var key = OeffiNpc.networkPlanController.get('id');
 		if (key) {
 			var query = SC.Query.local(OeffiNpc.NetworkPlanEntry, {
-				type: 'getNetworkPlanEntries',
+				orderBy: 'name',
 				conditions: "networkPlanKey = '" + key + "'",
 				parameters: {
 					networkPlanKey: key
