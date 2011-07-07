@@ -25,8 +25,6 @@ OeffiNpc.ShowNetworkPlanState = SC.State.extend({
 			name: 'new entry',
 			networkPlanKey: networkPlanId
 		});
-		OeffiNpc.networkPlanController.get('entries').addObject(newEntry);
-		// OeffiNpc.networkPlanEntriesController.addObject(newEntry);
 	},
 	
 	removeEntry: function(){

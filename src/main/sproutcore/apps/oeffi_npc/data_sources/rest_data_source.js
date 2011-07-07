@@ -10,11 +10,6 @@
 
   @extends SC.DataSource
 */
-OeffiNpc.NETWORK_PLANS_QUERY = SC.Query.create({
-	recordType: OeffiNpc.NetworkPlan,
-	orderBy: 'networkId ASC'
-});
-
 OeffiNpc.RestDataSource = SC.DataSource.extend(
 /** @scope OeffiNpc.RestDataSource.prototype */ {
 
@@ -25,16 +20,14 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 			isQuery: YES
 		};
 		
-		if (query === OeffiNpc.NETWORK_PLANS_QUERY) {
+		var recordType = query.get('recordType');
+		if (OeffiNpc.NetworkPlan === recordType) {
 			options['type'] = OeffiNpc.NetworkPlan;
 			return this._getFromUri('/networkplans', options);
-		}
-		
-		var type = query.get('type');
-		if (type && type === 'getNetworkPlan') {
-			options['type'] = OeffiNpc.NetworkPlan;
-			var url = '/networkplans/' + query.get('networkPlanId');
-			SC.debug('fetching ' + url);
+		} else if (OeffiNpc.NetworkPlanEntry === recordType) {
+			options['type'] = OeffiNpc.NetworkPlanEntry;
+			var networkPlanKey = query.parameters.networkPlanKey;
+			var url = '/networkplans/' + networkPlanKey + '/_entries';
 			return this._getFromUri(url, options);
 		}
 		

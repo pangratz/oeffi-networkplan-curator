@@ -52,6 +52,18 @@ app.get('/networkplans/:key', function(req, res){
 	});
 });
 
+app.get('/networkplans/:key/_entries', function(req, res){
+	var key = req.params.key;
+	oeffinpc.view('/oeffinpc/_design/oeffinpc/_view/all_networkplanentries?key="'+key+'"', {}, function(err, doc){
+		if (doc && doc.rows) {
+			var entries = doc.rows.map(function(val){
+				return val.value;
+			});
+			res.send(entries);
+		}
+	});
+});
+
 app.get('/networkplanentries', function(req, res){
 	oeffinpc.view('/oeffinpc/_design/oeffinpc/_view/networkplanentry', {}, function(err, doc){
 		if (doc.rows) {

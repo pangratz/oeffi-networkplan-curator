@@ -3,7 +3,10 @@
 OeffiNpc.LoadingState = SC.State.extend({
 	
 	enterState: function() {
-		var networkPlans = OeffiNpc.store.find(OeffiNpc.NETWORK_PLANS_QUERY);
+		var query = SC.Query.local(OeffiNpc.NetworkPlan, {
+			// orderBy: 'networkId ASC'
+		});
+		var networkPlans = OeffiNpc.store.find(query);
 		OeffiNpc.networkPlansController.set('content', networkPlans);
 		
 		this.gotoState('showNetworkPlans');

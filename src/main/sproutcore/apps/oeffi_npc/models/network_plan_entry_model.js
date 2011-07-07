@@ -19,6 +19,6 @@ OeffiNpc.NetworkPlanEntry = SC.Record.extend(
 	name: SC.Record.attr(String),
 	x: SC.Record.attr(Number),
 	y: SC.Record.attr(Number),
-	networkPlanKey: SC.Record.toOne('OeffiNpc.NetworkPlan', {isMaster: NO, inverse: 'entries'})
+	networkPlanKey: SC.Record.attr(String)
 
 });

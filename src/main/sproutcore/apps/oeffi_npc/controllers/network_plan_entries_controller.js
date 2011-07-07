@@ -16,7 +16,7 @@ OeffiNpc.networkPlanEntriesController = SC.ArrayController.create(
 	isEditable: YES,
 	destroyOnRemoval: YES,
 	allowsMultipleSelection: NO,
-	contentBinding: 'OeffiNpc.networkPlanController.entries',
+	content: [],
 	
 	numberOfNetworkPlanEntries: function(){
 		return this.get('length') + ' entries';

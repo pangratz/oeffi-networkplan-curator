@@ -13,6 +13,7 @@
 OeffiNpc.networkPlansController = SC.ArrayController.create(
 /** @scope OeffiNpc.networkPlansController.prototype */ {
 	
+	content: [],
 	allowsMultipleSelection: YES,
 	
 	numberOfNetworkPlans: function(){
