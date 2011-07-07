@@ -45,13 +45,20 @@ public class NetworkPlanEntryResource extends OeffiNpcServerResource {
 
 	@Override
 	protected Representation put(Representation entity, Variant variant) throws ResourceException {
+		NetworkPlanEntry oldEntry = mModelUtils.getNetworkPlanEntry(mStationKey);
+		if (oldEntry == null) {
+			setStatus(Status.CLIENT_ERROR_NOT_FOUND);
+			return createErrorRepresentation("NetworkPlanEntry with given id not found");
+		}
+
 		JsonRepresentation represent;
 		try {
 			represent = new JsonRepresentation(entity);
 			JSONObject json = represent.getJsonObject();
 
 			NetworkPlanEntry networkPlanEntry = new NetworkPlanEntry();
-			networkPlanEntry.setNetworkPlanKey(json.getLong("networkPlanKey"));
+			networkPlanEntry.setKey(oldEntry.getKey());
+			networkPlanEntry.setNetworkPlanKey(oldEntry.getNetworkPlanKey());
 			networkPlanEntry.setStationId(json.getString("stationId"));
 
 			if (json.has("name")) {
