@@ -35,21 +35,8 @@ app.post('/networkplans/:key', function(req, res){
 
 app.get('/networkplans/:key', function(req, res){
 	var key = req.params.key;
-	oeffinpc.view('/oeffinpc/_design/oeffinpc/_view/all_networkplans?key="'+key+'"', {}, function(err, doc){
-		var rows = doc.rows;
-		if (rows && rows.length == 1) {
-			var networkPlan = rows[0].value;
-			oeffinpc.view('/oeffinpc/_design/oeffinpc/_view/all_networkplanentries?key="'+key+'"', {}, function(err, doc){
-				if (doc && doc.rows) {
-					networkPlan['entries'] = doc.rows.map(function(val){
-						return val.value;
-					});
-				}
-				res.send(networkPlan);
-			});
-			return;
-		}
-		res.send(null);
+	oeffinpc.get(key, function(err, doc){
+		res.send(doc);
 	});
 });
 
@@ -58,7 +45,9 @@ app.get('/networkplans/:key/_entries', function(req, res){
 	oeffinpc.view('/oeffinpc/_design/oeffinpc/_view/all_networkplanentries?key="'+key+'"', {}, function(err, doc){
 		if (doc && doc.rows) {
 			var entries = doc.rows.map(function(val){
-				return val.value;
+				var entry = val.value;
+				entry['key'] = entry._id;
+				return entry;
 			});
 			res.send(entries);
 		}
@@ -79,6 +68,7 @@ app.get('/networkplanentries/:key', function(req, res){
 app.put('/networkplanentries/:key', function(req, res){
 	var body = req.body;
 	var key = req.params.key;
+	body['_id'] = undefined;
 	body['key'] = body._id;
 	oeffinpc.save(body, function(err, doc){
 		res.send(doc);
