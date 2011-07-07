@@ -105,6 +105,16 @@ public class ModelUtilsTest extends TestCase {
 		assertNull(modelUtils.getNetworkPlan(1L));
 	}
 
+	public void testGetInvalidNetworkPlanEntries() {
+		List<NetworkPlanEntry> nullEntries = modelUtils.getNetworkPlanEntries(null);
+		assertNotNull(nullEntries);
+		assertEquals(0, nullEntries.size());
+
+		List<NetworkPlanEntry> invalidEntries = modelUtils.getNetworkPlanEntries(Long.MIN_VALUE);
+		assertNotNull(invalidEntries);
+		assertEquals(0, invalidEntries.size());
+	}
+
 	public void testGetInvalidNetworkPlanEntry() {
 		assertNull(modelUtils.getNetworkPlanEntry(null));
 		assertNull(modelUtils.getNetworkPlanEntry(1L));
@@ -128,6 +138,10 @@ public class ModelUtilsTest extends TestCase {
 	public void testGetNetworkPlanEntries() {
 		NetworkPlan linz = createNetworkPlan("linz", "linz", "http://oeffi.schildbach.de/plans/linz.png");
 		Long linzKey = modelUtils.storeNetworkPlan(linz);
+
+		List<NetworkPlanEntry> entries = modelUtils.getNetworkPlanEntries(linzKey);
+		assertNotNull(entries);
+		assertEquals(0, entries.size());
 
 		modelUtils.storeNetworkPlanEntry(createNetworkPlanEntry(linzKey, "Hauptbahnhof", "111", 100, 200));
 		modelUtils.storeNetworkPlanEntry(createNetworkPlanEntry(linzKey, "Schumpeterstrasse", "222", 111, 2222));

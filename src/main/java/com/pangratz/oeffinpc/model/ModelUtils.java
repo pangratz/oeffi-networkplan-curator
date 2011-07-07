@@ -1,5 +1,6 @@
 package com.pangratz.oeffinpc.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -47,7 +48,10 @@ public class ModelUtils {
 			query.setOrdering("name asc");
 			query.declareParameters("Long networkIdParam");
 			List<NetworkPlanEntry> networkPlanEntries = (List<NetworkPlanEntry>) query.execute(networkId);
-			return (List<NetworkPlanEntry>) pm.detachCopyAll(networkPlanEntries);
+			if (networkPlanEntries != null)
+				return (List<NetworkPlanEntry>) pm.detachCopyAll(networkPlanEntries);
+
+			return new ArrayList<NetworkPlanEntry>();
 		} finally {
 			pm.close();
 		}
@@ -76,7 +80,10 @@ public class ModelUtils {
 		PersistenceManager pm = mPMF.getPersistenceManager();
 		try {
 			List<NetworkPlan> networkPlans = (List<NetworkPlan>) pm.newQuery(NetworkPlan.class).execute();
-			return (List<NetworkPlan>) pm.detachCopyAll(networkPlans);
+			if (networkPlans != null)
+				return (List<NetworkPlan>) pm.detachCopyAll(networkPlans);
+
+			return new ArrayList<NetworkPlan>();
 		} finally {
 			pm.close();
 		}
