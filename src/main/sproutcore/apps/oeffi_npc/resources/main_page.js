@@ -4,7 +4,7 @@ OeffiNpc.mainPage = SC.Page.design({
 	
 	mainPane: SC.MainPane.design({
 		
-		childViews: 'topView entriesView entryView magnifierView'.w(),
+		childViews: 'topView entriesView entryView'.w(),
 		layout: {left: 0, right: 0, top: 0, bottom: 0},
 		
 		keyUp: function(evt) {
@@ -39,20 +39,12 @@ OeffiNpc.mainPage = SC.Page.design({
 			
 		}),
 		
-		magnifierView: SC.ScrollView.design({
-			layout: {left: 10, width: 200, bottom: 10, height: 200},
-			contentView: OeffiNpc.MagnifierView.design({
-				valueBinding: 'OeffiNpc.networkPlanController.imageUrl',
-				positionBinding: 'OeffiNpc.networkPlanViewController.cursorPosition'
-			})
-		}),
-		
 		entriesView: SC.View.design({
-			layout: {left: 10, width: 200, top: 36, bottom: 220},
-			childViews: 'list buttons'.w(),
+			layout: {left: 10, width: 300, top: 36, bottom: 10},
+			childViews: 'list buttons editItemView'.w(),
 			
 			list: SC.ScrollView.design({
-				layout: {top: 0, bottom: 36, left: 0, right: 0},
+				layout: {top: 0, bottom: 256, left: 0, right: 0},
 				contentView: SC.ListView.design({
 					showAlternatingRows: YES,
 					contentBinding: 'OeffiNpc.networkPlanEntriesController.arrangedObjects',
@@ -63,7 +55,7 @@ OeffiNpc.mainPage = SC.Page.design({
 			
 			buttons: SC.View.design({
 				childViews: 'removeBtn addBtn'.w(),
-				layout: {bottom: 0, height: 36, left: 0, right: 0},
+				layout: {bottom: 210, height: 36, left: 0, right: 0},
 				
 				removeBtn: SC.ButtonView.design({
 					layout: {bottom: 0, right: 30, width: 18},
@@ -78,18 +70,77 @@ OeffiNpc.mainPage = SC.Page.design({
 					target: 'OeffiNpc.statechart',
 					action: 'addEntry'
 				})
+			}),
+			
+			editItemView: SC.View.design({
+				layout: {left: 0, right: 0, bottom: 0, height: 200},
+				childViews: 'name station position info'.w(),
+				
+				name: SC.View.design({
+					layout: {top: 10, left: 10, right: 10, height: 36},
+					childViews: 'label name'.w(),
+					label: SC.LabelView.design({
+						layout: {left: 5, width: 100},
+						value: 'Name'
+					}),
+					name: SC.TextFieldView.design({
+						layout: {left: 110, right: 5},
+						applyImmediately: NO,
+						valueBinding: 'OeffiNpc.networkPlanEntryController.name'
+					})
+				}),
+				
+				station: SC.View.design({
+					layout: {top: 51, left: 10, right: 10, height: 36},
+					childViews: 'label name'.w(),
+					label: SC.LabelView.design({
+						layout: {left: 5, width: 100},
+						value: 'Station'
+					}),
+					name: SC.TextFieldView.design({
+						layout: {left: 110, right: 5},
+						applyImmediately: NO,
+						valueBinding: 'OeffiNpc.networkPlanEntryController.stationId'
+					})
+				}),
+				
+				position: SC.View.design({
+					layout: {top: 92, left: 10, right: 10, height: 36},
+					childViews: 'label x y'.w(),
+					label: SC.LabelView.design({
+						layout: {left: 5, width: 100},
+						value: 'Position'
+					}),
+					x: SC.TextFieldView.design({
+						layout: {left: 110, width: 30},
+						applyImmediately: NO,
+						valueBinding: 'OeffiNpc.networkPlanEntryController.x'
+					}),
+					y: SC.TextFieldView.design({
+						layout: {left: 145, width: 30},
+						applyImmediately: NO,
+						valueBinding: 'OeffiNpc.networkPlanEntryController.y'
+					})
+				}),
+				
+				info: SC.View.design({
+					layout: {bottom: 0, left: 0, right: 0, height: 50},
+					childViews: 'id status'.w(),
+					id: SC.LabelView.design({
+						layout: {left: 5, right: 5, top: 5},
+						valueBinding: 'OeffiNpc.networkPlanEntryController.id'
+					}),
+					status: SC.LabelView.design({
+						layout: {left: 5, right: 5, bottom: 5},
+						valueBinding: 'OeffiNpc.networkPlanEntryController.status'
+					})
+				})
 			})
 		}),
 		
 		entryView: SC.View.design({
-			layout: {left: 220, top: 36, right: 10, bottom: 0},
-			childViews: 'contentView imageView bottomView'.w(),
-			
-			contentView: SC.TemplateView.create({
-				layout: {left: 10, width: 150, top: 0, bottom: 0},
-				templateName: 'entry',
-				entryBinding: 'OeffiNpc.networkPlanEntryController'
-			}),
+			layout: {left: 320, top: 36, right: 10, bottom: 0},
+			childViews: 'imageView bottomView'.w(),
 			
 			bottomView: SC.View.design({
 				childViews: 'label zoom'.w(),
@@ -107,7 +158,7 @@ OeffiNpc.mainPage = SC.Page.design({
 			}),
 			
 			imageView: OeffiNpc.NetworkPlanView.design({
-				layout: {left: 150, top: 0, right: 0, bottom: 36},
+				layout: {left: 0, top: 0, right: 0, bottom: 36},
 				cursorPositionBinding: 'OeffiNpc.networkPlanViewController.cursorPosition',
 				valueBinding: 'OeffiNpc.networkPlanController.imageUrl',
 				zoomBinding: 'OeffiNpc.networkPlanViewController.zoom',
