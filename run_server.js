@@ -28,6 +28,7 @@ app.post('/networkplans/:key', function(req, res){
 	body['x'] = body.x ? body.x : 0;
 	body['y'] = body.y ? body.y : 0;
 	oeffinpc.save(body, function(err, doc){
+		doc['key'] = doc._id;
 		res.send(doc);
 	});
 });
@@ -78,6 +79,7 @@ app.get('/networkplanentries/:key', function(req, res){
 app.put('/networkplanentries/:key', function(req, res){
 	var body = req.body;
 	var key = req.params.key;
+	body['key'] = body._id;
 	oeffinpc.save(body, function(err, doc){
 		res.send(doc);
 	});

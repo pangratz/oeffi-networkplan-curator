@@ -53,7 +53,7 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 			var body = response.get('body');
 			SC.debug('_didRetrieveRecord');
 			store.loadRecords(type, body);
-			store.dataSourceDidComplete(storeKey, body, body._id);
+			store.dataSourceDidComplete(storeKey, body, body.key);
 		} else {
 			store.dataSourceDidError(storeKey);
 		}
@@ -70,7 +70,6 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 		var id = store.idFor(storeKey);
 		var url = this._urlFor(type, id, hash);
 		var body = hash;
-		body['_id'] = undefined;
 		SC.Request.postUrl(url)
 				  .json()
 				  .notify(this, this._didCreateRecord, store, storeKey, type)
@@ -84,7 +83,7 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 		if (SC.ok(response)) {
 			SC.debug('invoking store#dataSourceDidComplete for ' + key);
 			var body = response.get('body');
-			var id = body._id;
+			var id = body.key;
 			store.dataSourceDidComplete(key, body, id);
 		} else {
 			SC.debug('invoking store#dataSourceDidError for ' + key);

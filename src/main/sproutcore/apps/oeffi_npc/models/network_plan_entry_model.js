@@ -14,7 +14,7 @@
 OeffiNpc.NetworkPlanEntry = SC.Record.extend(
 /** @scope OeffiNpc.NetworkPlanEntry.prototype */ {
 	
-	primaryKey: '_id',
+	primaryKey: 'key',
 	stationId: SC.Record.attr(String),
 	name: SC.Record.attr(String),
 	x: SC.Record.attr(Number),

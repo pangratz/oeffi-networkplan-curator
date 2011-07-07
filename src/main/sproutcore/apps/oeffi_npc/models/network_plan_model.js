@@ -14,7 +14,7 @@
 OeffiNpc.NetworkPlan = SC.Record.extend(
 /** @scope OeffiNpc.NetworkPlan.prototype */ {
 	
-	primaryKey: '_id',
+	primaryKey: 'key',
 	networkId: SC.Record.attr(String),
 	planId: SC.Record.attr(String),
 	imageUrl: SC.Record.attr(String)
