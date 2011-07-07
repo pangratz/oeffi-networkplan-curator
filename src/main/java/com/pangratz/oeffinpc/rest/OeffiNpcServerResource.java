@@ -34,16 +34,18 @@ public abstract class OeffiNpcServerResource extends ServerResource {
 	}
 
 	protected Representation createResourceCreatedRepresentation(NetworkPlan networkPlan) {
-		return createResourceCreatedRepresentation("/networkplans/" + networkPlan.getKey());
+		String id = "/networkplans/" + networkPlan.getKey();
+		return createResourceCreatedRepresentation(id, networkPlan);
 	}
 
 	protected Representation createResourceCreatedRepresentation(NetworkPlanEntry networkPlanEntry) {
-		return createResourceCreatedRepresentation("/networkplanentries/" + networkPlanEntry.getKey());
+		String id = "/networkplanentries/" + networkPlanEntry.getKey();
+		return createResourceCreatedRepresentation(id, networkPlanEntry);
 	}
 
-	protected Representation createResourceCreatedRepresentation(String id) {
+	protected Representation createResourceCreatedRepresentation(String id, Object data) {
 		setStatus(Status.SUCCESS_CREATED);
-		Representation result = new StringRepresentation("created");
+		Representation result = new JsonRepresentation(data);
 		Reference hostRef = getRequest().getHostRef();
 		String host = hostRef.toString();
 		result.setLocationRef(host + id);
