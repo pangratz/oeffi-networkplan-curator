@@ -16,6 +16,7 @@ OeffiNpc.networkPlanEntriesController = SC.ArrayController.create(
 	isEditable: YES,
 	destroyOnRemoval: YES,
 	allowsMultipleSelection: NO,
+	orderBy: 'name',
 	content: [],
 	
 	numberOfNetworkPlanEntries: function(){
