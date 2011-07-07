@@ -1,15 +1,9 @@
 package com.pangratz.oeffinpc.rest;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.restlet.data.MediaType;
 import org.restlet.data.Method;
 import org.restlet.data.Status;
-import org.restlet.ext.freemarker.TemplateRepresentation;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.representation.Variant;
@@ -17,9 +11,6 @@ import org.restlet.resource.ResourceException;
 
 import com.pangratz.oeffinpc.model.NetworkPlan;
 import com.pangratz.oeffinpc.model.NetworkPlanEntry;
-
-import freemarker.cache.ClassTemplateLoader;
-import freemarker.template.Configuration;
 
 public class NetworkPlanResource extends OeffiNpcServerResource {
 
@@ -46,27 +37,8 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 			return createErrorRepresentation("no network plan with id " + mNetworkPlanId);
 		}
 
-		List<NetworkPlanEntry> entries = mModelUtils.getNetworkPlanEntries(mNetworkPlanId);
-
-		if (MediaType.TEXT_CSV.equals(variant.getMediaType())) {
-			String templateName = "template.tfl";
-			Configuration config = new Configuration();
-			ClassTemplateLoader ctl = new ClassTemplateLoader(getClass(), "/com/pangratz/oeffinpc");
-			config.setTemplateLoader(ctl);
-			Map<String, Object> model = new HashMap<String, Object>();
-			model.put("networkPlan", networkPlan);
-			model.put("entries", entries);
-			return new TemplateRepresentation(templateName, config, model, MediaType.TEXT_CSV);
-		}
-
-		try {
-			JSONObject networkPlanObj = new JSONObject(networkPlan);
-			networkPlanObj.put("entries", entries);
-			return new JsonRepresentation(networkPlanObj);
-		} catch (JSONException e) {
-			e.printStackTrace();
-			return createErrorRepresentation(e.getMessage());
-		}
+		JSONObject networkPlanObj = new JSONObject(networkPlan);
+		return new JsonRepresentation(networkPlanObj);
 	}
 
 	@Override

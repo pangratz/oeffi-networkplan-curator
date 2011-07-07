@@ -11,6 +11,7 @@ public class OeffiNetworkPlanCuratorApplication extends Application {
 		Router router = new Router(getContext());
 		router.attach("/networkplans", NetworkPlansResource.class);
 		router.attach("/networkplans/{networkPlanId}", NetworkPlanResource.class);
+		router.attach("/networkplans/{networkPlanId}/_entries", NetworkPlanEntriesResource.class);
 		router.attach("/networkplanentries/{stationId}", NetworkPlanEntryResource.class);
 		return router;
 	}
