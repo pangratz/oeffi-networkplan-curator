@@ -64,18 +64,6 @@ app.get('/networkplans/:key/_entries', function(req, res){
 	});
 });
 
-app.get('/networkplanentries', function(req, res){
-	oeffinpc.view('/oeffinpc/_design/oeffinpc/_view/networkplanentry', {}, function(err, doc){
-		if (doc.rows) {
-			var entries = doc.rows.map(function(val){
-				return val.value;
-			});
-			res.send(entries);
-		}
-		res.send('no thing');
-	});
-});
-
 app.get('/networkplanentries/:key', function(req, res){
 	var key = req.params.key;
 	oeffinpc.view('/oeffinpc/_design/oeffinpc/_view/networkplanentry?key="'+key+'"', {}, function(err, doc){
