@@ -125,6 +125,7 @@ OeffiNpc.RestDataSource = SC.DataSource.extend(
 		var url = this._urlFor(type, id, hash);
 		
 		SC.Request.putUrl(url)
+				  .header({'Content-Type': 'application/json; charset=utf-8'})
 				  .json()
 				  .notify(this, this._didUpdateRecord, store, storeKey)
 				  .send(body);
