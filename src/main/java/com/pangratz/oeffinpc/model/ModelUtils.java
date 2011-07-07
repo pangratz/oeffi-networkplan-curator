@@ -45,6 +45,7 @@ public class ModelUtils {
 		try {
 			Query query = pm.newQuery(NetworkPlanEntry.class, "networkPlanKey == networkIdParam");
 			query.setOrdering("name asc");
+			query.declareParameters("Long networkIdParam");
 			List<NetworkPlanEntry> networkPlanEntries = (List<NetworkPlanEntry>) query.execute(networkId);
 			return (List<NetworkPlanEntry>) pm.detachCopyAll(networkPlanEntries);
 		} finally {

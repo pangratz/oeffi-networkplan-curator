@@ -125,6 +125,28 @@ public class ModelUtilsTest extends TestCase {
 		assertEquals(linzKey, insertedNetworkPlan.getKey());
 	}
 
+	public void testGetNetworkPlanEntries() {
+		NetworkPlan linz = createNetworkPlan("linz", "linz", "http://oeffi.schildbach.de/plans/linz.png");
+		Long linzKey = modelUtils.storeNetworkPlan(linz);
+
+		modelUtils.storeNetworkPlanEntry(createNetworkPlanEntry(linzKey, "Hauptbahnhof", "111", 100, 200));
+		modelUtils.storeNetworkPlanEntry(createNetworkPlanEntry(linzKey, "Schumpeterstrasse", "222", 111, 2222));
+		modelUtils.storeNetworkPlanEntry(createNetworkPlanEntry(linzKey, "Rudolfstrasse", "333", 333, 444));
+
+		NetworkPlan bonn = createNetworkPlan("bonn", "bonn", "http://oeffi.schildbach.de/plans/bonn.png");
+		Long bonnKey = modelUtils.storeNetworkPlan(bonn);
+		modelUtils.storeNetworkPlanEntry(createNetworkPlanEntry(bonnKey, "Bonn Station 1", "1", 1, 1));
+		modelUtils.storeNetworkPlanEntry(createNetworkPlanEntry(bonnKey, "Bonn Station 2", "2", 2, 2));
+
+		List<NetworkPlanEntry> linzNetworkPlanEntries = modelUtils.getNetworkPlanEntries(linzKey);
+		assertNotNull(linzNetworkPlanEntries);
+		assertEquals(3, linzNetworkPlanEntries.size());
+
+		List<NetworkPlanEntry> bonnNetworkPlanEntries = modelUtils.getNetworkPlanEntries(bonnKey);
+		assertNotNull(bonnNetworkPlanEntries);
+		assertEquals(2, bonnNetworkPlanEntries.size());
+	}
+
 	public void testGetNetworkPlans() {
 		List<NetworkPlan> networkPlans = modelUtils.getNetworkPlans();
 		assertEquals(0, networkPlans.size());
