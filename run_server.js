@@ -9,10 +9,12 @@ var oeffinpc = new CouchClient('http://localhost:5984/oeffinpc');
 
 app.get('/networkplans', function(req, res){
 	oeffinpc.view('/oeffinpc/_design/oeffinpc/_view/all_networkplans', {}, function(err, doc){
-		var networkPlans = doc.rows.map(function(val){
-			return val.value;
-		});
-		res.send(networkPlans);
+		if (doc.rows) {
+			var networkPlans = doc.rows.map(function(val){
+				return val.value;
+			});
+			res.send(networkPlans);
+		}
 	});
 });
 
