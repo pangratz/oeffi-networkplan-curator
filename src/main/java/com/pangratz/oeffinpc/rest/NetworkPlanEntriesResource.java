@@ -26,6 +26,8 @@ public class NetworkPlanEntriesResource extends OeffiNpcServerResource {
 
 	@Override
 	protected void doInit() throws ResourceException {
+		super.doInit();
+
 		String stringVal = (String) getRequest().getAttributes().get("networkPlanId");
 		System.out.println("NetworkPlanEntriesResource#stringVal = " + stringVal);
 		this.mNetworkPlanId = Long.valueOf(stringVal);
