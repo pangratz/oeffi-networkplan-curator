@@ -68,10 +68,12 @@ app.get('/networkplanentries/:key', function(req, res){
 app.put('/networkplanentries/:key', function(req, res){
 	var body = req.body;
 	var key = req.params.key;
-	body['_id'] = undefined;
-	body['key'] = body._id;
-	oeffinpc.save(body, function(err, doc){
-		res.send(doc);
+	oeffinpc.get(key, function(err, doc) {
+		body['_rev'] = doc._rev;
+		body['_id'] = key;
+		oeffinpc.save(body, function(err, doc2){
+			res.send(doc2);
+		});
 	});
 });
 
