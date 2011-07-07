@@ -23,6 +23,7 @@ OeffiNpc.ShowNetworkPlanState = SC.State.extend({
 		var networkPlanId = OeffiNpc.networkPlanController.get('id');
 		var newEntry = OeffiNpc.store.createRecord(OeffiNpc.NetworkPlanEntry, {
 			name: 'new entry',
+			stationId: '',
 			networkPlanKey: networkPlanId
 		});
 	},
