@@ -8,7 +8,6 @@
 OeffiNpc.RecordStatusMixin = {
 	
 	recordStatusString: function(){
-		SC.debug('test');
 		return this.statusString();
 	}.property('status')
 	
