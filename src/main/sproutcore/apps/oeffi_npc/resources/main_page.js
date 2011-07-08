@@ -77,62 +77,78 @@ OeffiNpc.mainPage = SC.Page.design({
 				childViews: 'name station position info'.w(),
 				
 				name: SC.View.design({
-					layout: {top: 10, left: 10, right: 10, height: 36},
+					layout: {top: 10, left: 10, right: 10, height: 26},
 					childViews: 'label name'.w(),
 					label: SC.LabelView.design({
-						layout: {left: 5, width: 100},
+						layout: {left: 5, width: 70},
 						value: 'Name'
 					}),
 					name: SC.TextFieldView.design({
-						layout: {left: 110, right: 5},
+						layout: {left: 80, right: 5},
 						applyImmediately: NO,
 						valueBinding: 'OeffiNpc.networkPlanEntryController.name'
 					})
 				}),
 				
 				station: SC.View.design({
-					layout: {top: 51, left: 10, right: 10, height: 36},
+					layout: {top: 51, left: 10, right: 10, height: 26},
 					childViews: 'label name'.w(),
 					label: SC.LabelView.design({
-						layout: {left: 5, width: 100},
+						layout: {left: 5, width: 70},
 						value: 'Station'
 					}),
 					name: SC.TextFieldView.design({
-						layout: {left: 110, right: 5},
+						layout: {left: 80, right: 5},
 						applyImmediately: NO,
 						valueBinding: 'OeffiNpc.networkPlanEntryController.stationId'
 					})
 				}),
 				
 				position: SC.View.design({
-					layout: {top: 92, left: 10, right: 10, height: 36},
+					layout: {top: 92, left: 10, right: 10, height: 26},
 					childViews: 'label x y'.w(),
 					label: SC.LabelView.design({
-						layout: {left: 5, width: 100},
+						layout: {left: 5, width: 70},
 						value: 'Position'
 					}),
 					x: SC.TextFieldView.design({
-						layout: {left: 110, width: 30},
+						layout: {left: 80, width: 60},
 						applyImmediately: NO,
 						valueBinding: 'OeffiNpc.networkPlanEntryController.x'
 					}),
 					y: SC.TextFieldView.design({
-						layout: {left: 145, width: 30},
+						layout: {left: 145, width: 60},
 						applyImmediately: NO,
 						valueBinding: 'OeffiNpc.networkPlanEntryController.y'
 					})
 				}),
 				
 				info: SC.View.design({
-					layout: {bottom: 0, left: 0, right: 0, height: 50},
+					layout: {bottom: 10, left: 10, right: 10, top: 128},
 					childViews: 'id status'.w(),
-					id: SC.LabelView.design({
-						layout: {left: 5, right: 5, top: 5},
-						valueBinding: 'OeffiNpc.networkPlanEntryController.id'
+					id: SC.View.design({
+						layout: {left: 10, right: 10, top: 10, height: 26},
+						childViews: 'label value'.w(),
+						label: SC.LabelView.design({
+							layout: {left: 0, width: 20},
+							value: 'Id:'
+						}),
+						value: SC.LabelView.design({
+							layout: {left: 25, right: 0},
+							valueBinding: 'OeffiNpc.networkPlanEntryController.id'
+						})
 					}),
-					status: SC.LabelView.design({
-						layout: {left: 5, right: 5, bottom: 5},
-						valueBinding: 'OeffiNpc.networkPlanEntryController.status'
+					status: SC.View.design({
+						layout: {left: 10, right: 10, top: 36, height: 26},
+						childViews: 'label value'.w(),
+						label: SC.LabelView.design({
+							layout: {left: 0, width: 40},
+							value: 'Status:'
+						}),
+						value: SC.LabelView.design({
+							layout: {left: 45, right: 0},
+							valueBinding: 'OeffiNpc.networkPlanEntryController.recordStatusString'
+						})
 					})
 				})
 			})
