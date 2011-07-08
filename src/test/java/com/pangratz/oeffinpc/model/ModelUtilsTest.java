@@ -215,6 +215,30 @@ public class ModelUtilsTest extends TestCase {
 		assertEquals("linz", insertedNetworkPlan.getPlanId());
 	}
 
+	public void testRemoveInvalidNetworkPlanEntries() {
+		assertEquals(0, modelUtils.removeNetworkPlanEntries(null));
+		assertEquals(0, modelUtils.removeNetworkPlanEntries(1L));
+	}
+
+	public void testRemoveNetworkPlanEntries() {
+		NetworkPlan linz = createNetworkPlan("linz", "linz", "http://oeffi.schildbach.de/plans/linz.png");
+		Long linzKey = modelUtils.storeNetworkPlan(linz);
+
+		NetworkPlanEntry hbf = createNetworkPlanEntry(null, "Hauptbahnhof", "123", 0, 20);
+		NetworkPlanEntry schumpeter = createNetworkPlanEntry(null, "Schumpeterstrasse", "222", 0, 0);
+		NetworkPlanEntry dornach = createNetworkPlanEntry(null, "Dornach", "333", 0, 0);
+		List<NetworkPlanEntry> entries = Arrays.asList(hbf, schumpeter, dornach);
+		modelUtils.storeNetworkPlanEntries(linzKey, entries);
+
+		long removedNetworkPlanEntriesCount = modelUtils.removeNetworkPlanEntries(linzKey);
+		assertEquals(3, removedNetworkPlanEntriesCount);
+
+		// network plan is still here?
+		NetworkPlan networkPlan = modelUtils.getNetworkPlan(linzKey);
+		assertNotNull(networkPlan);
+		assertEquals("linz", networkPlan.getNetworkId());
+	}
+
 	public void testRemoveNetworkPlanEntry() {
 		NetworkPlan linz = createNetworkPlan("linz", "linz", "http://oeffi.schildbach.de/plans/linz.png");
 		Long linzKey = modelUtils.storeNetworkPlan(linz);

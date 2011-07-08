@@ -25,6 +25,20 @@ public class NetworkPlanEntriesResource extends OeffiNpcServerResource {
 	private Long mNetworkPlanId;
 
 	@Override
+	protected Representation delete(Variant variant) throws ResourceException {
+		NetworkPlan networkPlan = mModelUtils.getNetworkPlan(mNetworkPlanId);
+		if (networkPlan == null) {
+			setStatus(Status.CLIENT_ERROR_NOT_FOUND);
+			return createErrorRepresentation("no network plan with id " + mNetworkPlanId);
+		}
+
+		long removedEntriesCount = mModelUtils.removeNetworkPlanEntries(mNetworkPlanId);
+		Map<Object, Object> data = new HashMap<Object, Object>();
+		data.put("removedEntriesCount", removedEntriesCount);
+		return new JsonRepresentation(data);
+	}
+
+	@Override
 	protected void doInit() throws ResourceException {
 		super.doInit();
 
@@ -32,6 +46,7 @@ public class NetworkPlanEntriesResource extends OeffiNpcServerResource {
 		System.out.println("NetworkPlanEntriesResource#stringVal = " + stringVal);
 		this.mNetworkPlanId = Long.valueOf(stringVal);
 
+		getVariants(Method.DELETE).add(new Variant(MediaType.APPLICATION_JSON));
 		getVariants(Method.GET).add(new Variant(MediaType.TEXT_CSV));
 		getVariants(Method.GET).add(new Variant(MediaType.APPLICATION_JSON));
 	}

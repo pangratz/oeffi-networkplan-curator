@@ -90,6 +90,17 @@ public class ModelUtils {
 		}
 	}
 
+	public long removeNetworkPlanEntries(Long networkPlanKey) {
+		PersistenceManager pm = mPMF.getPersistenceManager();
+		try {
+			Query query = pm.newQuery(NetworkPlanEntry.class, "networkPlanKey == keyParam");
+			query.declareParameters("Long keyParam");
+			return query.deletePersistentAll(networkPlanKey);
+		} finally {
+			pm.close();
+		}
+	}
+
 	public void removeNetworkPlanEntry(Long stationKey) {
 		PersistenceManager pm = mPMF.getPersistenceManager();
 		try {
