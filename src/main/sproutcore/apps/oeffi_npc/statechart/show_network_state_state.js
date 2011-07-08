@@ -19,6 +19,17 @@ OeffiNpc.ShowNetworkPlanState = SC.State.extend({
 		OeffiNpc.networkPlanEntryController.set('y', point.y);
 	},
 	
+	showBlackWhiteImageDidChange: function(){
+		var showBlackWhite = OeffiNpc.networkPlanViewController.get('showBlackWhiteImage');
+		var imageUrl = OeffiNpc.networkPlanController.get('imageUrl');
+		if (showBlackWhite) {
+			imageUrl = imageUrl.replace('.png','_bw.png');
+		} else {
+			imageUrl = imageUrl.replace('_bw.png','.png');
+		}
+		OeffiNpc.networkPlanController.set('imageUrl', imageUrl);
+	},
+	
 	addEntry: function(){
 		var networkPlanId = OeffiNpc.networkPlanController.get('id');
 		var newEntry = OeffiNpc.store.createRecord(OeffiNpc.NetworkPlanEntry, {
@@ -30,6 +41,11 @@ OeffiNpc.ShowNetworkPlanState = SC.State.extend({
 	
 	removeEntry: function(){
 		OeffiNpc.networkPlanEntryController.destroy();
+	},
+	
+	iPressed: function(){
+		var showBlackAndWhite = !OeffiNpc.networkPlanViewController.get('showBlackWhiteImage');
+		OeffiNpc.networkPlanViewController.set('showBlackWhiteImage', showBlackAndWhite);
 	},
 	
 	zPressed: function(){

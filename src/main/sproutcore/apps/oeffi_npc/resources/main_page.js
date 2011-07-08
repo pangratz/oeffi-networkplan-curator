@@ -13,6 +13,11 @@ OeffiNpc.mainPage = SC.Page.design({
 				return YES;
 			}
 			
+			if (evt.keyCode == 73) {
+				OeffiNpc.statechart.sendEvent('iPressed');
+				return YES;
+			}
+			
 			if (evt.keyCode >= 49 && evt.keyCode <= 57) {
 				OeffiNpc.statechart.sendEvent('numberPressed', (evt.keyCode - 48));
 				return YES;
@@ -159,7 +164,7 @@ OeffiNpc.mainPage = SC.Page.design({
 			childViews: 'imageView bottomView'.w(),
 			
 			bottomView: SC.View.design({
-				childViews: 'label zoom'.w(),
+				childViews: 'label zoom blackWhite'.w(),
 				layout: {left: 150, bottom: 0, height: 36, right: 0},
 				
 				label: SC.LabelView.design({
@@ -169,7 +174,14 @@ OeffiNpc.mainPage = SC.Page.design({
 				
 				zoom: SC.CheckboxView.design({
 					layout: {left: 110},
-					valueBinding: 'OeffiNpc.networkPlanViewController.zoom'
+					valueBinding: 'OeffiNpc.networkPlanViewController.zoom',
+					title: 'show magnifier?'
+				}),
+				
+				blackWhite: SC.CheckboxView.design({
+					layout: {left: 250},
+					valueBinding: 'OeffiNpc.networkPlanViewController.showBlackWhiteImage',
+					title: 'black & white?'
 				})
 			}),
 			

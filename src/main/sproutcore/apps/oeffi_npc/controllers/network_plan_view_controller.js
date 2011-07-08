@@ -19,6 +19,7 @@ OeffiNpc.networkPlanViewController = SC.ObjectController.create(
 	},
 	zoom: NO,
 	zoomScale: 2.0,
+	showBlackWhiteImage: NO,
 	
 	cursorPositionString: function() {
 		var pos = this.get('cursorPosition');
@@ -26,6 +27,10 @@ OeffiNpc.networkPlanViewController = SC.ObjectController.create(
 			return '%@1/%@2'.fmt(pos.x, pos.y);
 		}
 		return undefined;
-	}.property('cursorPosition')
+	}.property('cursorPosition'),
+	
+	showBlackWhiteImageDidChange: function(){
+		OeffiNpc.statechart.sendEvent('showBlackWhiteImageDidChange');
+	}.observes('showBlackWhiteImage')
 
 });
