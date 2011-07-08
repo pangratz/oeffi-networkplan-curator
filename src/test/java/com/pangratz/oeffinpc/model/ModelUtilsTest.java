@@ -1,6 +1,8 @@
 package com.pangratz.oeffinpc.model;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -16,6 +18,12 @@ public class ModelUtilsTest extends TestCase {
 	private final LocalServiceTestHelper helper = new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig());
 	private ModelUtils modelUtils = null;
 	private PersistenceManager pm;
+
+	public void testAddInvalidNetworkPlanEntries() {
+		assertEquals(0, modelUtils.storeNetworkPlanEntries(null, null));
+		assertEquals(0, modelUtils.storeNetworkPlanEntries(1L, null));
+		assertEquals(0, modelUtils.storeNetworkPlanEntries(null, new LinkedList<NetworkPlanEntry>()));
+	}
 
 	public void testAddNetworkPlanAndEntries() {
 		NetworkPlan linz = createNetworkPlan("linz", "linz", "http://oeffi.schildbach.de/plans/linz.png");
@@ -54,6 +62,27 @@ public class ModelUtilsTest extends TestCase {
 
 		NetworkPlanEntry schumpeterEntry = networkPlanEntries.get(1);
 		assertEquals(schumpeter.getName(), schumpeterEntry.getName());
+	}
+
+	public void testAddNetworkPlanEntries() {
+		NetworkPlan bonn = createNetworkPlan("bonn", "bonn", "http://oeffi.schildbach.de/plans/bonn.png");
+		Long bonnKey = modelUtils.storeNetworkPlan(bonn);
+		modelUtils.storeNetworkPlanEntry(createNetworkPlanEntry(bonnKey, "Hauptbahnhof", "90", 60, 90));
+		modelUtils.storeNetworkPlanEntry(createNetworkPlanEntry(bonnKey, "Bla Bla", "91", 59, 90));
+
+		NetworkPlan linz = createNetworkPlan("linz", "linz", "http://oeffi.schildbach.de/plans/linz.png");
+		Long linzKey = modelUtils.storeNetworkPlan(linz);
+
+		NetworkPlanEntry hbf = createNetworkPlanEntry(null, "Hauptbahnhof", "123", 0, 20);
+		NetworkPlanEntry schumpeter = createNetworkPlanEntry(null, "Schumpeterstrasse", "222", 0, 0);
+		NetworkPlanEntry dornach = createNetworkPlanEntry(null, "Dornach", "333", 0, 0);
+		List<NetworkPlanEntry> entries = Arrays.asList(hbf, schumpeter, dornach);
+		int nrOfStations = modelUtils.storeNetworkPlanEntries(linzKey, entries);
+		assertEquals(3, nrOfStations);
+
+		List<NetworkPlanEntry> linzEntries = modelUtils.getNetworkPlanEntries(linzKey);
+		assertNotNull(linzEntries);
+		assertEquals(3, linzEntries.size());
 	}
 
 	public void testAddTwoNetworkPlans() {

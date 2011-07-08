@@ -21,6 +21,21 @@
 
 	<dependencies>
 
+		<!-- needed for the NetworkPlanresource POST csv file test -->
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- needed for parsing csv's in the NetworkPlanResource POST -->
+		<dependency>
+			<groupId>net.sf.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>2.1</version>
+		</dependency>
+
 		<!-- Restlet -->
 		<dependency>
 			<groupId>org.restlet.gae</groupId>
@@ -46,6 +61,16 @@
 			<groupId>org.restlet.gae</groupId>
 			<artifactId>org.restlet.ext.freemarker</artifactId>
 			<version>2.0.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.restlet.gae</groupId>
+			<artifactId>org.restlet.ext.fileupload</artifactId>
+			<version>2.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.3.2</version>
 		</dependency>
 
 		<!-- Google App Engine meta-package -->

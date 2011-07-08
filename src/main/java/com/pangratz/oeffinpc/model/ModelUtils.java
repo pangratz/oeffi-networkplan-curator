@@ -1,6 +1,7 @@
 package com.pangratz.oeffinpc.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -105,6 +106,23 @@ public class ModelUtils {
 		try {
 			NetworkPlan persistent = pm.makePersistent(networkPlan);
 			return persistent.getKey();
+		} finally {
+			pm.close();
+		}
+	}
+
+	public int storeNetworkPlanEntries(Long networkPlanKey, List<NetworkPlanEntry> entries) {
+		if (networkPlanKey == null || entries == null) {
+			return 0;
+		}
+
+		PersistenceManager pm = mPMF.getPersistenceManager();
+		try {
+			for (NetworkPlanEntry entry : entries) {
+				entry.setNetworkPlanKey(networkPlanKey);
+			}
+			Collection<NetworkPlanEntry> persisted = pm.makePersistentAll(entries);
+			return persisted.size();
 		} finally {
 			pm.close();
 		}
