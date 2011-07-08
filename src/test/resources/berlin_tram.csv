@@ -1,0 +1,402 @@
+# This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
+# http://creativecommons.org/licenses/by-sa/3.0/
+#
+# Author: Andreas Schildbach
+#
+# Pixel coordinates for Berlin BVG Tram Plan dated 2011-05-01,
+# rendered at a resolution of 2480 x 1754
+
+# M1
+bvg|9100540|Universitätsstr.|berlin_tram|757|929
+bvg|9100038|Am Kupfergraben|berlin_tram|779|929
+bvg|9100541|Georgenstr./Am Kupfergraben|berlin_tram|772|903
+bvg|9100001|S+U Friedrichstr. Bhf|berlin_tram|643|840
+bvg|9100019|U Oranienburger Tor|berlin_tram|662|802
+bvg|9100007|S Oranienburger Str.|berlin_tram|655|791
+bvg|9100512|Monbijouplatz|berlin_tram|728|791
+bvg|9100002|S Hackescher Markt|berlin_tram|795|817
+bvg|9100080|U Weinmeisterstr./Gipsstr.|berlin_tram|820|763
+bvg|9100023|U Rosenthaler Platz|berlin_tram|843|740
+bvg|9100042|Zionskirchplatz|berlin_tram|880|699
+bvg|9110505|Schwedter Str.|berlin_tram|907|671
+bvg|9110006|U Eberswalder Str.|berlin_tram|937|639
+bvg|9110503|Milastr.|berlin_tram|937|577
+bvg|9110001|S+U Schönhauser Allee|berlin_tram|940|546
+bvg|9110007|Schönhauser Allee/Bornholmer Str.|berlin_tram|946|473
+bvg|9130011|U Vinetastr.|berlin_tram|942|443
+bvg|9130512|Masurenstr.|berlin_tram|942|416
+bvg|9130002|S+U Pankow|berlin_tram|942|372
+bvg|9130013|Pankow Kirche|berlin_tram|946|339
+bvg|9130501|Rathaus Pankow|berlin_tram|920|325
+bvg|9131004|Bürgerpark Pankow|berlin_tram|899|317
+bvg|9131505|Tschaikowskistr.|berlin_tram|884|302
+bvg|9131528|Grabbeallee/Pastor-Niemöller-Platz|berlin_tram|869|288
+bvg|9131527|Hermann-Hesse-Str./Waldstr.|berlin_tram|879|270
+bvg|9131510|Kuckhoffstr.|berlin_tram|895|253
+bvg|9131526|Heinrich-Böll-Str.|berlin_tram|912|236
+bvg|9131006|Nordend|berlin_tram|930|219
+bvg|9131519|Waldemarstr.|berlin_tram|947|202
+bvg|9131001|Schillerstr.|berlin_tram|962|187
+bvg|9131005|Pastor-Niemöller-Platz|berlin_tram|850|267
+bvg|9131529|Am Iderfenngraben|berlin_tram|833|250
+bvg|9131507|Platanenstr.|berlin_tram|817|234
+bvg|9131508|Uhlandstr.|berlin_tram|800|217
+bvg|9132502|Nordendstr.|berlin_tram|783|200
+bvg|9132501|Angerweg|berlin_tram|765|183
+bvg|9132500|Wiesenwinkel|berlin_tram|748|166
+bvg|9132010|Hauptstr./Friedrich-Engels-Str.|berlin_tram|733|151
+bvg|9132014|Rosenthal Nord|berlin_tram|717|134
+# M2
+bvg|9100024|S+U Alexanderplatz/Dircksenstr.|berlin_tram|994|880
+bvg|9100030|Memhardstr.|berlin_tram|961|813
+bvg|9110022|Mollstr./Prenzlauer Allee|berlin_tram|1009|765
+bvg|9110506|Prenzlauer Allee/Metzer Str.|berlin_tram|1057|718
+bvg|9110507|Knaackstr.|berlin_tram|1078|697
+bvg|9110508|Marienburger Str.|berlin_tram|1101|674
+bvg|9110017|Prenzlauer Allee/Danziger Str.|berlin_tram|1136|639
+bvg|9110510|Fröbelstr.|berlin_tram|1181|582
+bvg|9110002|S Prenzlauer Allee|berlin_tram|1181|545
+bvg|9110509|Erich-Weinert-Str.|berlin_tram|1181|507
+bvg|9110013|Prenzlauer Allee/Ostseestr.|berlin_tram|1181|473
+bvg|9141507|Prenzlauer Promenade/Am Steinberg|berlin_tram|1181|428
+bvg|9141506|Am Steinberg|berlin_tram|1188|388
+bvg|9141502|Berliner Str./Wiesenstr.|berlin_tram|1204|371
+bvg|9141504|Am Wasserturm|berlin_tram|1221|354
+bvg|9141002|Heinersdorf Kirche|berlin_tram|1237|337
+bvg|9141503|Rothenbachstr.|berlin_tram|1253|321
+bvg|9141001|Heinersdorf|berlin_tram|1271|305
+# M4
+bvg|9100515|Spandauer Str./Marienkirche|berlin_tram|908|865
+bvg|9100026|S+U Alexanderplatz Bhf/Gontardstr.|berlin_tram|963|913
+bvg|9100005|U Alexanderplatz|berlin_tram|1029|892
+bvg|9100040|Mollstr./Otto-Braun-Str.|berlin_tram|1089|831
+bvg|9110019|Am Friedrichshain|berlin_tram|1151|781
+bvg|9110521|Hufelandstr.|berlin_tram|1184|750
+bvg|9110020|Greifswalder Str./Danziger Str.|berlin_tram|1225|707
+bvg|9110003|S Greifswalder Str.|berlin_tram|1289|644
+bvg|9110515|Thomas-Mann-Str.|berlin_tram|1325|608
+bvg|9110016|Greifswalder Str./Ostseestr.|berlin_tram|1350|584
+bvg|9140011|Antonplatz|berlin_tram|1376|556
+bvg|9140005|Albertinenstr.|berlin_tram|1414|556
+bvg|9140006|Berliner Allee/Indira-Gandhi-Str.|berlin_tram|1450|556
+bvg|9140519|Buschallee|berlin_tram|1502|528
+bvg|9140518|Sulzfelder Str.|berlin_tram|1528|528
+bvg|9140007|Buschallee/Hansastr.|berlin_tram|1569|526
+bvg|9140014|Giersstr.|berlin_tram|1637|461
+bvg|9140517|Stadion Buschallee/Hansastr.|berlin_tram|1656|438
+bvg|9150501|Feldtmannstr.|berlin_tram|1676|420
+bvg|9150002|Hansastr./Malchower Weg|berlin_tram|1696|399
+bvg|9151006|Prerower Platz|berlin_tram|1726|375
+bvg|9152001|S Hohenschönhausen Bhf|berlin_tram|1748|353
+bvg|9152006|Falkenberger Ch./Prendener Str.|berlin_tram|1768|334
+bvg|9152003|Welsestr.|berlin_tram|1782|319
+bvg|9152007|Falkenberg|berlin_tram|1798|306
+bvg|9151501|Ahrenshooper Str.|berlin_tram|1693|344
+bvg|9151004|Zingster Str./Ribnitzer Str.|berlin_tram|1672|324
+bvg|9151003|Zingster Str.|berlin_tram|1646|298
+# M5
+bvg|9120511|Büschingstr.|berlin_tram|1144|829
+bvg|9120019|Platz der Vereinten Nationen|berlin_tram|1171|829
+bvg|9120513|Klinikum im Friedrichshain|berlin_tram|1226|829
+bvg|9120016|Landsberger Allee/Petersburger Str.|berlin_tram|1275|829
+bvg|9110004|S Landsberger Allee|berlin_tram|1402|829
+bvg|9110030|Oderbruchstr.|berlin_tram|1497|752
+bvg|9160508|Judith-Auer-Str.|berlin_tram|1518|731
+bvg|9150011|Hohenschönhauser Str./Weißenseer Weg|berlin_tram|1559|694
+bvg|9150510|Sandinostr.|berlin_tram|1620|623
+bvg|9150511|Simon-Bolivar-Str.|berlin_tram|1634|608
+bvg|9150512|Werneuchener Str.|berlin_tram|1649|594
+bvg|9150513|Freienwalder Str.|berlin_tram|1664|579
+bvg|9150007|Oberseestr.|berlin_tram|1680|563
+bvg|9150020|Hauptstr./Rhinstr.|berlin_tram|1739|530
+bvg|9150504|Gehrenseestr.|berlin_tram|1780|491
+bvg|9150500|Anna-Ebermann-Str.|berlin_tram|1780|451
+bvg|9152509|Arnimstr.|berlin_tram|1771|419
+bvg|9152508|Rüdickenstr.|berlin_tram|1750|399
+# M6
+bvg|9100501|U Schwartzkopffstr.|berlin_tram|521|711
+bvg|9100034|Pflugstr.|berlin_tram|517|660
+bvg|9100536|Habersaathstr.|berlin_tram|539|732
+bvg|9100009|U Naturkundemuseum|berlin_tram|558|751
+bvg|9100506|Torstr./U Oranienburger Tor|berlin_tram|585|783
+bvg|9150509|Altenhofer Str.|berlin_tram|1600|683
+bvg|9160513|Zechliner Str.|berlin_tram|1626|683
+bvg|9160514|Genslerstr.|berlin_tram|1652|683
+bvg|9160515|Arendsweg|berlin_tram|1679|683
+bvg|9160516|Schalkauer Str.|berlin_tram|1705|683
+bvg|9171011|Landsberger Allee/Rhinstr.|berlin_tram|1779|686
+bvg|9170520|Dingelstädter Str.|berlin_tram|1807|683
+bvg|9170521|Gewerbepark Georg Knorr|berlin_tram|1845|683
+bvg|9170001|S Marzahn|berlin_tram|1929|670
+bvg|9170020|Marzahner Promenade|berlin_tram|1970|634
+bvg|9170519|Freizeitforum Marzahn|berlin_tram|2003|601
+bvg|9170517|Jan-Petersen-Str.|berlin_tram|2042|596
+bvg|9170013|Landsberger Allee/Blumberger Damm|berlin_tram|2079|607
+bvg|9170524|Brodowiner Ring|berlin_tram|2100|618
+bvg|9170010|Betriebshof Marzahn|berlin_tram|2117|636
+bvg|9175510|Landsberger Chaussee/Zossener Str.|berlin_tram|2133|652
+bvg|9175511|Michendorfer Str.|berlin_tram|2150|668
+bvg|9175512|Alte Hellersdorfer/Zossener Str.|berlin_tram|2165|684
+bvg|9175513|Zossener Str./Kastanienallee|berlin_tram|2181|700
+bvg|9175514|Stendaler Str./Zossener Str.|berlin_tram|2197|716
+bvg|9175011|Stendaler Str./Quedlinburger Str.|berlin_tram|2212|731
+bvg|9175007|U Hellersdorf|berlin_tram|2226|748
+bvg|9175519|Nossener Str.|berlin_tram|2250|756
+bvg|9175520|Jenaer Str.|berlin_tram|2287|756
+bvg|9175014|Riesaer Str./Louis-Lewin-Str.|berlin_tram|2319|756
+bvg|9175013|Riesaer Str.|berlin_tram|2350|756
+# M8
+bvg|9007104|S Nordbahnhof|berlin_tram|656|701
+bvg|9100504|Pappelplatz|berlin_tram|734|702
+bvg|9100041|Brunnenstr./Invalidenstr.|berlin_tram|788|704
+bvg|9100016|U Rosa-Luxemburg-Platz|berlin_tram|936|766
+bvg|9110029|Landsberger Allee/Karl-Lade-Str.|berlin_tram|1453|838
+bvg|9160510|Anton-Saefkow-Platz|berlin_tram|1477|838
+bvg|9160022|Paul-Junius-Str.|berlin_tram|1539|838
+bvg|9160509|Bernhard-Bästlein-Str.|berlin_tram|1589|838
+bvg|9160518|Herzbergstr./Industriegebiet|berlin_tram|1623|838
+bvg|9160012|Herzbergstr./Siegfriedstr.|berlin_tram|1649|841
+bvg|9160520|Ev. Krankenhaus KEH|berlin_tram|1720|841
+bvg|9171008|Allee der Kosmonauten/Rhinstr.|berlin_tram|1780|844
+bvg|9171515|Beilsteiner Str.|berlin_tram|1817|838
+bvg|9171003|S Springpfuhl|berlin_tram|1855|841
+bvg|9171516|Helene-Weigel-Platz|berlin_tram|1900|817
+bvg|9171517|Boschpoler Str.|berlin_tram|1934|783
+bvg|9170019|Allee der Kosmonauten/Poelchaustr.|berlin_tram|1978|740
+bvg|9170515|Adersleber Weg|berlin_tram|2009|709
+bvg|9170516|Alt-Marzahn|berlin_tram|2042|676
+bvg|9170529|Bürgerpark Marzahn|berlin_tram|2062|545
+bvg|9170530|Max-Herrmann-Str.|berlin_tram|2083|524
+bvg|9170531|Wuhletalstr.|berlin_tram|2103|504
+bvg|9170506|Niemegker Str.|berlin_tram|2125|482
+bvg|9170011|Barnimplatz|berlin_tram|2150|457
+bvg|9170006|Ahrensfelde|berlin_tram|2174|432
+# M10
+bvg|9007150|Gedenkstätte Berliner Mauer|berlin_tram|706|663
+bvg|9007110|U Bernauer Str.|berlin_tram|747|639
+bvg|9007105|Wolliner Str.|berlin_tram|804|639
+bvg|9110018|Friedrich-Ludwig-Jahn-Sportpark|berlin_tram|890|639
+bvg|9110511|Husemannstr.|berlin_tram|1076|639
+bvg|9110512|Winsstr.|berlin_tram|1196|678
+bvg|9110025|Arnswalder Platz|berlin_tram|1246|728
+bvg|9110021|Kniprodestr./Danziger Str.|berlin_tram|1269|750
+bvg|9110523|Paul-Heyse-Str.|berlin_tram|1275|777
+bvg|9120515|Straßmannstr.|berlin_tram|1275|888
+bvg|9120516|Bersarinplatz|berlin_tram|1278|953
+bvg|9120008|U Frankfurter Tor|berlin_tram|1278|997
+bvg|9120014|Grünberger Str./Warschauer Str.|berlin_tram|1257|1030
+bvg|9120021|Revaler Str.|berlin_tram|1215|1076
+bvg|9120011|S Warschauer Str.|berlin_tram|1206|1086
+bvg|9120004|S+U Warschauer Str.|berlin_tram|1185|1102
+# M13
+bvg|9120526|Kopernikusstr./Warschauer Str.|berlin_tram|1244|1080
+bvg|9120527|Libauer Str.|berlin_tram|1278|1080
+bvg|9120528|Simplonstr.|berlin_tram|1298|1080
+bvg|9120529|Wühlischstr./Gärtnerstr.|berlin_tram|1320|1080
+bvg|9120013|Boxhagener Str./Holteistr.|berlin_tram|1344|1080
+bvg|9120540|Scharnweberstr.|berlin_tram|1376|1068
+bvg|9120001|S+U Frankfurter Allee|berlin_tram|1408|1026
+bvg|9160544|Rathaus Lichtenberg|berlin_tram|1440|1002
+bvg|9160017|Loeperplatz|berlin_tram|1519|929
+bvg|9160014|Möllendorffstr./Storkower Str.|berlin_tram|1550|899
+bvg|9160010|Herzbergstr./Weißenseer Weg|berlin_tram|1556|822
+bvg|9160018|Landsberger Allee/Weißenseer Weg|berlin_tram|1556|736
+bvg|9150519|Sportforum|berlin_tram|1558|663
+bvg|9150518|Betriebshof Indira-Gandhi-Str.|berlin_tram|1536|625
+bvg|9150522|Gounodstr.|berlin_tram|1514|603
+bvg|9140506|Behaimstr.|berlin_tram|1350|534
+bvg|9140505|Friesickestr.|berlin_tram|1328|512
+bvg|9140017|Gustav-Adolf-Str./Langhansstr.|berlin_tram|1304|488
+bvg|9110015|Stahlheimer Str./Wisbyer Str.|berlin_tram|1116|474
+bvg|9110008|Schönfließer Str.|berlin_tram|853|471
+bvg|9110010|Björnsonstr.|berlin_tram|808|471
+bvg|9110011|S Bornholmer Str.|berlin_tram|726|472
+bvg|9007160|Grüntaler Str.|berlin_tram|634|443
+bvg|9009204|Osloer Str./Prinzenallee|berlin_tram|581|392
+bvg|9009206|Drontheimer Str.|berlin_tram|522|358
+bvg|9009202|U Osloer Str.|berlin_tram|466|358
+bvg|9011201|Louise-Schroeder-Platz|berlin_tram|331|372
+bvg|9011252|Osram-Höfe|berlin_tram|303|400
+bvg|9009103|U Seestr.|berlin_tram|260|446
+bvg|9009105|Seestr./Amrumer Str.|berlin_tram|228|474
+bvg|9010251|Virchow-Klinikum|berlin_tram|203|500
+# M17
+bvg|9194006|S Schöneweide Bhf/Sterndamm|berlin_tram|1552|1500
+bvg|9192001|S Schöneweide Bhf|berlin_tram|1570|1480
+bvg|9192506|Brückenstr.|berlin_tram|1624|1428
+bvg|9181001|Wilhelminenhofstr./Edisonstr.|berlin_tram|1676|1378
+bvg|9181002|Rummelsburger Str./Edisonstr.|berlin_tram|1715|1333
+bvg|9181501|Treskowallee/Volkspark Wuhlheide|berlin_tram|1747|1302
+bvg|9162002|Hegemeisterweg|berlin_tram|1768|1280
+bvg|9162003|Treskowallee/Ehrlichstr.|berlin_tram|1772|1231
+bvg|9162501|S Karlshorst Bhf/Wandlitzstr.|berlin_tram|1779|1204
+bvg|9162001|S Karlshorst Bhf|berlin_tram|1779|1181
+bvg|9162007|Marksburgstr.|berlin_tram|1779|1152
+bvg|9162004|Treskowallee/HTW|berlin_tram|1779|1118
+bvg|9161002|U Tierpark|berlin_tram|1779|1076
+bvg|9161508|Criegernweg|berlin_tram|1779|1036
+bvg|9161507|Tierpark Berlin|berlin_tram|1779|997
+bvg|9161004|Alt-Friedrichsfelde/Rhinstr.|berlin_tram|1779|960
+bvg|9171002|S Friedrichsfelde Ost|berlin_tram|1779|913
+bvg|9171540|Kleingartenanlage Bielefeldt|berlin_tram|1779|888
+bvg|9171008|Allee der Kosmonauten/Rhinstr.|berlin_tram|1779|844
+bvg|9171514|Meeraner Str.|berlin_tram|1779|747
+bvg|9150005|Rhinstr./Plauener Str.|berlin_tram|1779|618
+bvg|9150008|Rhinstr./Gärtnerstr.|berlin_tram|1779|580
+# 12
+bvg|9110009|U Eberswalder Str./Pappelallee|berlin_tram|962|611
+bvg|9110502|Raumerstr.|berlin_tram|986|587
+bvg|9110501|Stargarder Str.|berlin_tram|1006|567
+bvg|9110500|Humannplatz|berlin_tram|1064|509
+bvg|9140012|Falkenberger Str./Berliner Allee|berlin_tram|1482|497
+bvg|9140013|Berliner Allee/Rennbahnstr.|berlin_tram|1461|456
+bvg|9140002|Pasedagplatz|berlin_tram|1430|426
+# 16
+# 18
+bvg|9160526|Fanningerstr.|berlin_tram|1660|963
+bvg|9160525|Guntherstr.|berlin_tram|1670|980
+bvg|9160021|S+U Lichtenberg Bhf/Gudrunstr.|berlin_tram|1674|992
+bvg|9160020|S+U Lichtenberg Bhf/Siegfriedstr.|berlin_tram|1660|992
+bvg|9160016|Freiaplatz|berlin_tram|1660|948
+bvg|9160523|Gotlindestr.|berlin_tram|1660|930
+bvg|9160522|Betriebshof Lichtenberg|berlin_tram|1663|905
+bvg|9160521|Siegfriedstr./Josef-Orlopp-Str.|berlin_tram|1663|876
+# 21
+bvg|9160538|Scheffelstr./Paul-Junius-Str.|berlin_tram|1449|942
+bvg|9120539|Samariterstr.|berlin_tram|1368|942
+bvg|9120538|Proskauer Str.|berlin_tram|1343|942
+bvg|9120542|Forckenbeckplatz|berlin_tram|1323|942
+bvg|9120517|Niederbarnimstr.|berlin_tram|1302|1038
+bvg|9120518|Wismarplatz|berlin_tram|1320|1056
+bvg|9120519|Neue Bahnhofstr.|berlin_tram|1379|1115
+bvg|9160535|Marktstr.|berlin_tram|1467|1126
+bvg|9160001|S Rummelsburg|berlin_tram|1558|1175
+bvg|9160536|Kosanke-Siedlung|berlin_tram|1566|1190
+bvg|9160502|Gustav-Holzmann-Str.|berlin_tram|1580|1205
+bvg|9160006|Heizkraftwerk|berlin_tram|1595|1219
+bvg|9160007|Köpenicker Chaussee/Blockdammweg|berlin_tram|1610|1233
+bvg|9162504|Blockdammweg/Ehrlichstr.|berlin_tram|1653|1238
+bvg|9162503|Stechlinstr.|berlin_tram|1694|1238
+bvg|9162502|Stühlinger Str.|berlin_tram|1731|1238
+# 27
+bvg|9150515|Stadion Buschallee/Suermondtstr.|berlin_tram|1623|526
+bvg|9150514|Am Faulen See|berlin_tram|1657|526
+bvg|9150010|Degnerstr./Suermondtstr.|berlin_tram|1706|526
+bvg|9181502|Firlstr.|berlin_tram|1700|1387
+bvg|9181503|Rathenaustr./HTW|berlin_tram|1722|1387
+bvg|9181504|Ostendstr.|berlin_tram|1743|1387
+bvg|9181505|Parkstr.|berlin_tram|1763|1387
+bvg|9181003|Freizeit- und Erholungszentrum|berlin_tram|1790|1387
+bvg|9181506|Nixenstr.|berlin_tram|1820|1387
+bvg|9181507|Spindlersfelder Str.|berlin_tram|1842|1387
+bvg|9181513|Alte Försterei|berlin_tram|1862|1387
+bvg|9180008|Bahnhofstr./Lindenstr.|berlin_tram|1884|1383
+bvg|9180024|Rathaus Köpenick|berlin_tram|1962|1412
+bvg|9180007|Schloßplatz Köpenick|berlin_tram|1992|1434
+bvg|9180005|Müggelheimer Str./Wendenschloßstr.|berlin_tram|2068|1440
+bvg|9180004|Pablo-Neruda-Str.|berlin_tram|2095|1440
+bvg|9180022|Krankenhaus Köpenick/Südseite|berlin_tram|2123|1440
+# 50
+bvg|9130502|Stiftsweg|berlin_tram|973|324
+bvg|9130520|Mendelstr.|berlin_tram|1002|324
+bvg|9130522|Würtzstr.|berlin_tram|1030|320
+bvg|9130001|S Pankow-Heinersdorf|berlin_tram|1058|305
+bvg|9130016|Galenusstr.|berlin_tram|1065|280
+bvg|9130017|Pankower Str.|berlin_tram|1065|260
+bvg|9134503|Pasewalker Str./Blankenburger Weg|berlin_tram|1065|238
+bvg|9134502|Marienstr./Pasewalker Str.|berlin_tram|1065|199
+bvg|9134501|Rosenthaler Str.|berlin_tram|1065|182
+bvg|9134500|Blankenfelder Str.|berlin_tram|1058|169
+bvg|9134011|Französisch Buchholz Kirche|berlin_tram|1044|156
+bvg|9134512|Navarraplatz|berlin_tram|1031|142
+bvg|9134513|Arnouxstr.|berlin_tram|1005|133
+bvg|9134509|Hugenottenplatz|berlin_tram|983|133
+bvg|9134511|Guyotstr.|berlin_tram|963|133
+# 60
+bvg|9193002|S Adlershof|berlin_tram|1686|1596
+bvg|9193505|Marktplatz Adlershof|berlin_tram|1708|1574
+bvg|9193506|Wassermannstr.|berlin_tram|1727|1555
+bvg|9180510|Ottomar-Geschke-Str.|berlin_tram|1748|1533
+bvg|9180003|S Spindlersfeld|berlin_tram|1781|1502
+bvg|9180012|Köllnischer Platz|berlin_tram|1909|1426
+bvg|9180006|Freiheit|berlin_tram|2006|1399
+bvg|9180009|Bahnhofstr./Seelenbinderstr.|berlin_tram|1883|1302
+bvg|9180511|Gelnitzstr.|berlin_tram|1930|1302
+bvg|9180512|Brandenburgplatz|berlin_tram|1957|1302
+bvg|9180013|Bellevuestr.|berlin_tram|1985|1302
+bvg|9182003|Hirschgarten|berlin_tram|2010|1302
+bvg|9182501|Westendsiedlung|berlin_tram|2112|1294
+bvg|9182502|Mühlweg|berlin_tram|2125|1282
+bvg|9182503|Ahornallee|berlin_tram|2138|1269
+bvg|9182002|S Friedrichshagen|berlin_tram|2153|1255
+bvg|9182504|Drachholzstr.|berlin_tram|2153|1283
+bvg|9182505|Marktplatz Friedrichshagen|berlin_tram|2153|1304
+bvg|9182004|Müggelseedamm/Bölschestr.|berlin_tram|2153|1324
+bvg|9182506|Josef-Nawrocki-Str.|berlin_tram|2177|1339
+bvg|9182507|Bruno-Wille-Str.|berlin_tram|2228|1339
+bvg|9182005|Altes Wasserwerk|berlin_tram|2259|1339
+# 61
+bvg|9182508|Wassersportzentrum|berlin_tram|2118|1316
+bvg|9182509|Spreestr.|berlin_tram|2136|1334
+bvg|9182510|Hartlebenstr.|berlin_tram|2184|1264
+bvg|9182511|Wasserwerk Friedrichshagen|berlin_tram|2207|1264
+bvg|9182512|Fürstenwalder Damm|berlin_tram|2230|1264
+bvg|9182513|Fürstenwalder Damm/Müggelseedamm|berlin_tram|2259|1264
+bvg|9183513|Licht- und Luftbad Müggelsee|berlin_tram|2298|1264
+bvg|9183514|Strandbad Müggelsee|berlin_tram|2326|1264
+bvg|9183003|Rahnsdorf/Waldschänke|berlin_tram|2345|1264
+# 62
+bvg|9180015|Wendenschloß|berlin_tram|2069|1640
+bvg|9180014|Müggelbergallee|berlin_tram|2069|1622
+bvg|9180520|Lienhardweg|berlin_tram|2069|1605
+bvg|9180519|Zur Nachtheide|berlin_tram|2069|1588
+bvg|9180518|Dregerhoffstr.|berlin_tram|2069|1571
+bvg|9180517|Pritstabelstr.|berlin_tram|2069|1554
+bvg|9180516|Segewaldweg|berlin_tram|2069|1539
+bvg|9180515|Mayschweg|berlin_tram|2069|1523
+bvg|9180514|Betriebshof Köpenick|berlin_tram|2069|1507
+bvg|9180010|Mahlsdorfer Str./Gehsener Str.|berlin_tram|1999|1156
+bvg|9180526|Wongrowitzer Steig|berlin_tram|2017|1137
+bvg|9180525|Unter den Birken|berlin_tram|2035|1119
+bvg|9180017|Mahlsdorf-Süd|berlin_tram|2053|1102
+bvg|9176512|Hultschiner Damm/Seestr.|berlin_tram|2071|1084
+bvg|9176533|Roseggerstr.|berlin_tram|2089|1065
+bvg|9176534|Erich-Baron-Weg|berlin_tram|2107|1047
+bvg|9176535|Bütower Str.|berlin_tram|2125|1030
+bvg|9176536|Bruchsaler Str.|berlin_tram|2143|1012
+bvg|9176537|Eichenhofweg|berlin_tram|2161|994
+bvg|9176526|Ledebourstr.|berlin_tram|2180|976
+bvg|9176525|Rahnsdorfer Str.|berlin_tram|2197|958
+bvg|9176524|Alt-Mahlsdorf|berlin_tram|2214|941
+bvg|9176008|Wilhelmsmühlenweg|berlin_tram|2231|923
+bvg|9176001|S Mahlsdorf|berlin_tram|2253|901
+# 63
+bvg|9194506|Johannisthal Kirche|berlin_tram|1504|1553
+bvg|9194521|Mühlbergstr.|berlin_tram|1502|1571
+bvg|9194012|Haeckelstr.|berlin_tram|1515|1579
+bvg|9194520|Herweghstr.|berlin_tram|1528|1555
+bvg|9194007|Sterndamm/Königsheideweg|berlin_tram|1521|1536
+bvg|9194522|Pietschkerstr.|berlin_tram|1538|1520
+bvg|9180016|Hirtestr.|berlin_tram|1992|1204
+bvg|9180513|Hirtestr./Janitzkystr.|berlin_tram|2012|1183
+# 67
+# 68
+bvg|9180524|Glienicker Str.|berlin_tram|1889|1501
+bvg|9180523|Vollkropfgraben|berlin_tram|1868|1522
+bvg|9180522|Rosenweg|berlin_tram|1849|1541
+bvg|9180521|Betonwerk|berlin_tram|1829|1560
+bvg|9186506|Friedrich-Wolf-Str.|berlin_tram|1811|1579
+bvg|9186505|Regattastr./Schule|berlin_tram|1792|1598
+bvg|9186002|Wassersportallee|berlin_tram|1774|1616
+bvg|9186001|S Grünau|berlin_tram|1745|1655
+bvg|9186504|Regattatribünen|berlin_tram|1782|1658
+bvg|9186503|Regattastr./Sportpromenade|berlin_tram|1814|1658
+bvg|9186502|Strandbad Grünau|berlin_tram|1847|1658
+bvg|9186501|Richtershorn|berlin_tram|1873|1658
+bvg|9185505|Schappachstr.|berlin_tram|1899|1658
+bvg|9185504|Lübbenauer Weg|berlin_tram|1926|1658
+bvg|9185503|Adlergestell/Vetschauer Allee|berlin_tram|1966|1675
+bvg|9185502|Reifenwerk|berlin_tram|1985|1695
+bvg|9185501|Zum Seeblick|berlin_tram|2003|1713
+bvg|9185001|Alt-Schmöckwitz|berlin_tram|2021|1731
+
