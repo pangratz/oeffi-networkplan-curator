@@ -82,10 +82,6 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 		mouseEntered: function(evt) {
 			this.set('canvas', evt.srcElement);
 		},
-
-		mouseExited: function(evt) {
-			this.set('canvas', undefined);
-		},
 		
 		repaint: function(){
 			var canvas = this.get('canvas');
