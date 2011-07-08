@@ -114,7 +114,6 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 		System.out.println("NetworkPlanResource#stringVal = " + stringVal);
 		this.mNetworkPlanId = Long.valueOf(stringVal);
 
-		getVariants(Method.GET).add(new Variant(MediaType.TEXT_CSV));
 		getVariants(Method.GET).add(new Variant(MediaType.APPLICATION_JSON));
 		getVariants(Method.POST).add(new Variant(MediaType.APPLICATION_JSON));
 		getVariants(Method.POST).add(new Variant(MediaType.MULTIPART_FORM_DATA));
