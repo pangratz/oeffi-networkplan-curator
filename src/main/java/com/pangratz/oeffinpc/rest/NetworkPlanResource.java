@@ -9,17 +9,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.JSONObject;
 import org.restlet.data.MediaType;
 import org.restlet.data.Method;
 import org.restlet.data.Status;
-import org.restlet.ext.fileupload.RestletFileUpload;
 import org.restlet.ext.json.JsonRepresentation;
+import org.restlet.ext.servlet.ServletUtils;
 import org.restlet.representation.Representation;
-import org.restlet.representation.StringRepresentation;
 import org.restlet.representation.Variant;
 import org.restlet.resource.ResourceException;
 
@@ -35,18 +35,15 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 	private Representation handleCsvFilePost(Representation entity) {
 		// implemented as described here:
 		// http://wiki.restlet.org/docs_2.1/13-restlet/28-restlet/64-restlet.html
-
-		DiskFileItemFactory factory = new DiskFileItemFactory();
-		factory.setSizeThreshold(1000 * 1024);
-
-		RestletFileUpload upload = new RestletFileUpload(factory);
-		List<FileItem> items;
+		// and here:
+		// http://code.google.com/appengine/kb/java.html#fileforms
 
 		try {
-			items = upload.parseRequest(getRequest());
-			if (items != null && items.size() == 1) {
-				FileItem file = items.get(0);
-				Reader reader = new InputStreamReader(file.getInputStream());
+			ServletFileUpload upload = new ServletFileUpload();
+			FileItemIterator iterator = upload.getItemIterator(ServletUtils.getRequest(getRequest()));
+			while (iterator.hasNext()) {
+				FileItemStream fileItemStream = iterator.next();
+				Reader reader = new InputStreamReader(fileItemStream.openStream());
 				CSVReader csvReader = new CSVReader(reader, '|');
 				String[] next = null;
 				List<NetworkPlanEntry> entries = new LinkedList<NetworkPlanEntry>();
@@ -66,6 +63,8 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 				dataMap.put("numberOfSavedEntries", numberOfEntries);
 				return new JsonRepresentation(dataMap);
 			}
+
+			return createErrorRepresentation("no files uploaded");
 		} catch (FileUploadException e) {
 			e.printStackTrace();
 			return createErrorRepresentation("error while uploading file: " + e.getMessage());
@@ -74,8 +73,6 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 			return createErrorRepresentation("error while parsing uploaded CSV file: " + e.getMessage());
 		}
 
-		String text = "uploaded " + items.size() + " files";
-		return new StringRepresentation(text);
 	}
 
 	private Representation handleJsonPost(Representation entity) {
