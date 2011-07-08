@@ -11,7 +11,9 @@
   @extends SC.Record
   @version 0.1
 */
-OeffiNpc.NetworkPlanEntry = SC.Record.extend(
+sc_require('models/record_status_mixin');
+
+OeffiNpc.NetworkPlanEntry = SC.Record.extend(OeffiNpc.RecordStatusMixin,
 /** @scope OeffiNpc.NetworkPlanEntry.prototype */ {
 	
 	primaryKey: 'key',
