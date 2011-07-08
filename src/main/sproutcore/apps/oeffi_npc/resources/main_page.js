@@ -22,7 +22,7 @@ OeffiNpc.mainPage = SC.Page.design({
 		},
 		
 		topView: SC.View.design({
-			layout: {top: 0, left: 0, right: 0, height: 36},
+			layout: {top: 5, left: 0, right: 0, height: 31},
 			childViews: 'backButton labelView'.w(),
 			
 			backButton: SC.ButtonView.design({
@@ -58,14 +58,14 @@ OeffiNpc.mainPage = SC.Page.design({
 				layout: {bottom: 210, height: 36, left: 0, right: 0},
 				
 				removeBtn: SC.ButtonView.design({
-					layout: {bottom: 0, right: 30, width: 18},
+					layout: {bottom: 0, right: 36, width: 24},
 					title: '-',
 					target: 'OeffiNpc.statechart',
 					action: 'removeEntry'
 				}),
 
 				addBtn: SC.ButtonView.design({
-					layout: {bottom: 0, right: 10, width: 18},
+					layout: {bottom: 0, right: 10, width: 24},
 					title: '+',
 					target: 'OeffiNpc.statechart',
 					action: 'addEntry'
