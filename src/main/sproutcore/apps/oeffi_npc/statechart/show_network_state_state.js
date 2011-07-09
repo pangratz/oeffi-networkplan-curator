@@ -19,6 +19,15 @@ OeffiNpc.ShowNetworkPlanState = SC.State.extend({
 		OeffiNpc.networkPlanEntryController.set('y', point.y);
 	},
 	
+	networkEntrySelected: function(){
+		var x = OeffiNpc.networkPlanEntryController.get('x');
+		var y = OeffiNpc.networkPlanEntryController.get('y');
+		OeffiNpc.networkPlanViewController.set('scrollPosition', {
+			x: x,
+			y: y
+		});
+	},
+	
 	addEntry: function(){
 		var networkPlanId = OeffiNpc.networkPlanController.get('id');
 		var newEntry = OeffiNpc.store.createRecord(OeffiNpc.NetworkPlanEntry, {
