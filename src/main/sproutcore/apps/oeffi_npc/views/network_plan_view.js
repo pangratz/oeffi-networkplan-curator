@@ -76,7 +76,6 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 		to: 60,
 		cursorPosition: undefined,
 		prev: undefined,
-		value: static_url('linz_bw.png'),
 		
 		highlightPoint: function(point){
 			SC.debug('highlighting point%@/%@'.fmt(point.x, point.y));
