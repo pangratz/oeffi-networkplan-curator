@@ -1,11 +1,7 @@
 package com.pangratz.oeffinpc.rest;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,10 +19,9 @@ import org.restlet.representation.Representation;
 import org.restlet.representation.Variant;
 import org.restlet.resource.ResourceException;
 
-import au.com.bytecode.opencsv.CSVReader;
-
 import com.pangratz.oeffinpc.model.NetworkPlan;
 import com.pangratz.oeffinpc.model.NetworkPlanEntry;
+import com.pangratz.oeffinpc.util.CsvUtils;
 
 public class NetworkPlanResource extends OeffiNpcServerResource {
 
@@ -43,21 +38,7 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 			FileItemIterator iterator = upload.getItemIterator(ServletUtils.getRequest(getRequest()));
 			while (iterator.hasNext()) {
 				FileItemStream fileItemStream = iterator.next();
-				Reader reader = new InputStreamReader(fileItemStream.openStream());
-				CSVReader csvReader = new CSVReader(reader, '|');
-				String[] next = null;
-				List<NetworkPlanEntry> entries = new LinkedList<NetworkPlanEntry>();
-				while ((next = csvReader.readNext()) != null) {
-					System.out.println(Arrays.toString(next));
-					if (next != null && next.length == 6) {
-						NetworkPlanEntry entry = new NetworkPlanEntry();
-						entry.setStationId(next[1]);
-						entry.setName(next[2]);
-						entry.setX(Integer.parseInt(next[4]));
-						entry.setY(Integer.parseInt(next[5]));
-						entries.add(entry);
-					}
-				}
+				List<NetworkPlanEntry> entries = CsvUtils.getInstance().readCsv(fileItemStream.openStream());
 				int numberOfEntries = this.mModelUtils.storeNetworkPlanEntries(mNetworkPlanId, entries);
 				Map<Object, Object> dataMap = new HashMap<Object, Object>();
 				dataMap.put("numberOfSavedEntries", numberOfEntries);

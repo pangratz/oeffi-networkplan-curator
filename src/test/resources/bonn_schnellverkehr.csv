@@ -1,0 +1,153 @@
+# "networkId"|"stationId"|"name"|"planId"|"x"|"y"
+"vrr"|22000687|"Bonn Hbf"|"bonn_schnellbahn"|1270|770
+"vrr"|22001104|"Stadthaus"|"bonn_schnellbahn"|1275|645
+"vrr"|22001115|"B.-v.-Suttner-Pl./Beethovenhaus"|"bonn_schnellbahn"|1375|645
+"vrr"|22001500|"Konrad-Adenauer-Platz"|"bonn_schnellbahn"|1510|645
+"vrr"|22001512|"Adelheidisstr."|"bonn_schnellbahn"|1535|640
+"vrr"|22001522|"Vilich"|"bonn_schnellbahn"|1555|625
+"vrr"|22001521|"Vilich-Müldorf"|"bonn_schnellbahn"|1590|590
+"vrr"|22001800|"Hangelar West"|"bonn_schnellbahn"|1620|560
+"vrr"|22001801|"Hangelar Mitte"|"bonn_schnellbahn"|1650|530
+"vrr"|22001802|"Hangelar Ost"|"bonn_schnellbahn"|1675|500
+"vrr"|22001803|"Sankt Augustin Ort"|"bonn_schnellbahn"|1685|465
+"vrr"|22001805|"Sankt Augustin Kloster"|"bonn_schnellbahn"|1685|425
+"vrr"|22001806|"Sankt Augustin Markt"|"bonn_schnellbahn"|1685|385
+"vrr"|22001807|"Sankt Augustin-Mülldorf"|"bonn_schnellbahn"|1675|350
+"vrr"|22001811|"Siegburg"|"bonn_schnellbahn"|1630|295
+"vrr"|22000686|"Universität/Markt"|"bonn_schnellbahn"|1320|800
+"vrr"|22000685|"Juridicum"|"bonn_schnellbahn"|1360|835
+"vrr"|22000684|"Bundesrechnungshof/Auswärtiges Amt"|"bonn_schnellbahn"|1395|875
+"vrr"|22000683|"Museum Koenig"|"bonn_schnellbahn"|1435|915
+"vrr"|22000692|"Heussallee/Museumsmeile"|"bonn_schnellbahn"|1475|950
+"vrr"|22000690|"Deutsche Telekom/Ollenhauerstr."|"bonn_schnellbahn"|1510|985
+"vrr"||"Deutsche Telekom/Olof-Palme-Allee"|"bonn_schnellbahn"|1540|1010
+"vrr"|22001655|"Robert-Schuman-Platz"|"bonn_schnellbahn"|1615|970
+"vrr"|22001268|"Rheinaue"|"bonn_schnellbahn"|1625|900
+"vrr"|22001584|"Ramersdorf"|"bonn_schnellbahn"|1760|840
+"vrr"|22001591|"Oberkassel Nord"|"bonn_schnellbahn"|1800|880
+"vrr"|22001592|"Oberkassel Mitte"|"bonn_schnellbahn"|1835|920
+"vrr"|22001593|"Oberkassel Süd/Römlinghoven"|"bonn_schnellbahn"|1875|955
+"vrr"|22001770|"Oberdollendorf Nord"|"bonn_schnellbahn"|1910|990
+"vrr"|22001774|"Oberdollendorf"|"bonn_schnellbahn"|1930|1030
+"vrr"|22001777|"Longenburg"|"bonn_schnellbahn"|1895|1070
+"vrr"|22001778|"Königswinter Clemens-August-Str."|"bonn_schnellbahn"|1900|1105
+"vrr"|22001779|"Königsw. Fähre/Sea Life Aquarium"|"bonn_schnellbahn"|1930|1135
+"vrr"|22001776|"Königsw. Denkmal"|"bonn_schnellbahn"|1955|1165
+"vrr"|22001781|"Rhöndorf"|"bonn_schnellbahn"|1995|1180
+"vrr"|22002737|"Am Spitzenbach"|"bonn_schnellbahn"|2010|1215
+"vrr"|22001788|"Bad Honnef"|"bonn_schnellbahn"|2035|1245
+"vrr"|22000698|"Max-Löbner-Str./Friesdorf"|"bonn_schnellbahn"|1560|1045
+"vrr"|22000699|"Hochkreuz/Deutsches Museum Bonn"|"bonn_schnellbahn"|1585|1065
+"vrr"|22000700|"Wurzerstr."|"bonn_schnellbahn"|1625|1100
+"vrr"|22000701|"Plittersdorfer Str."|"bonn_schnellbahn"|1645|1140
+"vrr"|22001602|"Bad Godesberg Bf"|"bonn_schnellbahn"|1655|1210
+"vrr"|22007185|"Bad Godesberg Stadthalle"|"bonn_schnellbahn"|1640|1275
+"vrr"|22001143|"Poppelsdorfer Allee"|"bonn_schnellbahn"|1290|865
+"vrr"|22001130|"Königstr."|"bonn_schnellbahn"|1290|900
+"vrr"|22001131|"Weberstr."|"bonn_schnellbahn"|1290|935
+"vrr"|22001132|"Rittershausstr."|"bonn_schnellbahn"|1290|970
+"vrr"|22001252|"Haus der Jugend"|"bonn_schnellbahn"|1290|1005
+"vrr"|22001253|"Eduard-Otto-Str."|"bonn_schnellbahn"|1290|1040
+"vrr"|22001270|"Pützstr."|"bonn_schnellbahn"|1300|1080
+"vrr"|22001273|"Bergstr."|"bonn_schnellbahn"|1325|1100
+"vrr"|22001280|"Hindenburgplatz"|"bonn_schnellbahn"|1350|1125
+"vrr"|22001286|"Dottendorf Quirinusplatz"|"bonn_schnellbahn"|1380|1155
+"vrr"|22001106|"Th-Mann-Str."|"bonn_schnellbahn"|1290|705
+"vrr"|22001110|"Wilhelmsplatz"|"bonn_schnellbahn"|1290|610
+"vrr"|22001162|"Rosental"|"bonn_schnellbahn"|1290|580
+"vrr"|22001182|"Chlodwigplatz"|"bonn_schnellbahn"|1290|555
+"vrr"|22001175|"LVR-Klinik"|"bonn_schnellbahn"|1290|525
+"vrr"|22001176|"Finanzministerium"|"bonn_schnellbahn"|1290|495
+"vrr"|22001177|"Innenministerium"|"bonn_schnellbahn"|1290|465
+"vrr"|22001178|"Heinrich-Hertz-Europakolleg"|"bonn_schnellbahn"|1290|435
+"vrr"|22008437|"An der Josefshöhe"|"bonn_schnellbahn"|1290|410
+"vrr"|22008507|"Pariser Str."|"bonn_schnellbahn"|1290|380
+"vrr"|22001406|"Auerberg Kopenhagener Str."|"bonn_schnellbahn"|1290|350
+"vrr"|22001501|"Beuel Rathaus"|"bonn_schnellbahn"|1530|695
+"vrr"|22001503|"Obere Wilhelmstr."|"bonn_schnellbahn"|1550|720
+"vrr"|22001504|"Beuel Bf"|"bonn_schnellbahn"|1585|735
+"vrr"|22008471|"Limperich Nord"|"bonn_schnellbahn"|1610|770
+"vrr"|22001586|"Limperich"|"bonn_schnellbahn"|1650|770
+"vrr"|22001585|"Küdinghoven"|"bonn_schnellbahn"|1700|775
+"vrr"|22008950|"Schießbergweg"|"bonn_schnellbahn"|1735|800
+"vrr"|22000688|"BN West"|"bonn_schnellbahn"|1190|690
+"vrr"|22000689|"Brühler Str."|"bonn_schnellbahn"|1075|655
+"vrr"|22000696|"Robert-Kirchhoff-Str."|"bonn_schnellbahn"|1020|655
+"vrr"|22000697|"Dransdorf"|"bonn_schnellbahn"|965|655
+"vrr"|22000681|"Alfter"|"bonn_schnellbahn"|925|640
+"vrr"|22000672|"Roisdorf West"|"bonn_schnellbahn"|905|620
+"vrr"||"Bornheim Rathaus"|"bonn_schnellbahn"|885|600
+"vrr"|22000673|"Bornheim"|"bonn_schnellbahn"|865|580
+"vrr"|22000674|"Dersdorf"|"bonn_schnellbahn"|840|555
+"vrr"|22000675|"Waldorf"|"bonn_schnellbahn"|810|530
+"vrr"|22000676|"Merten"|"bonn_schnellbahn"|780|500
+"vrr"|22000677|"Walberberg"|"bonn_schnellbahn"|755|475
+"vrr"|22000739|"Brühl-Schwadorf"|"bonn_schnellbahn"|730|450
+"vrr"|22000737|"Brühl-Badorf"|"bonn_schnellbahn"|700|425
+"vrr"|22000736|"Brühl Süd"|"bonn_schnellbahn"|680|395
+"vrr"|22000735|"Brühl Mitte"|"bonn_schnellbahn"|650|365
+"vrr"|22000905|"Propsthof Nord"|"bonn_schnellbahn"|1155|635
+"vrr"|22000693|"Tannenbusch Süd"|"bonn_schnellbahn"|1140|585
+"vrr"|22000694|"Tannenbusch Mitte"|"bonn_schnellbahn"|1140|530
+"vrr"|22000695|"Buschdorf"|"bonn_schnellbahn"|1140|485
+"vrr"|22000678|"Hersel"|"bonn_schnellbahn"|1140|450
+"vrr"|22000679|"Uedorf"|"bonn_schnellbahn"|1140|415
+"vrr"|22000680|"Widdig"|"bonn_schnellbahn"|1140|385
+"vrr"|22000743|"Urfeld"|"bonn_schnellbahn"|1140|350
+"vrr"|22000740|"Wesseling Süd"|"bonn_schnellbahn"|1140|315
+"vrr"|22000741|"Wesseling"|"bonn_schnellbahn"|1140|285
+"vrr"|22000742|"Wesseling Nord"|"bonn_schnellbahn"|1140|250
+"vrr"|22000134|"Godorf"|"bonn_schnellbahn"|1140|215
+"vrr"|22000124|"Sürth"|"bonn_schnellbahn"|1140|185
+"vrr"|22000468|"Porz"|"bonn_schnellbahn"|1365|140
+"vrr"|22000488|"Porz-Wahn"|"bonn_schnellbahn"|1450|205
+"vrr"|22002030|"Spich"|"bonn_schnellbahn"|1480|240
+"vrr"|22002071|"Troisdorf"|"bonn_schnellbahn"|1515|280
+"vrr"|22002243|"Hennef"|"bonn_schnellbahn"|1700|285
+"vrr"|22009664|"Blankenberg"|"bonn_schnellbahn"|1755|275
+"vrr"|22009665|"Merten"|"bonn_schnellbahn"|1810|275
+"vrr"|22002461|"Eitorf"|"bonn_schnellbahn"|1870|285
+"vrr"|22004688|"Herchen"|"bonn_schnellbahn"|1925|285
+"vrr"|22004861|"Dattenfeld"|"bonn_schnellbahn"|1985|285
+"vrr"|22004728|"Schladern"|"bonn_schnellbahn"|2040|285
+"vrr"|22004723|"Rosbach"|"bonn_schnellbahn"|2095|285
+"vrr"|22004719|"Au (Sieg)"|"bonn_schnellbahn"|2155|290
+"vrr"|22000999|"Köln/Bonn Flughafen"|"bonn_schnellbahn"|1575|120
+"vrr"|22002066|"Friedrich-Wilhelmshütte"|"bonn_schnellbahn"|1575|395
+"vrr"|22001823|"Menden"|"bonn_schnellbahn"|1575|490
+"vrr"|22009624|"BN-Oberkassel"|"bonn_schnellbahn"|1770|925
+"vrr"|22002179|"Niederdollendorf"|"bonn_schnellbahn"|1860|1010
+"vrr"|22002182|"Königswinter"|"bonn_schnellbahn"|1950|1105
+"vrr"|22001797|"Bad Honnef"|"bonn_schnellbahn"|2060|1215
+"vrr"|22001762|"BN-Mehlem "|"bonn_schnellbahn"|1745|1285
+"vrr"|22009601|"Roisdorf"|"bonn_schnellbahn"|1020|560
+"vrr"|22005351|"Sechtem"|"bonn_schnellbahn"|915|460
+"vrr"|22005502|"Brühl"|"bonn_schnellbahn"|835|380
+"vrr"|22001341|"BN-Duisdorf"|"bonn_schnellbahn"|1070|740
+"vrr"|22009599|"Witterschlick"|"bonn_schnellbahn"|1025|785
+"vrr"|22009598|"Kottenforst"|"bonn_schnellbahn"|980|835
+"vrr"|22008845|"Meckenheim Industriepark"|"bonn_schnellbahn"|915|870
+"vrr"|22001489|"Meckenheim"|"bonn_schnellbahn"|830|870
+"vrr"|22001690|"Rheinbach"|"bonn_schnellbahn"|745|870
+"vrr"|22001857|"Odendorf"|"bonn_schnellbahn"|660|870
+"vrr"|22009596|"Kuchenheim"|"bonn_schnellbahn"|575|870
+"vrr"|22006058|"Euskirchen"|"bonn_schnellbahn"|475|865
+"vrr"|22006055|"Zuckerfabrik"|"bonn_schnellbahn"|510|910
+"vrr"|22009592|"Stotzheim"|"bonn_schnellbahn"|510|970
+"vrr"|22009593|"Kreuzweingarten"|"bonn_schnellbahn"|510|1025
+"vrr"|22006140|"Arloff"|"bonn_schnellbahn"|510|1080
+"vrr"|22006137|"Iversheim"|"bonn_schnellbahn"|510|1135
+"vrr"|22006099|"Bad Münstereifel"|"bonn_schnellbahn"|510|1190
+"vrr"|22006472|"Dahlem"|"bonn_schnellbahn"|85|1270
+"vrr"|22009589|"Schmidtheim"|"bonn_schnellbahn"|55|1220
+"vrr"|22006429|"Blankenheim (Wald)"|"bonn_schnellbahn"|80|1170
+"vrr"|22006381|"Nettersheim"|"bonn_schnellbahn"|125|1125
+"vrr"|22006484|"Urft (Steinfeld)"|"bonn_schnellbahn"|170|1080
+"vrr"|22006346|"Kall"|"bonn_schnellbahn"|210|1040
+"vrr"|22009588|"Scheven"|"bonn_schnellbahn"|265|985
+"vrr"|22006263|"Mechernich"|"bonn_schnellbahn"|320|930
+"vrr"|22009587|"Satzvey"|"bonn_schnellbahn"|375|875
+"vrr"|22006230|"Großbüllesheim"|"bonn_schnellbahn"|510|765
+"vrr"|22009585|"Derkum"|"bonn_schnellbahn"|510|670
+"vrr"|22006221|"Weilerswist"|"bonn_schnellbahn"|510|575
+"vrr"|22006913|"Erftstadt"|"bonn_schnellbahn"|510|475
