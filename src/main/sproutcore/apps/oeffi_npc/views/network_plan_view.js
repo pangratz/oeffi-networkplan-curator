@@ -14,9 +14,9 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 	
 	scrollPositionDidChange: function(){
 		var scrollPosition = this.get('scrollPosition');
-		var layout = this.get('layout');
 		SC.debug('scroll to %@/%@'.fmt(scrollPosition.x, scrollPosition.y));
-		this.scrollTo(scrollPosition.x - 100, scrollPosition.y - 100);
+		var frame = this.get('frame');
+		this.scrollTo(scrollPosition.x - (frame.width / 2.0), scrollPosition.y - (frame.height / 2.0));
 		this.contentView.highlightPoint(scrollPosition);
 	}.observes('scrollPosition'),
 	
