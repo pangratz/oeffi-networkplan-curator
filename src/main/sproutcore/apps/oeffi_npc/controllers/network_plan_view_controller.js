@@ -20,6 +20,11 @@ OeffiNpc.networkPlanViewController = SC.ObjectController.create(
 	zoom: NO,
 	zoomScale: 2.0,
 	
+	scrollPosition: {
+		x: undefined,
+		y: undefined
+	},
+	
 	cursorPositionString: function() {
 		var pos = this.get('cursorPosition');
 		if (pos) {

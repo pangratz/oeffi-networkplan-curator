@@ -12,6 +12,14 @@
 */
 OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 	
+	scrollPositionDidChange: function(){
+		var scrollPosition = this.get('scrollPosition');
+		var layout = this.get('layout');
+		SC.debug('scroll to %@/%@'.fmt(scrollPosition.x, scrollPosition.y));
+		this.scrollTo(scrollPosition.x - 100, scrollPosition.y - 100);
+		this.contentView.highlightPoint(scrollPosition);
+	}.observes('scrollPosition'),
+	
 	valueChanged: function(){
 		this.contentView.set('value', this.get('value'));
 	}.observes('value'),
@@ -68,6 +76,33 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 		to: 60,
 		cursorPosition: undefined,
 		prev: undefined,
+		value: static_url('linz_bw.png'),
+		
+		highlightPoint: function(point){
+			SC.debug('highlighting point%@/%@'.fmt(point.x, point.y));
+			var canvas = this.get('canvas');
+			if (!canvas) {
+				return;
+			}
+			SC.debug('gerring context');
+			var ctx = canvas.getContext('2d');
+			var image = this.get('image');
+			ctx.save();
+			ctx.fillStyle = 'red';
+			ctx.fillRect(point.x-5, point.y-5, 10, 10);
+			ctx.restore();
+			setTimeout(function(){
+				ctx.drawImage(image,
+					point.x-5,
+					point.y-5,
+					10,
+					10,
+					point.x-5,
+					point.y-5,
+					10,
+					10);
+			}, 1000);
+		},
 		
 		cursorPositionChanged: function(){
 			if (this.get('zoom') === YES) {
