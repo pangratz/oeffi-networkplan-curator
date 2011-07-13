@@ -14,9 +14,8 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 	
 	scrollPositionDidChange: function(){
 		var scrollPosition = this.get('scrollPosition');
-		var layout = this.get('layout');
-		SC.debug('scroll to %@/%@'.fmt(scrollPosition.x, scrollPosition.y));
-		this.scrollTo(scrollPosition.x - 100, scrollPosition.y - 100);
+		var frame = this.get('frame');
+		this.scrollTo(scrollPosition.x - (frame.width / 2.0), scrollPosition.y - (frame.height / 2.0));
 		this.contentView.highlightPoint(scrollPosition);
 	}.observes('scrollPosition'),
 	
@@ -78,29 +77,45 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 		prev: undefined,
 		
 		highlightPoint: function(point){
-			SC.debug('highlighting point%@/%@'.fmt(point.x, point.y));
 			var canvas = this.get('canvas');
 			if (!canvas) {
 				return;
 			}
-			SC.debug('gerring context');
+			
 			var ctx = canvas.getContext('2d');
 			var image = this.get('image');
+			this._drawCircle(ctx, image, point, 70, 40);
+		},
+		
+		_drawCircle: function(ctx, image, center, radius, dt){
+			if (radius <= 0.0) {
+				return;
+			}
+			
 			ctx.save();
-			ctx.fillStyle = 'red';
-			ctx.fillRect(point.x-5, point.y-5, 10, 10);
+			ctx.strokeStyle = 'red';
+			ctx.lineWidth = 5.0;
+			ctx.beginPath();
+			ctx.arc(center.x, center.y, radius, 0, Math.PI*2, false);
+			ctx.stroke();
 			ctx.restore();
+			var that = this;
 			setTimeout(function(){
-				ctx.drawImage(image,
-					point.x-5,
-					point.y-5,
-					10,
-					10,
-					point.x-5,
-					point.y-5,
-					10,
-					10);
-			}, 1000);
+				that._resetArea(ctx, center, radius+10);
+				that._drawCircle(ctx, image, center, radius-5, dt);
+			}, dt);
+		},
+		
+		_resetArea: function(ctx, center, dimension) {
+			var image = this.get('image');
+			var canvas = this.get('canvas');
+			var x = Math.max(0, center.x - dimension);
+			var y = Math.max(0, center.y - dimension);
+			var w = Math.min(2*dimension, canvas.width - x);
+			var h = Math.min(2*dimension, canvas.height - y);
+			ctx.drawImage(image,
+				x,y,w,h,
+				x,y,w,h);
 		},
 		
 		cursorPositionChanged: function(){
@@ -249,15 +264,17 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 			ctx.restore();
 		},
         
-		_drawCrosshair: function(ctx, center) {
+		_drawCrosshair: function(ctx, center, dimension, thickness) {
+			dimension = dimension || this.to;
+			thickness = thickness || 1.0;
 			ctx.save();
 			ctx.beginPath();
 			ctx.strokeStyle = 'red';
-			ctx.lineWidth = 1.0;
-			ctx.moveTo(center.x, center.y-this.to);
-			ctx.lineTo(center.x, center.y+this.to);
-			ctx.moveTo(center.x-this.to, center.y);
-			ctx.lineTo(center.x+this.to, center.y);
+			ctx.lineWidth = thickness;
+			ctx.moveTo(center.x, center.y-dimension);
+			ctx.lineTo(center.x, center.y+dimension);
+			ctx.moveTo(center.x-dimension, center.y);
+			ctx.lineTo(center.x+dimension, center.y);
 			ctx.stroke();
         
 			ctx.restore();
