@@ -17,6 +17,8 @@ OeffiNpc.NetworkPlan = SC.Record.extend(
 	primaryKey: 'key',
 	networkId: SC.Record.attr(String),
 	planId: SC.Record.attr(String),
-	imageUrl: SC.Record.attr(String)
+	imageUrl: SC.Record.attr(String),
+	imageWidth: SC.Record.attr(Number),
+	imageHeight: SC.Record.attr(Number)
 
 }) ;

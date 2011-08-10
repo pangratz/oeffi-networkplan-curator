@@ -45,6 +45,8 @@ public class NetworkPlansResource extends OeffiNpcServerResource {
 
 			NetworkPlan networkPlan = new NetworkPlan();
 			networkPlan.setImageUrl(json.getString("imageUrl"));
+			networkPlan.setImageWidth(json.getInt("imageWidth"));
+			networkPlan.setImageHeight(json.getInt("imageHeight"));
 			networkPlan.setNetworkId(json.getString("networkId"));
 			networkPlan.setPlanId(json.getString("planId"));
 
