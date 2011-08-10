@@ -5,7 +5,7 @@
 
 # Add initial buildfile information here
 config :all,
-:required => [:sproutcore, "sproutcore/statechart"]
+:required => [:sproutcore, "sproutcore/statechart", "raphaeljs"]
 
 proxy '/static', :to => 'oeffinpc.appspot.com'
 proxy '/', :to => 'localhost:3000'
