@@ -145,24 +145,12 @@ OeffiNpc.mainPage = SC.Page.design({
 			childViews: 'imageView bottomView'.w(),
 			
 			bottomView: SC.View.design({
-				childViews: 'label zoom blackWhite'.w(),
+				childViews: 'label'.w(),
 				layout: {left: 150, bottom: 0, height: 36, right: 0},
 				
 				label: SC.LabelView.design({
 					layout: {width: 100, left: 0},
 					valueBinding: 'OeffiNpc.networkPlanViewController.cursorPositionString'
-				}),
-				
-				zoom: SC.CheckboxView.design({
-					layout: {left: 110},
-					valueBinding: 'OeffiNpc.networkPlanViewController.zoom',
-					title: 'show magnifier?'
-				}),
-				
-				blackWhite: SC.CheckboxView.design({
-					layout: {left: 250},
-					valueBinding: 'OeffiNpc.networkPlanViewController.showBlackWhiteImage',
-					title: 'black & white?'
 				})
 			}),
 			
