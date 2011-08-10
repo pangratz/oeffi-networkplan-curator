@@ -50,21 +50,6 @@ OeffiNpc.ShowNetworkPlanState = SC.State.extend({
 	
 	removeEntry: function(){
 		OeffiNpc.networkPlanEntryController.destroy();
-	},
-	
-	iPressed: function(){
-		var showBlackAndWhite = !OeffiNpc.networkPlanViewController.get('showBlackWhiteImage');
-		OeffiNpc.networkPlanViewController.set('showBlackWhiteImage', showBlackAndWhite);
-	},
-	
-	zPressed: function(){
-		var zoom = OeffiNpc.networkPlanViewController.get('zoom');
-		OeffiNpc.networkPlanViewController.set('zoom', !zoom);
-	},
-	
-	numberPressed: function(nr) {
-		var scale = nr * 0.5;
-		OeffiNpc.networkPlanViewController.set('zoomScale', scale);
 	}
 	
 });

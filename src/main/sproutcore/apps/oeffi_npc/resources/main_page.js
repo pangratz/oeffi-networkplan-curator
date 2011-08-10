@@ -7,25 +7,6 @@ OeffiNpc.mainPage = SC.Page.design({
 		childViews: 'topView entriesView entryView'.w(),
 		layout: {left: 0, right: 0, top: 0, bottom: 0},
 		
-		keyUp: function(evt) {
-			if (evt.keyCode == 90) {
-				OeffiNpc.statechart.sendEvent('zPressed');
-				return YES;
-			}
-			
-			if (evt.keyCode == 73) {
-				OeffiNpc.statechart.sendEvent('iPressed');
-				return YES;
-			}
-			
-			if (evt.keyCode >= 49 && evt.keyCode <= 57) {
-				OeffiNpc.statechart.sendEvent('numberPressed', (evt.keyCode - 48));
-				return YES;
-			}
-			
-			return NO;
-		},
-		
 		topView: SC.View.design({
 			layout: {top: 5, left: 0, right: 0, height: 31},
 			childViews: 'backButton labelView'.w(),
