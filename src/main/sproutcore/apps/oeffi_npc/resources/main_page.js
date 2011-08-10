@@ -40,8 +40,13 @@ OeffiNpc.mainPage = SC.Page.design({
 			}),
 			
 			buttons: SC.View.design({
-				childViews: 'removeBtn addBtn'.w(),
-				layout: {bottom: 210, height: 36, left: 0, right: 0},
+				childViews: 'count removeBtn addBtn'.w(),
+				layout: {bottom: 210, height: 36, right: 0},
+				
+				count: SC.LabelView.design({
+					layout: {left: 0, width: 50, bottom: 0},
+					valueBinding: 'OeffiNpc.networkPlanEntriesController.numberOfNetworkPlanEntries'
+				}),
 				
 				removeBtn: SC.ButtonView.design({
 					layout: {bottom: 0, right: 36, width: 24},
