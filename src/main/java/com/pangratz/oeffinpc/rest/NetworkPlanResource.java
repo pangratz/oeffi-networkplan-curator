@@ -125,4 +125,43 @@ public class NetworkPlanResource extends OeffiNpcServerResource {
 		}
 		return result;
 	}
+
+	@Override
+	protected Representation put(Representation entity, Variant variant) throws ResourceException {
+		NetworkPlan oldEntry = mModelUtils.getNetworkPlan(mNetworkPlanId);
+		if (oldEntry == null) {
+			setStatus(Status.CLIENT_ERROR_NOT_FOUND);
+			return createErrorRepresentation("NetworkPlan with given id not found");
+		}
+
+		JsonRepresentation represent;
+		try {
+			represent = new JsonRepresentation(entity);
+			JSONObject json = represent.getJsonObject();
+
+			NetworkPlan networkPlan = new NetworkPlan();
+			networkPlan.setKey(oldEntry.getKey());
+			networkPlan.setNetworkId(json.getString("networkId"));
+			networkPlan.setPlanId(json.getString("planId"));
+
+			if (json.has("imageUrl")) {
+				networkPlan.setImageUrl(json.getString("imageUrl"));
+			}
+			if (json.has("imageWidth")) {
+				networkPlan.setImageWidth(json.getInt("imageWidth"));
+			}
+			if (json.has("imageHeight")) {
+				networkPlan.setImageHeight(json.getInt("imageHeight"));
+			}
+
+			mModelUtils.storeNetworkPlan(networkPlan);
+
+			return super.createResourceUpdatedRepresentation(networkPlan.getNetworkId());
+		} catch (Exception e) {
+			e.printStackTrace();
+			setStatus(Status.SERVER_ERROR_INTERNAL);
+		}
+
+		return createErrorRepresentation("error while updating NetworkPlanEntry");
+	}
 }

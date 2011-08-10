@@ -25,12 +25,12 @@ public class NetworkPlan implements JSONString {
 	private String imageUrl;
 
 	@Persistent
-	private Integer imageWidth;
+	private int imageWidth;
 
 	@Persistent
-	private Integer imageHeight;
+	private int imageHeight;
 
-	public Integer getImageHeight() {
+	public int getImageHeight() {
 		return imageHeight;
 	}
 
@@ -38,7 +38,7 @@ public class NetworkPlan implements JSONString {
 		return imageUrl;
 	}
 
-	public Integer getImageWidth() {
+	public int getImageWidth() {
 		return imageWidth;
 	}
 
@@ -54,7 +54,7 @@ public class NetworkPlan implements JSONString {
 		return planId;
 	}
 
-	public void setImageHeight(Integer imageHeight) {
+	public void setImageHeight(int imageHeight) {
 		this.imageHeight = imageHeight;
 	}
 
@@ -62,7 +62,7 @@ public class NetworkPlan implements JSONString {
 		this.imageUrl = imageUrl;
 	}
 
-	public void setImageWidth(Integer imageWidth) {
+	public void setImageWidth(int imageWidth) {
 		this.imageWidth = imageWidth;
 	}
 
