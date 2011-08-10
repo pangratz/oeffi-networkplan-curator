@@ -45,6 +45,8 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 			width: width,
 			height: height
 		});
+		
+		this.set('layerNeedsUpdate', YES);
 	}.observes('value'),
 	
 	getImageCoords: function(evt) {
@@ -71,10 +73,11 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 	contentView: SC.View.design({
 		
 		didAppendToDocument: function(){
-			var paper = new Raphael(this.get('layerId'), 0, 0);
-			
-			this.set('paper', paper);
-			this.set('layout', {width: 0, height: 0});
+			if (!this.get('paper')) {
+				var paper = new Raphael(this.get('layerId'), 0, 0);
+				this.set('paper', paper);
+				this.set('layout', {width: 0, height: 0});
+			}
 		},
 		
 		highlightPoint: function(point){
