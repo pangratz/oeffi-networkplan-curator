@@ -24,18 +24,37 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 		var paper = this.contentView.get('paper');
 		paper.setSize(2338,1653);
 		var img = paper.image(value,0,0,2338,1653);
+		
+		var that = this;
 		img.dblclick(function(event){
-			SC.debug(event);
-			OeffiNpc.statechart.sendEvent('clickedOnNetworkPlan', {
-				x: event.pageX,
-				y: event.pageY
-			});
+			OeffiNpc.statechart.sendEvent('clickedOnNetworkPlan', that.getImageCoords(event));
 		});
 		this.contentView.set('layout', {
 			width: 2338,
 			height: 1653
 		});
 	}.observes('value'),
+	
+	getImageCoords: function(evt) {
+		var point = {
+			x: evt.pageX,
+			y: evt.pageY
+		};
+		
+		var newFrame = this.convertFrameFromView(point, null);
+		point.x = newFrame.x;
+		point.y = newFrame.y;
+		
+		var offset = {
+			x: Math.floor(this.get('horizontalScrollOffset') * this.get('scale')),
+			y: Math.floor(this.get('verticalScrollOffset') * this.get('scale'))
+		};
+		
+		point.x += offset.x;
+		point.y += offset.y;
+		
+		return point;
+	},
 	
 	contentView: SC.View.design({
 		
@@ -50,7 +69,9 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 			var paper = this.get('paper');
 			
 			var c = paper.circle(point.x, point.y, 30).attr({fill: 'red'});
-			c.animate({r: 5}, 1000);
+			c.animate({r: 0}, 500, function(){
+				c.remove();
+			});
 		}
 		
 	})
