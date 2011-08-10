@@ -163,9 +163,9 @@ OeffiNpc.mainPage = SC.Page.design({
 				layout: {left: 0, top: 0, right: 0, bottom: 36},
 				cursorPositionBinding: 'OeffiNpc.networkPlanViewController.cursorPosition',
 				valueBinding: 'OeffiNpc.networkPlanController.imageUrl',
-				zoomBinding: 'OeffiNpc.networkPlanViewController.zoom',
-				zoomScaleBinding: 'OeffiNpc.networkPlanViewController.zoomScale',
-				scrollPositionBinding: 'OeffiNpc.networkPlanViewController.scrollPosition'
+				scrollPositionBinding: 'OeffiNpc.networkPlanViewController.scrollPosition',
+				imageWidthBinding: 'OeffiNpc.networkPlanController.imageWidth',
+				imageHeightBinding: 'OeffiNpc.networkPlanController.imageHeight'
 			})
 		})
 		
