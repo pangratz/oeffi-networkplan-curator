@@ -190,7 +190,8 @@ OeffiNpc.mainPage = SC.Page.design({
 				cursorPositionBinding: 'OeffiNpc.networkPlanViewController.cursorPosition',
 				valueBinding: 'OeffiNpc.networkPlanController.imageUrl',
 				zoomBinding: 'OeffiNpc.networkPlanViewController.zoom',
-				zoomScaleBinding: 'OeffiNpc.networkPlanViewController.zoomScale'
+				zoomScaleBinding: 'OeffiNpc.networkPlanViewController.zoomScale',
+				scrollPositionBinding: 'OeffiNpc.networkPlanViewController.scrollPosition'
 			})
 		})
 		

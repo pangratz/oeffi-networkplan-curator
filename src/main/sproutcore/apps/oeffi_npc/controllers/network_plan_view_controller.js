@@ -17,6 +17,10 @@ OeffiNpc.networkPlanViewController = SC.ObjectController.create(
 		x: undefined,
 		y: undefined
 	},
+	scrollPosition: {
+		x: undefined,
+		y: undefined
+	},
 	zoom: NO,
 	zoomScale: 2.0,
 	showBlackWhiteImage: NO,

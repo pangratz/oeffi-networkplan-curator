@@ -12,6 +12,13 @@
 */
 OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 	
+	scrollPositionDidChange: function(){
+		var scrollPosition = this.get('scrollPosition');
+		var frame = this.get('frame');
+		this.scrollTo(scrollPosition.x - (frame.width / 2.0), scrollPosition.y - (frame.height / 2.0));
+		this.contentView.highlightPoint(scrollPosition);
+	}.observes('scrollPosition'),
+	
 	valueDidChange: function(){
 		var value = this.get('value');		
 		var paper = this.contentView.get('paper');
@@ -37,6 +44,13 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 			
 			this.set('paper', paper);
 			this.set('layout', {width: 0, height: 0});
+		},
+		
+		highlightPoint: function(point){
+			var paper = this.get('paper');
+			
+			var c = paper.circle(point.x, point.y, 30).attr({fill: 'red'});
+			c.animate({r: 5}, 1000);
 		}
 		
 	})

@@ -13,6 +13,10 @@
 OeffiNpc.networkPlanEntryController = SC.ObjectController.create(
 /** @scope OeffiNpc.networkPlanEntryController.prototype */ {
 	
-	contentBinding: 'OeffiNpc.networkPlanEntriesController.selection'
+	contentBinding: 'OeffiNpc.networkPlanEntriesController.selection',
+	
+	networkEntryDidChange: function(){
+		OeffiNpc.statechart.sendEvent('networkEntrySelected');
+	}.observes('content')
 	
 });
