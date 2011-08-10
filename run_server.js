@@ -5,7 +5,7 @@ var app = express.createServer();
 app.use(express.bodyParser());
 
 var CouchClient = require('couch-client');
-var oeffinpc = new CouchClient('http://localhost:5984/oeffinpc');
+var oeffinpc = new CouchClient('http://oeffinpc.iriscouch.com/oeffinpc');
 
 app.get('/networkplans', function(req, res){
 	oeffinpc.view('/oeffinpc/_design/oeffinpc/_view/all_networkplans', {}, function(err, doc){
