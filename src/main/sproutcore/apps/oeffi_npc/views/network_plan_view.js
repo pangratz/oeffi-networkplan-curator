@@ -29,6 +29,9 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 		img.dblclick(function(event){
 			OeffiNpc.statechart.sendEvent('clickedOnNetworkPlan', that.getImageCoords(event));
 		});
+		img.mousemove(function(event){
+			that.set('cursorPosition', that.getImageCoords(event));
+		});
 		this.contentView.set('layout', {
 			width: 2338,
 			height: 1653
