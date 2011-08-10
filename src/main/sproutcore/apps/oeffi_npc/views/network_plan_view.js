@@ -20,10 +20,19 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 	}.observes('scrollPosition'),
 	
 	valueDidChange: function(){
+		var networkPlanImage = this.get('networkPlanImage');
+		if (networkPlanImage) {
+			networkPlanImage.remove();
+		}
+		
 		var value = this.get('value');		
 		var paper = this.contentView.get('paper');
-		paper.setSize(2338,1653);
-		var img = paper.image(value,0,0,2338,1653);
+		var width = this.get('imageWidth');
+		var height = this.get('imageHeight');
+		
+		paper.setSize(width, height);
+		var img = paper.image(value,0,0,width,height);
+		this.set('networkPlanImage', img);
 		
 		var that = this;
 		img.dblclick(function(event){
@@ -33,8 +42,8 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 			that.set('cursorPosition', that.getImageCoords(event));
 		});
 		this.contentView.set('layout', {
-			width: 2338,
-			height: 1653
+			width: width,
+			height: height
 		});
 	}.observes('value'),
 	
