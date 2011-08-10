@@ -28,17 +28,6 @@ OeffiNpc.ShowNetworkPlanState = SC.State.extend({
 		});
 	},
 	
-	showBlackWhiteImageDidChange: function(){
-		var showBlackWhite = OeffiNpc.networkPlanViewController.get('showBlackWhiteImage');
-		var imageUrl = OeffiNpc.networkPlanController.get('imageUrl');
-		if (showBlackWhite) {
-			imageUrl = imageUrl.replace('.png','_bw.png');
-		} else {
-			imageUrl = imageUrl.replace('_bw.png','.png');
-		}
-		OeffiNpc.networkPlanController.set('imageUrl', imageUrl);
-	},
-	
 	addEntry: function(){
 		var networkPlanId = OeffiNpc.networkPlanController.get('id');
 		var newEntry = OeffiNpc.store.createRecord(OeffiNpc.NetworkPlanEntry, {
