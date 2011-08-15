@@ -153,10 +153,10 @@ OeffiNpc.mainPage = SC.Page.design({
 			}),
 			
 			zoomedImage: SC.ScrollView.design({
-				layout: {left: 10, right: 10, bottom: 10, height: 280},
-				contentView: SC.ImageView.design({
+				layout: {left: 10, right: 10, bottom: 10, height: 280, width: 280},
+				contentView: OeffiNpc.MagnifierView.design({
 					valueBinding: 'OeffiNpc.networkPlanController.imageUrl',
-					layout: {width: 3000, height: 3000}
+					positionBinding: 'OeffiNpc.networkPlanViewController.cursorPosition'
 				})
 			})
 		}),

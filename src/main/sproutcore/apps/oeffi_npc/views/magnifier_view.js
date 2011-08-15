@@ -13,7 +13,7 @@
 OeffiNpc.MagnifierView = SC.ImageView.extend(OeffiNpc.ImageViewMixin,
 /** @scope OeffiNpc.MagnifierView.prototype */ {
 	
-	scale: 0.5,
+	scale: 2.0,
 	
 	positionChanged: function(){
 		var pos = this.get('position');
