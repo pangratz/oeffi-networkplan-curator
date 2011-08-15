@@ -34,7 +34,7 @@ OeffiNpc.mainPage = SC.Page.design({
 				contentView: SC.ListView.design({
 					showAlternatingRows: YES,
 					contentBinding: 'OeffiNpc.networkPlanEntriesController.arrangedObjects',
-					selectionBinding: 'OeffiNpc.networkPlanEntryController.content',
+					selectionBinding: 'OeffiNpc.networkPlanEntriesController.selection',
 					contentValueKey: 'name'
 				})
 			}),
