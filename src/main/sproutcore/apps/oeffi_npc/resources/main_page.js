@@ -27,47 +27,52 @@ OeffiNpc.mainPage = SC.Page.design({
 		
 		entriesView: SC.View.design({
 			layout: {left: 10, width: 300, top: 36, bottom: 10},
-			childViews: 'list buttons editItemView'.w(),
+			childViews: 'entries editItemView zoomedImage'.w(),
 			
-			list: SC.ScrollView.design({
-				layout: {top: 0, bottom: 256, left: 0, right: 0},
-				contentView: SC.ListView.design({
-					showAlternatingRows: YES,
-					contentBinding: 'OeffiNpc.networkPlanEntriesController.arrangedObjects',
-					selectionBinding: 'OeffiNpc.networkPlanEntriesController.selection',
-					contentValueKey: 'name',
-					target: 'OeffiNpc.statechart',
-					action: 'networkEntrySelected',
-					actOnSelect: YES
-				})
-			}),
-			
-			buttons: SC.View.design({
-				childViews: 'count removeBtn addBtn'.w(),
-				layout: {bottom: 210, height: 36, right: 0},
+			entries: SC.View.design({
+				layout: {bottom: 500, top: 0},
+				childViews: 'list buttons'.w(),
 				
-				count: SC.LabelView.design({
-					layout: {left: 0, width: 100, bottom: 0},
-					valueBinding: 'OeffiNpc.networkPlanEntriesController.numberOfNetworkPlanEntries'
-				}),
-				
-				removeBtn: SC.ButtonView.design({
-					layout: {bottom: 0, right: 36, width: 24},
-					title: '-',
-					target: 'OeffiNpc.statechart',
-					action: 'removeEntry'
+				list: SC.ScrollView.design({
+					layout: {top: 0, bottom: 56, left: 0, right: 0},
+					contentView: SC.ListView.design({
+						showAlternatingRows: YES,
+						contentBinding: 'OeffiNpc.networkPlanEntriesController.arrangedObjects',
+						selectionBinding: 'OeffiNpc.networkPlanEntriesController.selection',
+						contentValueKey: 'name',
+						target: 'OeffiNpc.statechart',
+						action: 'networkEntrySelected',
+						actOnSelect: YES
+					})
 				}),
 
-				addBtn: SC.ButtonView.design({
-					layout: {bottom: 0, right: 10, width: 24},
-					title: '+',
-					target: 'OeffiNpc.statechart',
-					action: 'addEntry'
-				})
+				buttons: SC.View.design({
+					childViews: 'count removeBtn addBtn'.w(),
+					layout: {bottom: 10, height: 36, right: 0},
+
+					count: SC.LabelView.design({
+						layout: {left: 0, width: 100, bottom: 0},
+						valueBinding: 'OeffiNpc.networkPlanEntriesController.numberOfNetworkPlanEntries'
+					}),
+
+					removeBtn: SC.ButtonView.design({
+						layout: {bottom: 0, right: 36, width: 24},
+						title: '-',
+						target: 'OeffiNpc.statechart',
+						action: 'removeEntry'
+					}),
+
+					addBtn: SC.ButtonView.design({
+						layout: {bottom: 0, right: 10, width: 24},
+						title: '+',
+						target: 'OeffiNpc.statechart',
+						action: 'addEntry'
+					})
+				})				
 			}),
 			
 			editItemView: SC.View.design({
-				layout: {left: 0, right: 0, bottom: 0, height: 200},
+				layout: {left: 0, right: 0, bottom: 300, height: 200},
 				childViews: 'name station position info'.w(),
 				
 				name: SC.View.design({
@@ -144,6 +149,14 @@ OeffiNpc.mainPage = SC.Page.design({
 							valueBinding: 'OeffiNpc.networkPlanEntryController.recordStatusString'
 						})
 					})
+				})
+			}),
+			
+			zoomedImage: SC.ScrollView.design({
+				layout: {left: 10, right: 10, bottom: 10, height: 280},
+				contentView: SC.ImageView.design({
+					valueBinding: 'OeffiNpc.networkPlanController.imageUrl',
+					layout: {width: 3000, height: 3000}
 				})
 			})
 		}),
