@@ -12,6 +12,100 @@
 */
 OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 	
+	contentLengthDidChange: function() {
+		var content = this.get('content');
+		this.set('length', content ? content.get('length') : 0);
+	},
+	
+	reload: function(indexes) {
+		SC.debug('reload %@1'.fmt(indexes));
+	},
+	
+	nowShowing: function() {
+		return SC.IndexSet.create(0, this.get('length')).freeze();
+	}.property('length').cacheable(),
+	
+	_cv_nowShowingDidChange: function() {
+		this.updateContentRangeObserver();
+	}.observes('nowShowing'),
+	
+	updateContentRangeObserver: function() {
+		SC.debug('updateContentRangeObserver');
+
+		var nowShowing = this.get('nowShowing');
+		var observer = this._cv_contentRangeObserver;
+		var content = this.get('content');
+		
+		if (!content) {
+			SC.debug('updateRangeObserver --> no content');
+			return;
+		}
+		
+		if (observer) {
+			SC.debug('updateRangeObserver --> updateRangeObserver');
+			content.updateRangeObserver(observer, nowShowing);
+		} else {
+			SC.debug('updateRangeObserver --> addRangeObserver');
+			var func = this.contentRangeDidChange;
+			observer = content.addRangeObserver(nowShowing, this, func, null);
+			this._cv_contentRangeObserver = observer;
+		}
+	},
+	
+	contentRangeDidChange: function(content, object, key, indexes) {
+		SC.debug('contentRangeDidChange %@1 %@2 %@3 %@4'.fmt(content, object, key, indexes));
+		if (!object && key === '[]') {
+			this.reload(indexes); // note: if indexes == null, reloads all
+		} else {
+			this.contentPropertyDidChange(object, key, indexes);
+		}
+	},
+	
+	removeContentRangeObserver: function() {
+		var content = this.get('content');
+		var observer = this._cv_contentRangeObserver;
+		
+		if (observer) {
+			if (content) {
+				content.removeRangeObserver(observer);
+			}
+			this._cv_contentRangeObserver = null;
+		}
+	},
+	
+	contentPropertyDidChange: function(target, key, indexes) {
+		SC.debug('contentPropertyDidChange: %@1 %@2 %@3'.fmt(target, key, indexes));
+	},
+	
+	_contentDidChange: function() {
+		SC.debug('_contentDidChange');
+		
+		var content = this.get('content');
+		var lfunc = this.contentLengthDidChange;
+		
+		if (content === this._content) {
+			return;
+		}
+		
+		// cleanup old content
+		this.removeContentRangeObserver();
+		if (this._content) {
+			this._content.removeObserver('length', this, lfunc);
+		}
+		
+		// cache
+		this._content = content;
+		
+		// add new observers - range observer will be added lazily
+		if (content) {
+			content.addObserver('length', this, lfunc);
+		}
+		
+		// notify all items changed
+		this.contentLengthDidChange();
+		this.contentRangeDidChange(content, null, '[]', null);		
+	}.observes('content'),
+	
 	scrollPositionDidChange: function(){
 		var scrollPosition = this.get('scrollPosition');
 		var frame = this.get('frame');
