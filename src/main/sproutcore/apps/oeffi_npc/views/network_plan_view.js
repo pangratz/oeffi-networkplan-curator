@@ -14,17 +14,61 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 	
 	_entries: [],
 	
-	_createPoint: function(paper, x, y, stationId) {
-		var id = stationId;
-		var gradient = id ? 'r darkgreen-green' : 'r darkred-red';
+	_start: function () {
+	    // storing original coordinates
+	    this.ox = this.attr("cx");
+	    this.oy = this.attr("cy");
+		this.attr({
+			cursor: 'none',
+			opacity: 0.5
+		});
+	},
+	
+	_move: function (dx, dy) {
+	    // move will be called with dx and dy
+	    this.attr({
+			cx: this.ox + dx,
+			cy: this.oy + dy,
+			cursor: "none"
+		});
+	},
+	
+	_up: function () {
+		this.attr({
+			cursor: "default",
+			opacity: 1.0
+		});
+		
+		var point = {
+			x: this.attr('cx'),
+			y: this.attr('cy')
+		};
+		OeffiNpc.statechart.sendEvent('movedNetworkPlanEntry', this._storeKey, point);
+	},
+	
+	_createPoint: function(paper, entry) {
+		var stationId = entry.get('stationId');
+		var gradient = stationId ? 'r darkgreen-green' : 'r darkred-red';
+		var x = entry.get('x');
+		var y = entry.get('y');
+		var storeKey = entry.get('storeKey');
+		
+		SC.debug('creating circle for storeKey %@1'.fmt(storeKey));
+		
 		var attrs = {
 			fill: gradient
 		};
 		var cross = paper.circle(x,y, 7).attr(attrs);
-		// cross.drag(move, start, up);
+		cross._storeKey = storeKey;
+		cross.drag(this._move, this._start, this._up);
 		cross.hover(function (event) {
 			this.attr({cursor: "move"});
 		});		
+		
+		cross.click(function(event) {
+			OeffiNpc.statechart.sendEvent('selectedNetworkPlan', storeKey);
+		});
+		
 		return cross;
 	},
 	
@@ -49,7 +93,7 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 		// SC.debug('_valueChanged: %@1 %@2 %@3 %@4'.fmt(sender, key, value, rev));
 		SC.debug('value %@1 of item with id {%@2} changed'.fmt(key, sender.get('key')));
 		
-		var circle = this._entries[sender.get('key')];
+		var circle = this._entries[sender.get('storeKey')];
 		if (circle) {
 			circle.attr({
 				cx: sender.get('x'),
@@ -79,7 +123,9 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 			item.addObserver('x', that, '_valueChanged');
 			item.addObserver('y', that, '_valueChanged');
 			
-			that._entries[item.get('key')] = that._createPoint(paper, item.get('x'), item.get('y'), item.get('stationId'));
+			if (!that._entries[item.get('storeKey')]) {
+				that._entries[item.get('storeKey')] = that._createPoint(paper, item);
+			}
 		});
 		
 		if (observer) {
