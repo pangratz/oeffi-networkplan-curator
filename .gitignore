@@ -8,3 +8,5 @@ target
 src/main/sproutcore/tmp
 
 node_modules/
+
+pullBonnNetworkPlan.js
