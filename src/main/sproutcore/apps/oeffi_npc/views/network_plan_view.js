@@ -12,6 +12,22 @@
 */
 OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 	
+	_entries: [],
+	
+	_createPoint: function(paper, x, y, stationId) {
+		var id = stationId;
+		var gradient = id ? 'r darkgreen-green' : 'r darkred-red';
+		var attrs = {
+			fill: gradient
+		};
+		var cross = paper.circle(x,y, 7).attr(attrs);
+		// cross.drag(move, start, up);
+		cross.hover(function (event) {
+			this.attr({cursor: "move"});
+		});		
+		return cross;
+	},
+	
 	contentLengthDidChange: function() {
 		var content = this.get('content');
 		this.set('length', content ? content.get('length') : 0);
@@ -29,6 +45,20 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 		this.updateContentRangeObserver();
 	}.observes('nowShowing'),
 	
+	_valueChanged: function(sender, key, value, rev){
+		// SC.debug('_valueChanged: %@1 %@2 %@3 %@4'.fmt(sender, key, value, rev));
+		SC.debug('value %@1 of item with id {%@2} changed'.fmt(key, sender.get('key')));
+		
+		var circle = this._entries[sender.get('key')];
+		if (circle) {
+			circle.attr({
+				cx: sender.get('x'),
+				cy: sender.get('y'),
+				fill: sender.get('stationId') ? 'r darkgreen-green' : 'r darkred-red'
+			});
+		}
+	},
+	
 	updateContentRangeObserver: function() {
 		SC.debug('updateContentRangeObserver');
 
@@ -40,6 +70,17 @@ OeffiNpc.NetworkPlanView = SC.ScrollView.extend({
 			SC.debug('updateRangeObserver --> no content');
 			return;
 		}
+		
+		var that = this;
+		var paper = this.contentView.get('paper');
+		content.forEach(function(item, index, enumerable){
+			item.addObserver('name', that, '_valueChanged');
+			item.addObserver('stationId', that, '_valueChanged');
+			item.addObserver('x', that, '_valueChanged');
+			item.addObserver('y', that, '_valueChanged');
+			
+			that._entries[item.get('key')] = that._createPoint(paper, item.get('x'), item.get('y'), item.get('stationId'));
+		});
 		
 		if (observer) {
 			SC.debug('updateRangeObserver --> updateRangeObserver');
